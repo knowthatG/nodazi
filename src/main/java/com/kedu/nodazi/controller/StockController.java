@@ -1,5 +1,6 @@
 package com.kedu.nodazi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kedu.nodazi.dto.ChartDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -71,12 +73,17 @@ public class StockController {
 	
 	@ResponseBody
 	@RequestMapping(value="/chartAjax", method=RequestMethod.GET)
-	public List<PricesDto> chartAjax(/*@RequestParam int term, */@RequestParam String code, Model model) throws Exception{
+	public ChartDto chartAjax(/*@RequestParam int term, */@RequestParam String code, Model model) throws Exception{
 		
 		
 //		code = 241180
 		logger.info("code : " + code);
 		List<PricesDto> recStock = service.readStockPrice(code, 5/*term*/);
+		ChartDto		chart    = new ChartDto(); 
+		
+		for(PricesDto dto : recStock){
+			chart.addPrice(dto);
+		}
 		
 //		SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
 //		
@@ -85,8 +92,9 @@ public class StockController {
 //		}
 		
 		logger.info("recStock : " + recStock);
+		logger.info("chartDto : " + chart);
 		
-		return recStock;
+		return chart;
 		
 /*		List<PricesDto> recStrock1 = service.readStockPrice(recStockList.get(0), 5);
 		List<PricesDto> recStrock2 = service.readStockPrice(recStockList.get(1), 5);
