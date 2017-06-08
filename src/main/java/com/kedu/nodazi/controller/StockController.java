@@ -92,7 +92,7 @@ public class StockController {
 //		}
 		
 		logger.info("recStock : " + recStock);
-		logger.info("chartDto : " + chart);
+		logger.info("chartDto : " + chart.toString());
 		
 		return chart;
 		

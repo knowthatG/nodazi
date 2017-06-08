@@ -49,10 +49,25 @@
 <script type="text/javascript">
 $(function(){
 	
+	/* var chartData = $.ajax({
+		  type : 'get'
+		, url : '/stock/chartAjax'
+		, dataType : 'json'
+		, data : {	
+			code : '241180'
+		  , term : 5
+		}
+		, success : function(result){
+			
+		}
+	}); */
+	
+	
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
 	});
 	google.charts.setOnLoadCallback(drawChart);
+	
 	
 	function drawChart() {
 		/* var data = google.visualization.arrayToDataTable([
@@ -68,6 +83,10 @@ $(function(){
 			  type : 'get'
 			, url : '/stock/chartAjax'
 			, dataType : 'json'
+			, data : {	
+				code : '241180'
+			  /* , term : 5 */
+			}
 			, async : false
 		}).responseText;
 		

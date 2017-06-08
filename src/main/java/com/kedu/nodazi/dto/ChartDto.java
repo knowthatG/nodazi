@@ -37,7 +37,7 @@ public class ChartDto {
 		price.add(dateFormat(dto.getPrice_date()));
 		price.add(dto.getPrice_low());
 		price.add(dto.getPrice_open());
-		price.add(dto.getPrice_adj_close());
+		price.add(dto.getPrice_close());
 		price.add(dto.getPrice_high());
 		
 		result.add(price);
@@ -55,6 +55,16 @@ public class ChartDto {
 		
 		return day;
 		
+	}
+	
+	public String toString(){
+		String str = "";
+		
+		for(ArrayList list : result){
+			str += list.toString();
+		}
+		
+		return str;
 	}
 
 }
