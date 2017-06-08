@@ -1,18 +1,20 @@
 package com.kedu.nodazi.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardDto {
-	private	int		b_no;
-	private String	b_title;
-	private String	b_content;
-	private String	u_id;
-	private Date	b_regda;
-	private int		b_notice;
-	private int		b_top;
-	private Date	b_updatedt;
-	private int		b_viewcnt;
-	private int		r_cnt;
+	private	int		 b_no;
+	private String	 b_title;
+	private String	 b_content;
+	private String	 u_id;
+	private Date	 b_regda;
+	private int		 b_notice;
+	private int		 b_top;
+	private Date	 b_updatedt;
+	private int		 b_viewcnt;
+	private int		 r_cnt;
+	private String[] files;
 	
 	public int getB_no() {
 		return b_no;
@@ -74,12 +76,18 @@ public class BoardDto {
 	public void setR_cnt(int r_cnt) {
 		this.r_cnt = r_cnt;
 	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardDto [b_no=" + b_no + ", b_title=" + b_title + ", b_content=" + b_content + ", u_id=" + u_id
 				+ ", b_regda=" + b_regda + ", b_notice=" + b_notice + ", b_top=" + b_top + ", b_updatedt=" + b_updatedt
-				+ ", b_viewcnt=" + b_viewcnt + ", r_cnt=" + r_cnt + "]";
+				+ ", b_viewcnt=" + b_viewcnt + ", r_cnt=" + r_cnt + ", files=" + Arrays.toString(files) + "]";
 	}
-	
+		
 }
