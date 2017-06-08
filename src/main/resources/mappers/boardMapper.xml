@@ -121,6 +121,33 @@
 		 where b_no = #{b_no}
 	</update>
 	
+	<insert id="addAttach">
+		insert into attach(fullName
+						 , b_no)
+					values(#{fullName}
+						 , LAST_INSERT_ID())
+	</insert>
+	
+	<select id="getAttach"
+			resultType="string">
+		select fullName
+		  from attach
+		 where b_no = #{b_no}
+		 order by a_regdt
+	</select>
+	
+	<delete id="deleteAttach">
+		delete from attach
+		 where b_no = #{b_no}
+	</delete>
+	
+	<insert id="replaceAttach">
+		insert into attach(fullName
+						 , b_no)
+					values(#{fullName}
+						 , #{b_no})
+	</insert>
+	
 	<sql id="search">
 	<if test="searchType != null">
 		<if test="searchType == 't'.toString()">

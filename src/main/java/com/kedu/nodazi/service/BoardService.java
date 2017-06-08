@@ -99,4 +99,6 @@ public interface BoardService {
 	public List<BoardDto> listSearchCriteria(SearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+	
+	public List<String> getAttach(int b_no) throws Exception;
 }
