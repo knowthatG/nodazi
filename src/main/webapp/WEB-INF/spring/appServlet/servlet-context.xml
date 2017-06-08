@@ -7,6 +7,21 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<!-- Interceptor -->
+	<beans:bean id="loginInterceptor" class="com.kedu.nodazi.interceptor.LoginInterceptor"/>
+	<beans:bean id="authInterceptor" class="com.kedu.nodazi.interceptor.AuthInterceptor"/>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/user/main"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<annotation-driven />
 
 	<!-- resources mapping -->

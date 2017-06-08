@@ -14,13 +14,13 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/sb-admin.css" rel="stylesheet">
+    <link href="../../css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,10 +140,10 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
     
             <!-- javaScript -->
 <script>
@@ -161,7 +161,7 @@ $(function(){
 	})
 	//비밀번호 유효성 처리.
 	 $("#submit").click(function(){
-
+			
 		 if($("#u_pw").val().length < 8 || $("#u_pw").val().length > 20){
 				alert("비밀번호는 8~20자리여야 합니다.");
 				return false;
@@ -181,7 +181,6 @@ $(function(){
 					return false;
 				}
 				else{
-					
 					 
 				 	mobile1 = $("#mobile1").val();
 					mobile2 = $("#mobile2").val();
@@ -198,10 +197,11 @@ $(function(){
 					$("#u_mobile").val(u_mobile);
 					
 					$("#u_email").val(u_email);	
-
+					alert(u_mobile,u_email);
 					submit();
 				}
 			}
+
 	});
  	
 		
