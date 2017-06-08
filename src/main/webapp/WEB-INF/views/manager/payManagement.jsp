@@ -38,10 +38,14 @@
 
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-	
-	
-</script>
+
+<style type="text/css">
+
+.box-header{
+	margin-bottom: 20px;
+}
+
+</style>
 
 </head>
 
@@ -58,10 +62,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							결제 관리<small>Payment Management</small>
+							결제 관리
 						</h1>
 						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
+							<li class="active"><i class="fa fa-dashboard"></i> Payment Management
 							</li>
 						</ol>
 					</div>
@@ -73,8 +77,8 @@
 						<div class="box">
 							<div class="box-header form-inline">
 								<select name="searchType" class="form-control">
-									<option value="ind" selected="selected"
-										<c:out value="${cri.searchType eq ''?'selected':''}"/>>
+									<option value="inb" selected="selected"
+										<c:out value="${cri.searchType eq 'inb'?'selected':''}"/>>
 										전체
 									</option>
 									<option value="i"
@@ -91,21 +95,22 @@
 									</option>
 								</select> <input type="text" name='keyword' id="keywordInput" class="form-control"
 									value='${cri.keyword }'>
-								<button id="searchBtn" class="btn btn-default">Search</button>
+								<button id="searchBtn" class="btn btn-default">검색</button>
 							</div>
+							
 							<div class="box-body">
-								<table class="table table-hover">
+								<table class="table table-hover text-center">
 									<tr>
 										<th class="col-lg-0"></th>
-										<th>no</th>
-										<th>id</th>
-										<th>입금액</th>
-										<th>입금은행</th>
-										<th>입금주</th>
-										<th>신청일</th>
-										<th>승인일</th>
-										<th>만기일</th>
-										<th>상태</th>
+										<th class="text-center">no</th>
+										<th class="text-center">id</th>
+										<th class="text-center">입금액</th>
+										<th class="text-center">입금은행</th>
+										<th class="text-center">입금주</th>
+										<th class="text-center">신청일</th>
+										<th class="text-center">승인일</th>
+										<th class="text-center">만기일</th>
+										<th class="text-center">상태</th>
 									</tr>
 									
 									<!--상태 비교를 위해 현재 날짜를 가져옴 -->
@@ -140,6 +145,11 @@
 										</tr>
 									</c:forEach>
 								</table>
+								<div class="col-lg-12 row text-right ">
+									<button class="btn btn-primary">승인</button>
+								</div>
+								
+								
 							</div>
 							<!-- /.box-body -->
 			
@@ -204,24 +214,37 @@ $(document).ready(function(){
 			
 	$("#searchBtn").on("click",
 		function(event) {
-		alert("paymentList"
+			alert("paymentList"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType="
+					+ $("select option:selected").val()
+					+ "&keyword=" + $('#keywordInput').val());
+			self.location = "paymentList"
 				+ '${pageMaker.makeQuery(1)}'
 				+ "&searchType="
 				+ $("select option:selected").val()
-				+ "&keyword=" + $('#keywordInput').val());
-		self.location = "paymentList"
-			+ '${pageMaker.makeQuery(1)}'
-			+ "&searchType="
-			+ $("select option:selected").val()
-			+ "&keyword=" + $('#keywordInput').val();
+				+ "&keyword=" + $('#keywordInput').val();
 		}
 	);
+	
+	
+	
+	
+	
+	$("#approval").on("click",
+		function(event){
+			
 		
+		}
+	)
 		
 			
 			
 });	
 
+
 </script>
+
+
 
 </html>

@@ -25,14 +25,14 @@ public class ManagerController {
 	
 	
 	@RequestMapping(value="/paymentList", method = RequestMethod.GET)
-	public String userListSearch(@ModelAttribute("sc") SearchCriteria sc, Model model) throws Exception{
-		logger.info(sc.toString());
+	public String userListSearch(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+		logger.info(cri.toString());
 		
-		model.addAttribute("list",service.getPaymentListSearch(sc));
+		model.addAttribute("list",service.getPaymentListSearch(cri));
 		PageMaker pageMaker = new PageMaker();
-	    pageMaker.setCri(sc);
+	    pageMaker.setCri(cri);
 
-	    pageMaker.setTotalCount(service.getPaymentListSearchCount(sc));
+	    pageMaker.setTotalCount(service.getPaymentListSearchCount(cri));
 
 	    model.addAttribute("pageMaker", pageMaker);
 	    
