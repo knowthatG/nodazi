@@ -1,0 +1,120 @@
+package com.kedu.nodazi.controller;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.kedu.nodazi.dto.LoginDto;
+import com.kedu.nodazi.dto.PaymentDto;
+import com.kedu.nodazi.dto.UserDto;
+import com.kedu.nodazi.service.UserService;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+		private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+		@Inject
+		private UserService uservice;
+		
+		@RequestMapping(value="/main",method = RequestMethod.GET)
+		public void mainGET(Model model)throws Exception{
+			logger.info("main");
+		}
+		
+		@RequestMapping(value="/join",method = RequestMethod.GET)
+		public void registerGET(UserDto udto,Model model)throws Exception{
+			logger.info("register get");
+			
+		}
+		
+		@RequestMapping(value="/join",method = RequestMethod.POST)
+		public String registerPOST(UserDto udto,RedirectAttributes rttr)throws Exception{
+			logger.info("register post");
+			uservice.join(udto);
+			
+			rttr.addFlashAttribute("msg","success");
+			return "redirect:/user/login";
+		}
+		
+		@RequestMapping(value="/join_policy",method = RequestMethod.GET)
+		public void JoinPolicyGET(Model model) throws Exception{
+			logger.info("join_policy");
+		}
+		
+		
+		//login
+		@RequestMapping(value="/login",method=RequestMethod.GET)
+		public void LoginGET(@ModelAttribute("ldto")LoginDto ldto)throws Exception{
+			logger.info("login");
+		}
+		@RequestMapping(value="/loginPost",method=RequestMethod.POST)
+		public void LoginPOST(LoginDto ldto, HttpSession session,Model model)throws Exception{
+			UserDto udto = uservice.login(ldto);
+			
+			if(udto == null){
+				return;
+			}
+			
+			model.addAttribute("UserDto",udto);
+		}
+		
+		@RequestMapping(value="/logout",method=RequestMethod.GET)
+		public String Logout(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws Exception{
+			Object obj = session.getAttribute("login");
+			
+			if(obj != null){
+				UserDto udto = (UserDto) obj;
+				
+				session.removeAttribute("login");
+				session.invalidate();
+			}
+			return "/user/logout";
+		}
+		
+		//payment
+		@RequestMapping(value="/payment_policy",method=RequestMethod.GET)
+		public void PaymentPolicyGET(Model model)throws Exception{
+			logger.info("payment_policy");
+		}
+		
+		@RequestMapping(value="/payment",method=RequestMethod.GET)
+		public void PaymentGET(Model model)throws Exception{
+			logger.info("payment");
+		}
+		
+		@RequestMapping(value="/payment",method = RequestMethod.POST)
+		public String PaymentPOST(PaymentDto pdto,RedirectAttributes rttr)throws Exception{
+			logger.info("Payment post");
+			uservice.payment(pdto);
+			
+			rttr.addFlashAttribute("msg","success");
+			return "redirect:/user/main";
+		}
+		
+		@RequestMapping(value="/info",method = RequestMethod.GET)
+		public void InfoGET(Model model)throws Exception{
+			logger.info("info");
+		}
+		
+		@RequestMapping(value="/update",method = RequestMethod.GET)
+		public void UpdateGET(Model model)throws Exception{
+			logger.info("update");
+		}
+		
+		@RequestMapping(value="/withdraw",method = RequestMethod.GET)
+		public void WithdrawGET(Model model)throws Exception{
+			logger.info("withdraw");
+		}
+}
