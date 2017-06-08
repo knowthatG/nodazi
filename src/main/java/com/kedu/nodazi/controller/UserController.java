@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kedu.nodazi.dto.LoginDto;
@@ -59,6 +60,7 @@ public class UserController {
 		public void LoginGET(@ModelAttribute("ldto")LoginDto ldto)throws Exception{
 			logger.info("login");
 		}
+		
 		@RequestMapping(value="/loginPost",method=RequestMethod.POST)
 		public void LoginPOST(LoginDto ldto, HttpSession session,Model model)throws Exception{
 			UserDto udto = uservice.login(ldto);
@@ -104,17 +106,11 @@ public class UserController {
 		}
 		
 		@RequestMapping(value="/info",method = RequestMethod.GET)
-		public void InfoGET(Model model)throws Exception{
-			logger.info("info");
+		public void InfoGET(Model model, HttpSession session,UserDto udto)throws Exception{
+			String u_id = (String)session.getAttribute("u_id");
+			udto = uservice.info(u_id);
+			logger.info("infoGET");
 		}
 		
-		@RequestMapping(value="/update",method = RequestMethod.GET)
-		public void UpdateGET(Model model)throws Exception{
-			logger.info("update");
-		}
 		
-		@RequestMapping(value="/withdraw",method = RequestMethod.GET)
-		public void WithdrawGET(Model model)throws Exception{
-			logger.info("withdraw");
-		}
 }

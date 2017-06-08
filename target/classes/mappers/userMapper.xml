@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{u_id},#{p_account},#{p_dep_nm},#{p_dep_bank})
 	</insert>
 	
-	<select id = "info">
+	<select id = "info" resultType="com.kedu.nodazi.dto.UserDto">
 		select u_id,u_nm,u_email,u_mobile,u_regdt from user
 		where u_id= #{u_id}
 	</select>
