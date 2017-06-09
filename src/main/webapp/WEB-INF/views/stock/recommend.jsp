@@ -70,29 +70,31 @@ $(function(){
 	
 	
 	function drawChart() {
-		/* var data = google.visualization.arrayToDataTable([
+		/* 
+		var data = google.visualization.arrayToDataTable([
 				  [ 'Mon', 20, 28, 38, 45 ]
 				, [ 'Tue', 31, 38, 55, 66 ]
 				, [ 'Wed', 50, 55, 77, 80 ]
 				, [ 'Thu', 77, 77, 66, 50 ]
 				, [ 'Fri', 68, 66, 22, 15 ]
 		// Treat first row as data as well.
-		], true); */
+		], true); 
+		 */
 		
 		var chartData = $.ajax({
-			  type : 'get'
-			, url : '/stock/chartAjax'
+			  url : '/stock/chartAjax'
 			, dataType : 'json'
 			, data : {	
 				code : '241180'
-			  /* , term : 5 */
+			  , term : 5
 			}
 			, async : false
 		}).responseText;
 		
 		console.info(chartData)
 		
-		var data = google.visualization.DataTable(chartData, true);
+		var data = new google.visualization.DataTable(chartData, true);
+		
 		
 		var options = {
 			legend : 'none'
