@@ -1,6 +1,7 @@
 package com.kedu.nodazi.controller;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -73,7 +74,7 @@ public class StockController {
 	
 	@ResponseBody
 	@RequestMapping(value="/chartAjax", method=RequestMethod.GET)
-	public ChartDto chartAjax(/*@RequestParam int term, */@RequestParam String code, Model model) throws Exception{
+	public HashMap<String, Object> chartAjax(/*@RequestParam int term, */@RequestParam String code, Model model) throws Exception{
 		
 		
 //		code = 241180
@@ -81,9 +82,69 @@ public class StockController {
 		List<PricesDto> recStock = service.readStockPrice(code, 5/*term*/);
 		ChartDto		chart    = new ChartDto(); 
 		
-		for(PricesDto dto : recStock){
-			chart.addPrice(dto);
+//		chart.addColumn("month", "string");
+//		chart.addColumn("company", "number");
+		
+		chart.createRows(5/*term*/);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+		String format = null;
+		
+		for(int row=0; row<recStock.size(); row++){
+			PricesDto dto = recStock.get(row);
+			format = sdf.format(dto.getPrice_date());
+			
+			chart.addCell(row, dto.getPrice_date(), format);
+			chart.addCell(row, dto.getPrice_low());
+			chart.addCell(row, dto.getPrice_open());
+			chart.addCell(row, dto.getPrice_close());
+			chart.addCell(row, dto.getPrice_high());
 		}
+		
+		/*
+		{
+			"rows":[
+					{"c":[{"v":1477353600000,"f":"10/25"}
+						,{"v":10880,"f":null}
+						,{"v":10880,"f":null}
+						,{"v":10940,"f":null}
+						,{"v":10965,"f":null}]}
+					,{"c":[{"v":1477267200000,"f":"10/24"}
+						,{"v":10865,"f":null}
+						,{"v":10875,"f":null}
+						,{"v":10880,"f":null}
+						,{"v":10880,"f":null}]}
+					,{"c":[{"v":1477008000000,"f":"10/21"}
+						,{"v":10875,"f":null}
+						,{"v":10885,"f":null}
+						,{"v":10875,"f":null}
+						,{"v":10885,"f":null}]}
+					,{"c":[{"v":1476921600000,"f":"10/20"}
+						,{"v":10675,"f":null}
+						,{"v":10675,"f":null}
+						,{"v":10750,"f":null}
+						,{"v":10750,"f":null}]}
+					,{"c":[{"v":1476748800000,"f":"10/18"}
+						,{"v":10675,"f":null}
+						,{"v":10680,"f":null}
+						,{"v":10675,"f":null}
+						,{"v":10680,"f":null}]}
+					]
+			,"cols":[
+					 {"pattern":""
+					 	,"id":""
+					 	,"label":"month"
+					 	,"type":"string"
+					 }
+					 ,{"pattern":""
+					 	,"id":""
+					 	,"label":"company"
+					 	,"type":"number"
+					 }
+					]
+		}
+		
+		*/
 		
 //		SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
 //		
@@ -92,9 +153,9 @@ public class StockController {
 //		}
 		
 		logger.info("recStock : " + recStock);
-		logger.info("chartDto : " + chart.toString());
+		logger.info("chart.getResult() : " + chart.toString());
 		
-		return chart;
+		return chart.getResult();
 		
 /*		List<PricesDto> recStrock1 = service.readStockPrice(recStockList.get(0), 5);
 		List<PricesDto> recStrock2 = service.readStockPrice(recStockList.get(1), 5);
