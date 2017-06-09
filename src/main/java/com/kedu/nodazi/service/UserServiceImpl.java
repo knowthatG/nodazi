@@ -1,5 +1,7 @@
 package com.kedu.nodazi.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -34,5 +36,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto info(String u_id)throws Exception{
 		return udao.info(u_id);
+	}
+	
+	@Override
+	public List<PaymentDto> payment(String u_id)throws Exception{
+		return udao.payment(u_id);
+	}
+	
+	@Override
+	public void userUpdate(UserDto udto)throws Exception{
+		udao.userUpdate(udto);
 	}
 }

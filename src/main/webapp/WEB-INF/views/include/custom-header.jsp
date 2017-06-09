@@ -114,7 +114,7 @@
                                 <a href="/user/payment_policy">결제안내</a>
                             </li>
                             <li>
-                                <a href="blank8.jsp">결제내역</a>
+                                <a href="/user/payment_detail">결제내역</a>
                             </li>
                         </ul>
                     </li>

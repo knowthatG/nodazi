@@ -15,38 +15,42 @@
 
     <title>SB Admin - Bootstrap Admin Template</title>
 
+
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/sb-admin.css" rel="stylesheet">
+    <link href="../../css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
 <script type="text/javascript">
-/* $(function) start */
 $(document).ready(function(){
-  $.get('/user/info', function(data){
-    $('#section-1').html(data);
-  });
-});
+	  $.get('/joshadelic/pen/WvmePv.html', function(data){
+	    $('#section-1').html(data);
+	  });
+	});
 
-$('[data-toggle="tab"]').on('click', function(){
-    var $this = $(this),
-        source = $this.attr('href'),
-        pane = $this.attr('data-target');
-  
-    if($(pane).is(':empty')) {  // check if pane is empty, if so get data
-      $.get(source, function(data) {
-          $(pane).html(data);
-      });
+	$('[data-toggle="tab"]').on('click', function(){
+	    var $this = $(this),
+	        source = $this.attr('href'),
+	        pane = $this.attr('data-target');
+	  
+	    if($(pane).is(':empty')) {  // check if pane is empty, if so get data
+	      $.get(source, function(data) {
+	          $(pane).html(data);
+	      });
 
-      $(this).tab('show');
-      return false;
-    }
-});
-	
+	      $(this).tab('show');
+	      return false;
+	    }
+	}); 
 </script>
 </head>
 
@@ -59,52 +63,55 @@ $('[data-toggle="tab"]').on('click', function(){
 
 
         <div id="page-wrapper">
-				 			<!-- Page Heading -->
+
+            <div class="container-fluid">
+
+ 			<!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             	회원가입 <small>Register</small>
                         </h1>
                 </div>
-
-				<div class="container">
-				  <div class="row">
-				    <div class="col-sm-6 col-sm-offset-2">
-				
-				      <!-- Nav tabs -->
-				      <ul class="nav nav-tabs" role="tablist">
-				        <li role="presentation" class="active"><a href="/user/info" id="link-1" aria-controls="section-1" role="tab" data-target="#section-1" data-toggle="tab">정보조회</a></li>
-				        <li role="presentation"><a href="/user/update" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">정보수정</a></li>
-				        <li role="presentation"><a href="/user/withdraw" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">회원탈퇴</a></li>
-				      </ul>
-				
-				      <!-- Tab panes -->
-				      <div class="tab-content">
-				        <div role="tabpanel" class="tab-pane active" id="section-1">
-				          <label for="email1" class="col-sm-2 control-label">E-mail :</label>
-  						<input name="email1" type="text" class="form-control" id="email1" size="15"placeholder="E-mail" readonly="readonly";> ${udto.u_email }
-				        </div>
-				        <div role="tabpanel" class="tab-pane" id="section-2">
-				         <input type="text">
-				          <input type="text">
-				        </div>
-				        <div role="tabpanel" class="tab-pane" id="section-3">
-				         <input type="text">
-				           <input type="text">
-				           <input type="text">
-				        </div>
-				         
-				        
-				        <div role="tabpanel" class="tab-pane" id="section-4">
-				         <input type="text">
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				<%@include file="../include/footer.jsp"%>
-			</div>
+                <!-- /.row -->
+      	<div class="center-block clearfx" style="width:800px">
+			<div class="container">
+			  <div class="row">
+			    <div class="col-sm-6 col-sm-offset-2">
+			
+			      <!-- Nav tabs -->
+			      <ul class="nav nav-tabs" role="tablist">
+			        <li role="presentation" class="active"><a href="" id="link-1" aria-controls="section-1" role="tab" data-target="#section-1" data-toggle="tab">Section 1</a></li>
+			        <li role="presentation"><a href="/joshadelic/pen/LVabRL.html" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">Section 2</a></li>
+			        <li role="presentation"><a href="/joshadelic/pen/VLRmKr.html" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">Section 3</a></li>
+			      </ul>
+			
+			      <!-- Tab panes -->
+			      <div class="tab-content">
+			        <div role="tabpanel" class="tab-pane active" id="section-1">
+			        	
+			        </div>
+			       <div role="tabpanel" class="tab-pane" id="section-2">
+			        	<form action="/user/update">
+			        	
+			        	</form>
+			        </div>
+			        <div role="tabpanel" class="tab-pane" id="section-3">
+			        	
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>		
 		</div>
+		<%@include file="../include/footer.jsp"%>
+                <!-- /.row -->
 
+            </div>
+            </div>
+            </div>
+<script>
+
+</script>
 </body>
 </html>

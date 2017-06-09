@@ -29,35 +29,7 @@
 
     <div id="wrapper">
 
-       <%@include file="../include/custom-header.jsp"%>
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
- <!--                Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            	종목상세 <small>Statistics Overview</small>
-                        </h1>
-					</div>
-				</div>
-                <!-- /.row -->
-
-                <!-- /.row -->
-                <ul class="nav nav-tabs">
-					 <li><a href="/user/info">회원정보</a></li>
-					 <li class="active"><a href="/user/update">정보수정</a></li>
-					 <li><a href="/user/withdraw">회원탈퇴</a></li>
-				</ul>
-					                
-
-                            </div>
-		<%@include file="../include/footer.jsp"%>
-                        </div>
-
+ 
                 <!-- /.row -->
 
             </div>

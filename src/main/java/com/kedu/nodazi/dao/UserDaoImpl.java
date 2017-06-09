@@ -1,5 +1,7 @@
 package com.kedu.nodazi.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,5 +32,14 @@ public class UserDaoImpl implements UserDao{
 	
 	public UserDto info(String u_id)throws Exception{
 		return session.selectOne(namespace + ".info",u_id);
+	}
+	
+
+	public List<PaymentDto> payment(String u_id)throws Exception{
+		return session.selectList(namespace + ".paymentDetail",u_id);
+	}
+	
+	public void userUpdate(UserDto udto)throws Exception{
+		 session.update(namespace+".UserUpdate",udto);
 	}
 }

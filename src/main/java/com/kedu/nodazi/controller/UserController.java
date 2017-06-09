@@ -1,10 +1,13 @@
 package com.kedu.nodazi.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -105,12 +108,30 @@ public class UserController {
 			return "redirect:/user/main";
 		}
 		
-		@RequestMapping(value="/info",method = RequestMethod.GET)
-		public void InfoGET(Model model, HttpSession session,UserDto udto)throws Exception{
-			String u_id = (String)session.getAttribute("u_id");
-			udto = uservice.info(u_id);
+		@RequestMapping(value="/payment_detail",method = RequestMethod.GET)
+		public void PaymentDetailGET(Model model,HttpSession session)throws Exception{
+			Object obj = session.getAttribute("login");
+			UserDto udto = (UserDto)obj;
+			String u_id = udto.getU_id();
+			model.addAttribute("list",uservice.payment(u_id));
 			logger.info("infoGET");
 		}
 		
+		@RequestMapping(value="/info_tab",method= RequestMethod.GET)
+		public void InfotabGET(Model model)throws Exception{
+			logger.info("info_tab");
+		}
+		@RequestMapping(value="/info",method = RequestMethod.GET)
+		public void InfoGET(Model model, HttpSession session)throws Exception{
+			Object obj = session.getAttribute("login");
+			UserDto udto = (UserDto)obj;
+			String u_id = udto.getU_id();
+			model.addAttribute("udto",uservice.info(u_id));
+			logger.info("infoGET");
+
+		}
+		
+		
+
 		
 }

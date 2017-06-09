@@ -22,15 +22,7 @@
     <!-- Custom Fonts -->
     <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     
-
-
 </head>
 
 <body>
@@ -162,7 +154,23 @@ $(function(){
 	//비밀번호 유효성 처리.
 	 $("#submit").click(function(){
 			
-		 if($("#u_pw").val().length < 8 || $("#u_pw").val().length > 20){
+		 	mobile1 = $("#mobile1").val();
+			mobile2 = $("#mobile2").val();
+			mobile3 = $("#mobile3").val();
+			
+			
+			email1 = $("#email1").val();
+			email2 = $("#email2").val();
+			
+			u_email = email1 + "@" + email2;
+			
+			u_mobile = mobile1 + "-" + mobile2 + "-" + mobile3;
+			
+			$("#u_mobile").val(u_mobile);
+			
+			$("#u_email").val(u_email);	
+		 
+			if($("#u_pw").val().length < 8 || $("#u_pw").val().length > 20){
 				alert("비밀번호는 8~20자리여야 합니다.");
 				return false;
 			}else if($("#u_id").val() == null){
@@ -182,22 +190,6 @@ $(function(){
 				}
 				else{
 					 
-				 	mobile1 = $("#mobile1").val();
-					mobile2 = $("#mobile2").val();
-					mobile3 = $("#mobile3").val();
-					
-					
-					email1 = $("#email1").val();
-					email2 = $("#email2").val();
-					
-					u_email = email1 + "@" + email2;
-					
-					u_mobile = mobile1 + "-" + mobile2 + "-" + mobile3;
-					
-					$("#u_mobile").val(u_mobile);
-					
-					$("#u_email").val(u_email);	
-					alert(u_mobile,u_email);
 					submit();
 				}
 			}

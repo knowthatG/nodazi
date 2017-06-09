@@ -23,4 +23,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u_id,u_nm,u_email,u_mobile,u_regdt from user
 		where u_id= #{u_id}
 	</select>
+	
+ 	<select id = "paymentDetail" resultType="com.kedu.nodazi.dto.PaymentDto">
+		select u_id,p_account,p_dep_nm,p_dep_bank,p_regdt,p_depdt,p_price,p_enddt from payment
+		where u_id= #{u_id}
+	</select> 
+	
+	<update id ="userupdate">
+		update user set u_pw = #{u_pw},u_email = #{u_email},u_mobile = #{u_mobile}
+		where u_id = #{u_id}
+	</update>
+	
+	<update id="userwithdraw">
+		update user set u_withdraw = 1;
+		where u_id = #{u_id}
+	</update>
 </mapper>
