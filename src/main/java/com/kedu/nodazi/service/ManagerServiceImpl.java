@@ -25,5 +25,21 @@ public class ManagerServiceImpl implements ManagerService {
 	public int getPaymentListSearchCount(SearchCriteria sc) throws Exception{
 		return dao.paymentListSearchCount(sc);
 	}
-
+	
+	@Override
+	public void confirmPayment(List<PaymentDto> list) throws Exception {
+		dao.updatePaymentStatus(list);
+	}
+	
+	@Override
+	public List<PaymentDto> getUserListSearch(SearchCriteria sc) throws Exception {
+		return dao.userListSearch(sc);
+	}
+	
+	@Override
+	public int getUserListSearchCount(SearchCriteria sc) throws Exception {
+		return dao.userListSearchCount(sc);
+	}
+	
+	
 }

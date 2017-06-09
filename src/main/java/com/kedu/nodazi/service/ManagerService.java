@@ -11,4 +11,9 @@ public interface ManagerService {
 	
 	public int getPaymentListSearchCount(SearchCriteria sc) throws Exception;
 	
+	public void confirmPayment(List<PaymentDto> list) throws Exception;
+	
+	public List<PaymentDto> getUserListSearch(SearchCriteria sc) throws Exception;
+	
+	public int getUserListSearchCount(SearchCriteria sc) throws Exception;
 }

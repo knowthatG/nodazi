@@ -121,32 +121,37 @@
 									
 									<!-- 결제 리스트를 출력 -->
 									<c:forEach items="${list}" var="paymentDto" varStatus="status">
-										<tr>
-											<td>
-												<input type="checkbox" >
-											</td>
-											<td>
-												${status.index+1}
-											</td>
-											<td>${paymentDto.u_id}</td>
-											<td>${paymentDto.p_price}</td>
-											<td>${paymentDto.p_dep_bank}</td>
-											<td>${paymentDto.p_dep_nm}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_regdt}"/></td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_depdt}"/></td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_enddt}"/></td>
-											<td id="paymentstate">
-												<c:if test="${paymentDto.p_enddt==Null}">입금전</c:if>
-												<c:if test="${paymentDto.p_enddt!=Null}">
-													<c:if test="${paymentDto.p_enddt>=now}">입금완료</c:if>
-													<c:if test="${paymentDto.p_enddt<now}">만기</c:if>
-												</c:if>
-											</td>
-										</tr>
+									<tr>
+										<td>
+											<input type="checkbox" class="checkSelect">
+										</td>
+										<td>${paymentDto.p_seq}</td>
+										<td>${paymentDto.u_id}</td>
+										<td>${paymentDto.p_price}</td>
+										<td>${paymentDto.p_dep_bank}</td>
+										<td>${paymentDto.p_dep_nm}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_regdt}"/></td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_depdt}"/>
+											<c:if test="${paymentDto.p_depdt==Null}">-</c:if>
+										</td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${paymentDto.p_enddt}"/>
+											<c:if test="${paymentDto.p_enddt==Null}">-</c:if>
+										</td>
+										<td id="paymentstate">
+											<c:if test="${paymentDto.p_enddt==Null}">입금전</c:if>
+											<c:if test="${paymentDto.p_enddt!=Null}">
+												<c:if test="${paymentDto.p_enddt>=now}">입금완료</c:if>
+												<c:if test="${paymentDto.p_enddt<now}">만기</c:if>
+											</c:if>
+										</td>
+									</tr>
 									</c:forEach>
+									
 								</table>
 								<div class="col-lg-12 row text-right ">
-									<button class="btn btn-primary">승인</button>
+									<button id="approval" class="btn btn-primary">승인</button>
 								</div>
 								
 								
@@ -206,19 +211,13 @@
 	<script src="../js/plugins/morris/morris-data.js"></script>
 	
 </body>
-
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../../js/jquery.js"></script>
 <script>
 
 $(document).ready(function(){
 			
 	$("#searchBtn").on("click",
 		function(event) {
-			alert("paymentList"
-					+ '${pageMaker.makeQuery(1)}'
-					+ "&searchType="
-					+ $("select option:selected").val()
-					+ "&keyword=" + $('#keywordInput').val());
 			self.location = "paymentList"
 				+ '${pageMaker.makeQuery(1)}'
 				+ "&searchType="
@@ -227,20 +226,57 @@ $(document).ready(function(){
 		}
 	);
 	
-	
-	
-	
-	
 	$("#approval").on("click",
-		function(event){
+		function(){
+			var approvalList = Array();
+			var send_cnt = 0;
+			var chkbox = $(".checkSelect");
 			
-		
-		}
-	)
-		
+			for(i=0;i<chkbox.length;i++) {
+			    if (chkbox[i].checked == true){
+			    	approvalList[send_cnt]={
+						"p_seq":"",
+						"u_id":"",
+						"p_price":""
+					};
+			    	
+			    	approvalList[send_cnt].p_seq = $(chkbox[i]).parent().next().text();
+			    	approvalList[send_cnt].u_id = $(chkbox[i]).parent().next().next().text();
+			    	approvalList[send_cnt].p_price = $(chkbox[i]).parent().next().next().next().text();
+			        send_cnt++;
+			        
+			    }
+			}
 			
+			alert(approvalList[0].p_seq +" : " + approvalList[0].u_id + " : " + approvalList[0].p_price);
+			
+			$.ajax({
+				  url		:"/manager/confirm"
+				, type		:"post"
+				, dataType	:"text"
+				
+				, timeout	:"30000"
+				, success	:function(){
+					
+					
+					
+					
+				}
+				
+			});
+			
+		}		
+	
+	);
+	
+	
+	
+	
+	
+	
 			
 });	
+
 
 
 </script>

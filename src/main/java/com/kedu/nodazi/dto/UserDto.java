@@ -11,8 +11,9 @@ public class UserDto {
 	private String u_mobile;
 	private Date u_regdt;
 	private Date u_updatedt;
+	private Date u_withdrawdt;
 	private int u_mgr;
-	private int u_withraw;
+	private int u_withdraw;
 	public String getU_nm() {
 		return u_nm;
 	}
@@ -55,17 +56,32 @@ public class UserDto {
 	public void setU_updatedt(Date u_updatedt) {
 		this.u_updatedt = u_updatedt;
 	}
+	public Date getU_withdrawdt() {
+		return u_withdrawdt;
+	}
+	public void setU_withdrawdt(Date u_withdrawdt) {
+		this.u_withdrawdt = u_withdrawdt;
+	}
 	public int getU_mgr() {
 		return u_mgr;
 	}
 	public void setU_mgr(int u_mgr) {
 		this.u_mgr = u_mgr;
 	}
-	public int getU_withraw() {
-		return u_withraw;
+	public int getU_withdraw() {
+		return u_withdraw;
 	}
-	public void setU_withraw(int u_withraw) {
-		this.u_withraw = u_withraw;
+	public void setU_withdraw(int u_withdraw) {
+		this.u_withdraw = u_withdraw;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "UserDto [u_nm=" + u_nm + ", u_id=" + u_id + ", u_pw=" + u_pw + ", u_email=" + u_email + ", u_mobile="
+				+ u_mobile + ", u_regdt=" + u_regdt + ", u_updatedt=" + u_updatedt + ", u_withdrawdt=" + u_withdrawdt
+				+ ", u_mgr=" + u_mgr + ", u_withdraw=" + u_withdraw + "]";
+	}
+	
+	
+	
 }

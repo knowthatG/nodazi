@@ -32,4 +32,22 @@ public class ManagerDaoImpl implements ManagerDao {
 		return session.selectOne(namespace + ".paymentListSearchCount", sc);
 	}
 	
+	@Override
+	public void updatePaymentStatus(List<PaymentDto> list) throws Exception {
+		while(list.isEmpty()){
+			session.update(namespace+".updateViewCnt",list.iterator());
+		}
+	}
+	
+	@Override
+	public List<PaymentDto> userListSearch(SearchCriteria sc) throws Exception {
+		return session.selectList(namespace + ".userListSearch",sc) ;
+	}
+	
+	@Override
+	public int userListSearchCount(SearchCriteria sc) throws Exception {
+		return session.selectOne(namespace + ".userListSearchCount", sc);
+	}
+	
 }
+

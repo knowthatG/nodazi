@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin - Bootstrap Admin Template</title>
+<title>주가 예측 프로젝트 - 노다지</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -36,10 +38,14 @@
 
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-	
-	
-</script>
+
+<style type="text/css">
+
+.box-header{
+	margin-bottom: 20px;
+}
+
+</style>
 
 </head>
 
@@ -56,10 +62,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							회원 관리<small>Memeber Management</small>
+							회원 관리
 						</h1>
 						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
+							<li class="active"><i class="fa fa-dashboard"></i> Member Management
 							</li>
 						</ol>
 					</div>
@@ -67,48 +73,65 @@
 				<!-- /.row -->
 
 				<div class="col-lg-12">
-					<div class="panel panel-default">
 						
 						<div class="box">
-							<div class="box-header with-border">
+							<div class="box-header form-inline">
+								<select name="searchType" class="form-control">
+									<option value="inm" selected="selected"
+										<c:out value="${cri.searchType eq 'inm'?'selected':''}"/>>
+										전체
+									</option>
+									<option value="i"
+										<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
+										아이디
+									</option>
+									<option value="n"
+										<c:out value="${cri.searchType eq 'n'?'selected':''}"/>>
+										성명
+									</option>
+									<option value="m"
+										<c:out value="${cri.searchType eq 'm'?'selected':''}"/>>
+										전화번호
+									</option>
+								</select> <input type="text" name='keyword' id="keywordInput" class="form-control"
+									value='${cri.keyword }'>
+								<button id="searchBtn" class="btn btn-default">검색</button>
+							</div>
+							
+							<div class="box-body">
+								<table class="table table-hover text-center">
+									<tr>
+										<th class="text-center">no</th>
+										<th class="text-center">id</th>
+										<th class="text-center">성명</th>
+										<th class="text-center">이메일</th>
+										<th class="text-center">전화번호</th>
+										<th class="text-center">가입일</th>
+										<th class="text-center">탈퇴일</th>
+									</tr>
+									
+									<!-- 회원 리스트를 출력 -->
+									<c:forEach items="${list}" var="userDto" varStatus="status">
+									<tr>
+										<td>
+											${status.index+1}
+										</td>
+										<td>${userDto.u_id}</td>
+										<td>${userDto.u_nm}</td>
+										<td>${userDto.u_email}</td>
+										<td>${userDto.u_mobile}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${userDto.u_regdt}"/></td>
+										<td>
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${userDto.u_withdrawdt}"/>
+											<c:if test="${userDto.u_withdrawdt==Null}">-</c:if>
+										</td>
+									</tr>
+									</c:forEach>
+									
+								</table>
 								
 							</div>
-							<div class="box-body col-lg-12">
-								<table class="table table-bordered table-striped table-hover">
-									<tr>
-										<th class="col-lg-0"></th>
-										<th>no</th>
-										<th>id</th>
-										<th>입금액</th>
-										<th>입금은행</th>
-										<th>신청일</th>
-										<th>승인일</th>
-										<th>만기일</th>
-										<th>상태</th>
-									</tr>
-			
-									<c:forEach items="${list}" var="boardVO">
-			
-										<tr>
-											<td>
-												<input type="checkbox" >
-											</td>
-											<td><a
-												href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
-													${boardVO.title} <strong>[ ${boardVO.replycnt} ]</strong>
-											</a></td>
-											<td>${boardVO.writer}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-													value="${boardVO.regdate}" /></td>
-											<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
-										</tr>
-			
-									</c:forEach>
-			
-								</table>
-							</div>
 							<!-- /.box-body -->
-			
 			
 							<div class="box-footer">
 			
@@ -117,20 +140,20 @@
 			
 										<c:if test="${pageMaker.prev}">
 											<li><a
-												href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+												href="paymentList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 										</c:if>
-			
+										
 										<c:forEach begin="${pageMaker.startPage }"
 											end="${pageMaker.endPage }" var="idx">
 											<li
 												<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-												<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+												<a href="paymentList${pageMaker.makeSearch(idx)}">${idx}</a>
 											</li>
 										</c:forEach>
 			
 										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 											<li><a
-												href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+												href="paymentList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 										</c:if>
 			
 									</ul>
@@ -139,7 +162,7 @@
 							</div>
 							<!-- /.box-footer-->
 						</div>
-					</div>
+					
 				</div>
 
 
@@ -161,7 +184,25 @@
 	<script src="../js/plugins/morris/raphael.min.js"></script>
 	<script src="../js/plugins/morris/morris.min.js"></script>
 	<script src="../js/plugins/morris/morris-data.js"></script>
-
+	
 </body>
+<script src="../../js/jquery.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$("#searchBtn").on("click",
+		function(event) {
+			self.location = "userList"
+				+ '${pageMaker.makeQuery(1)}'
+				+ "&searchType="
+				+ $("select option:selected").val()
+				+ "&keyword=" + $('#keywordInput').val();
+		}
+	);
+
+});
+</script>
+
+
 
 </html>

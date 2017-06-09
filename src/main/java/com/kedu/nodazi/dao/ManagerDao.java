@@ -11,4 +11,9 @@ public interface ManagerDao {
 	
 	public int paymentListSearchCount(SearchCriteria sc) throws Exception;
 	
+	public void updatePaymentStatus(List<PaymentDto> list) throws Exception; 
+	
+	public List<PaymentDto> userListSearch(SearchCriteria sc) throws Exception;
+	
+	public int userListSearchCount(SearchCriteria sc) throws Exception;
 }
