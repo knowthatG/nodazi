@@ -1,8 +1,6 @@
 package com.kedu.nodazi.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +19,6 @@ public class ChartDto {
 		this.result.put("rows", this.rows);
 	}
 	
-	/*
 	public void addColumn(String label, String type){
 		addColumn("", label, "", type);
 	}
@@ -37,7 +34,6 @@ public class ChartDto {
 		
 		this.cols.add(col);
 	}
-	*/
 	
 //	왜있는거지?
 	public void addRow(String name, Object value){
@@ -96,16 +92,6 @@ public class ChartDto {
 	
 	public HashMap<String, Object> getResult(){
 		return this.result;
-	}
-	
-	public String dateFormat(Date date, String pattern){
-		
-		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-		
-		String day = sdf.format(date);
-		
-		return day;
-		
 	}
 	
 	public String toString(){

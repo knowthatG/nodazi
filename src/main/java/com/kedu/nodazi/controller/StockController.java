@@ -76,14 +76,16 @@ public class StockController {
 	@RequestMapping(value="/chartAjax", method=RequestMethod.GET)
 	public HashMap<String, Object> chartAjax(/*@RequestParam int term, */@RequestParam String code, Model model) throws Exception{
 		
-		
 //		code = 241180
 		logger.info("code : " + code);
 		List<PricesDto> recStock = service.readStockPrice(code, 5/*term*/);
 		ChartDto		chart    = new ChartDto(); 
 		
-//		chart.addColumn("month", "string");
-//		chart.addColumn("company", "number");
+		chart.addColumn("month", "string");
+		chart.addColumn("price_low", "number");
+		chart.addColumn("price_open", "number");
+		chart.addColumn("price_close", "number");
+		chart.addColumn("price_high", "number");
 		
 		chart.createRows(5/*term*/);
 		
@@ -101,81 +103,11 @@ public class StockController {
 			chart.addCell(row, dto.getPrice_high());
 		}
 		
-		/*
-		{
-			"rows":[
-					{"c":[{"v":1477353600000,"f":"10/25"}
-						,{"v":10880,"f":null}
-						,{"v":10880,"f":null}
-						,{"v":10940,"f":null}
-						,{"v":10965,"f":null}]}
-					,{"c":[{"v":1477267200000,"f":"10/24"}
-						,{"v":10865,"f":null}
-						,{"v":10875,"f":null}
-						,{"v":10880,"f":null}
-						,{"v":10880,"f":null}]}
-					,{"c":[{"v":1477008000000,"f":"10/21"}
-						,{"v":10875,"f":null}
-						,{"v":10885,"f":null}
-						,{"v":10875,"f":null}
-						,{"v":10885,"f":null}]}
-					,{"c":[{"v":1476921600000,"f":"10/20"}
-						,{"v":10675,"f":null}
-						,{"v":10675,"f":null}
-						,{"v":10750,"f":null}
-						,{"v":10750,"f":null}]}
-					,{"c":[{"v":1476748800000,"f":"10/18"}
-						,{"v":10675,"f":null}
-						,{"v":10680,"f":null}
-						,{"v":10675,"f":null}
-						,{"v":10680,"f":null}]}
-					]
-			,"cols":[
-					 {"pattern":""
-					 	,"id":""
-					 	,"label":"month"
-					 	,"type":"string"
-					 }
-					 ,{"pattern":""
-					 	,"id":""
-					 	,"label":"company"
-					 	,"type":"number"
-					 }
-					]
-		}
-		
-		*/
-		
-//		SimpleDateFormat sdf = new SimpleDateFormat("MM.dd");
-//		
-//		for(PricesDto dto : recStock){
-//			dto.setPrice_date(sdf.format(dto.getPrice_date()));
-//		}
-		
 		logger.info("recStock : " + recStock);
 		logger.info("chart.getResult() : " + chart.toString());
 		
 		return chart.getResult();
 		
-/*		List<PricesDto> recStrock1 = service.readStockPrice(recStockList.get(0), 5);
-		List<PricesDto> recStrock2 = service.readStockPrice(recStockList.get(1), 5);
-		List<PricesDto> recStrock3 = service.readStockPrice(recStockList.get(2), 5);
-		List<PricesDto> recStrock4 = service.readStockPrice(recStockList.get(3), 5);
-		List<PricesDto> recStrock5 = service.readStockPrice(recStockList.get(4), 5);
-		
-		logger.info("recStockList : " + recStockList);
-		logger.info("recStrock1 : " + recStrock1.toString());
-		logger.info("recStrock2 : " + recStrock2);
-		logger.info("recStrock3 : " + recStrock3);
-		logger.info("recStrock4 : " + recStrock4);
-		logger.info("recStrock5 : " + recStrock5);
-		
-		model.addAttribute("recStockList", recStockList);
-		model.addAttribute("recStock1", recStrock1);
-		model.addAttribute("recStock2", recStrock2);
-		model.addAttribute("recStock3", recStrock3);
-		model.addAttribute("recStock4", recStrock4);
-		model.addAttribute("recStock5", recStrock5);*/
 	}
 	
 }
