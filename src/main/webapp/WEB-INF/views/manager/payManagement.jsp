@@ -39,6 +39,9 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 
+	
+
+
 <style type="text/css">
 
 .box-header{
@@ -212,6 +215,8 @@
 	
 </body>
 <script src="../../js/jquery.js"></script>
+<script type="text/javascript" src=""></script>
+
 <script>
 
 $(document).ready(function(){
@@ -228,18 +233,32 @@ $(document).ready(function(){
 	
 	$("#approval").on("click",
 		function(){
+			
 			var approvalList = Array();
 			var send_cnt = 0;
 			var chkbox = $(".checkSelect");
 			
+			if(chkbox.checked == true){
+			    alert("체크 후 승인을 눌러주세요.");
+			    return false;
+			}
+			
+			/* 승인 대상 정보 JSON으로 말기 */
 			for(i=0;i<chkbox.length;i++) {
 			    if (chkbox[i].checked == true){
+			    	if($(chkbox[i]).parent().next().next().next().next().next().next().next().text()[24] != "-".toString()){
+			    		alert("이미 승인된 항목이 있습니다.");
+					    return false;
+			    	}
+			    	
+			    	/* 각 인덱스에 JSON 생성 */
 			    	approvalList[send_cnt]={
 						"p_seq":"",
 						"u_id":"",
 						"p_price":""
 					};
 			    	
+			    	/* JSON에 값 대입 */
 			    	approvalList[send_cnt].p_seq = $(chkbox[i]).parent().next().text();
 			    	approvalList[send_cnt].u_id = $(chkbox[i]).parent().next().next().text();
 			    	approvalList[send_cnt].p_price = $(chkbox[i]).parent().next().next().next().text();
@@ -250,13 +269,35 @@ $(document).ready(function(){
 			
 			alert(approvalList[0].p_seq +" : " + approvalList[0].u_id + " : " + approvalList[0].p_price);
 			
+			/* 검색 조건 유지를 위해 JSON으로 말기 */
+			var searchType = $("select option:selected").val()
+			var keyword = $('#keywordInput').val();
+			var page = ${pageMaker.cri.page};
+			
+			var search = {
+				searchType : searchType
+			  , keyword : keyword
+			  , page : page
+			}
+			
+			alert(search.searchType + " : " + search.keyword + " : " + search.page);
+			
+			
 			$.ajax({
 				  url		:"/manager/confirm"
 				, type		:"post"
+				, header	: {
+					"Content-Type" : "application/json"
+				  , "X-HTTP-Method-Override" : "POST"
+				}
 				, dataType	:"text"
-				
+				, data		:JSON.stringify({
+					  data		: approvalList
+					, search	: search
+				})
 				, timeout	:"30000"
-				, success	:function(){
+				, success	:function(list){
+					console.log("list "+ list);
 					
 					
 					

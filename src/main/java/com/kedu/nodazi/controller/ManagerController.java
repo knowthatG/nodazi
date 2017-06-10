@@ -1,6 +1,7 @@
 package com.kedu.nodazi.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,19 +45,26 @@ public class ManagerController {
 		return "/manager/payManagement";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/confirm", method = RequestMethod.POST)
-	public void approvePayment(@RequestBody List<PaymentDto> approvalList, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+	public List<PaymentDto> approvePayment(@RequestBody Map<String, Object> json) throws Exception{
+		
+		List<PaymentDto> approvalList = (List<PaymentDto>) json.get("data");
 		
 		service.confirmPayment(approvalList);
 		
-		model.addAttribute("list",service.getPaymentListSearch(cri));
+		SearchCriteria cri  = (SearchCriteria) json.get("search");
+		
+		/*model.addAttribute("list",service.getPaymentListSearch(cri));
 		PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
 
 	    pageMaker.setTotalCount(service.getPaymentListSearchCount(cri));
 
-	    model.addAttribute("pageMaker", pageMaker);
+	    model.addAttribute("pageMaker", pageMaker);*/
+	    
+	    return service.getPaymentListSearch(cri);
 		
 	}
 	

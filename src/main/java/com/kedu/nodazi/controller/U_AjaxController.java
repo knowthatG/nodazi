@@ -25,9 +25,8 @@ public class U_AjaxController {
 	private UserService uservice;
 	
 
-	@RequestMapping(value="/info",method = RequestMethod.GET)
+	//@RequestMapping(value="/info",method = RequestMethod.GET)
 	public void InfoGET(Model model, HttpSession session)throws Exception{
-
 		
 		Object obj = session.getAttribute("login");
 		UserDto udto = (UserDto)obj;
