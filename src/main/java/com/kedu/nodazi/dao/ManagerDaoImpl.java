@@ -34,8 +34,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	
 	@Override
 	public void updatePaymentStatus(List<PaymentDto> list) throws Exception {
-		while(list.isEmpty()){
-			session.update(namespace+".updateViewCnt",list.iterator());
+
+		for(int i=0;i<list.size();i++ ){
+			session.update(namespace+".updatePaymentStatus",list.get(i));
 		}
 	}
 	

@@ -36,12 +36,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-
-	
-
-
 <style type="text/css">
 
 .box-header{
@@ -102,8 +96,8 @@
 							</div>
 							
 							<div class="box-body">
-								<table class="table table-hover text-center">
-									<tr>
+								<table class="table table-hover text-center" >
+									<tr id="paymentCol">
 										<th class="col-lg-0"></th>
 										<th class="text-center">no</th>
 										<th class="text-center">id</th>
@@ -215,14 +209,74 @@
 	
 </body>
 <script src="../../js/jquery.js"></script>
-<script type="text/javascript" src=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<script type="text/x-handlebars-template" id="template">
+{{#each.}}
+	<tr>
+		<td>
+			<input type="checkbox" class="checkSelect">
+		</td>
+		<td>{{p_seq}}</td>
+		<td>{{u_id}}</td>
+		<td>{{p_price}}</td>
+		<td>{{p_dep_bank}}</td>
+		<td>{{p_dep_nm}}</td>
+		<td>
+			{{prettifyDate p_regdt}}
+		</td>
+		<td>
+			{{prettifyDate p_depdt}}
+		</td>
+		<td>
+			{{prettifyDate p_enddt}}
+		</td>
+		<td id="paymentstate">
+			{{checkStatus p_enddt}}				
+		</td>
+	</tr>
+
+{{/each}}
+</script>
 
 <script>
+
+Handlebars.registerHelper("prettifyDate", function(timeValue) {
+	if(timeValue == null){
+		return "-";
+	}
+	var dateObj = new Date(timeValue);
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth() + 1;
+	var date = dateObj.getDate();
+	return year + "-" + month + "-" + date;
+});
+
+Handlebars.registerHelper("checkStatus", function(enddt) {
+	if(enddt == null){
+		return "입금전";
+	}else{
+		var now = new Date();
+		if(enddt>=now){
+			return "입금완료";
+		}else if(enddt<now){
+			return "만기";
+		}
+	}
+	
+});
+
+
 
 $(document).ready(function(){
 			
 	$("#searchBtn").on("click",
 		function(event) {
+			if($('#keywordInput').val()==""){
+				alert("검색어를 입력해주세요");
+				return false;
+			}
+			
 			self.location = "paymentList"
 				+ '${pageMaker.makeQuery(1)}'
 				+ "&searchType="
@@ -253,15 +307,15 @@ $(document).ready(function(){
 			    	
 			    	/* 각 인덱스에 JSON 생성 */
 			    	approvalList[send_cnt]={
-						"p_seq":"",
+						"p_seq":0,
 						"u_id":"",
-						"p_price":""
+						"p_price":0
 					};
 			    	
 			    	/* JSON에 값 대입 */
-			    	approvalList[send_cnt].p_seq = $(chkbox[i]).parent().next().text();
+			    	approvalList[send_cnt].p_seq = parseInt($(chkbox[i]).parent().next().text());
 			    	approvalList[send_cnt].u_id = $(chkbox[i]).parent().next().next().text();
-			    	approvalList[send_cnt].p_price = $(chkbox[i]).parent().next().next().next().text();
+			    	approvalList[send_cnt].p_price = parseInt($(chkbox[i]).parent().next().next().next().text());
 			        send_cnt++;
 			        
 			    }
@@ -275,9 +329,8 @@ $(document).ready(function(){
 			var page = ${pageMaker.cri.page};
 			
 			var search = {
-				searchType : searchType
-			  , keyword : keyword
-			  , page : page
+				'searchType' : searchType
+			  , 'keyword' : keyword
 			}
 			
 			alert(search.searchType + " : " + search.keyword + " : " + search.page);
@@ -286,36 +339,31 @@ $(document).ready(function(){
 			$.ajax({
 				  url		:"/manager/confirm"
 				, type		:"post"
-				, header	: {
+				, headers	: {
 					"Content-Type" : "application/json"
 				  , "X-HTTP-Method-Override" : "POST"
 				}
-				, dataType	:"text"
+				, dataType	:"json"
 				, data		:JSON.stringify({
-					  data		: approvalList
-					, search	: search
+					  "data"	: approvalList
+					, "searchType" : searchType
+				    , "keyword" : keyword
+	     			, "page" : page 
 				})
 				, timeout	:"30000"
 				, success	:function(list){
 					console.log("list "+ list);
 					
-					
-					
-					
+					var template = Handlebars.compile($("#template").html());
+					var html = template(list);
+					$("#paymentCol").nextAll().remove();
+					$("#paymentCol").after(html);
 				}
 				
 			});
-			
 		}		
-	
 	);
 	
-	
-	
-	
-	
-	
-			
 });	
 
 

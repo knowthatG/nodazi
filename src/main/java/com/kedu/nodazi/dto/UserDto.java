@@ -14,6 +14,7 @@ public class UserDto {
 	private Date u_withdrawdt;
 	private int u_mgr;
 	private int u_withdraw;
+	
 	public String getU_nm() {
 		return u_nm;
 	}

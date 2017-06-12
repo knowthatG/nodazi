@@ -108,8 +108,9 @@
                         <a href="blank6.jsp"><i class="fa fa-fw fa-edit"></i> 게시판</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-shopping-cart"></i> 결제 <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                    
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-shopping-cart"></i> 결제 <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo1" class="collapse">
                             <li>
                                 <a href="/user/payment_policy">결제안내</a>
                             </li>
@@ -118,6 +119,19 @@
                             </li>
                         </ul>
                     </li>
+                    
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="glyphicon glyphicon-king"></i> 관리 <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo2" class="collapse">
+                            <li>
+                                <a href="/manager/userList">회원관리</a>
+                            </li>
+                            <li>
+                                <a href="/manager/paymentList">결제관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -51,7 +51,7 @@
 	</sql>
 	
 	
-	<update id="updateViewCnt">
+	<update id="updatePaymentStatus">
 		update payment
   		   set p_depdt = now()
 		<include refid="condition"></include>

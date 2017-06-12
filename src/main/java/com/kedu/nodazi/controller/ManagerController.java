@@ -25,7 +25,7 @@ import com.kedu.nodazi.service.ManagerService;
 public class ManagerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
-	
+
 	@Inject
 	private ManagerService service;
 	
@@ -48,13 +48,20 @@ public class ManagerController {
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/confirm", method = RequestMethod.POST)
-	public List<PaymentDto> approvePayment(@RequestBody Map<String, Object> json) throws Exception{
-		
+	public List<PaymentDto> approvlPayment(@RequestBody Map<String, Object> json) throws Exception{
+		logger.info(((List<PaymentDto>) json.get("data")).toString());
+		logger.info((String) json.get("searchType"));
+		logger.info((String) json.get("keyword"));
+		logger.info(json.get("page").toString());
 		List<PaymentDto> approvalList = (List<PaymentDto>) json.get("data");
 		
 		service.confirmPayment(approvalList);
 		
-		SearchCriteria cri  = (SearchCriteria) json.get("search");
+		SearchCriteria cri  = new SearchCriteria();
+		
+		cri.setSearchType((String)json.get("searchType"));
+		cri.setKeyword((String)json.get("keyword"));
+		cri.setPage(Integer.parseInt(json.get("page").toString()));
 		
 		/*model.addAttribute("list",service.getPaymentListSearch(cri));
 		PageMaker pageMaker = new PageMaker();
