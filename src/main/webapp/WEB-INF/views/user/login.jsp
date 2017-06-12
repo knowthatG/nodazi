@@ -96,6 +96,19 @@ form[role=login] {
 	.form-links a {
 		color: #fff;
 	}
+
+@font-face{
+	font-family: blackChancery;
+	src: url(../fonts/BLKCHCRY.ttf);
+	font-weight: bold;
+}
+
+#companyName{
+	font-family: blackChancery;
+	font-size: 30px;
+	text-align: center;
+}
+	
 </style>
 
 </head>
@@ -127,7 +140,7 @@ form[role=login] {
 						    <div class="col-md-4">
 						      <section class="login-form">
 						        <form method="post" action="#" role="login">
-						          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+						          <span id="companyName">Know Da Zi</span>
 						          <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
 						          
 						          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
