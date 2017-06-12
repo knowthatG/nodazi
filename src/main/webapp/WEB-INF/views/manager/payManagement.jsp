@@ -321,20 +321,10 @@ $(document).ready(function(){
 			    }
 			}
 			
-			alert(approvalList[0].p_seq +" : " + approvalList[0].u_id + " : " + approvalList[0].p_price);
-			
-			/* 검색 조건 유지를 위해 JSON으로 말기 */
+			/* 검색 조건 유지를 위한 변수 선언 */
 			var searchType = $("select option:selected").val()
 			var keyword = $('#keywordInput').val();
 			var page = ${pageMaker.cri.page};
-			
-			var search = {
-				'searchType' : searchType
-			  , 'keyword' : keyword
-			}
-			
-			alert(search.searchType + " : " + search.keyword + " : " + search.page);
-			
 			
 			$.ajax({
 				  url		:"/manager/confirm"

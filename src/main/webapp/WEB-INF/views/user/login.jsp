@@ -23,28 +23,27 @@
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 
-.wrapper {	
-	margin-top: 80px;
-  margin-bottom: 80px;
+/*
+over-ride "Weak" message, show font in dark grey
+*/
+
+.progress-bar {
+    color: #333;
+} 
+
+/*
+Reference:
+http://www.bootstrapzen.com/item/135/simple-login-form-logo/
+*/
+
+* {
+    -webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	outline: none;
 }
 
-.form-signin {
-  max-width: 380px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-
-  border: 1px solid rgba(0,0,0,0.1);  
-
-  .form-signin-heading,
-	.checkbox {
-	  margin-bottom: 30px;
-	}
-
-	.checkbox {
-	  font-weight: normal;
-	}
-
-	.form-control {
+    .form-control {
 	  position: relative;
 	  font-size: 16px;
 	  height: auto;
@@ -56,18 +55,47 @@
 		}
 	}
 
-	input[type="text"] {
-	  margin-bottom: -1px;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-	}
-
-	input[type="password"] {
-	  margin-bottom: 20px;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
-	}
+body {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
+.login-form {
+	margin-top: 60px;
+}
+
+form[role=login] {
+	color: #5d5d5d;
+	background: #f2f2f2;
+	padding: 26px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+	form[role=login] img {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 35px;
+	}
+	form[role=login] input,
+	form[role=login] button {
+		font-size: 18px;
+		margin: 16px 0;
+	}
+	form[role=login] > div {
+		text-align: center;
+	}
+	
+.form-links {
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 50px;
+}
+	.form-links a {
+		color: #fff;
+	}
 </style>
 
 </head>
@@ -78,29 +106,44 @@
     <div id="wrapper">
 
        <%@include file="../include/custom-header.jsp"%>
-
+		
 
         <div id="page-wrapper">
 
             <div class="container-fluid">
 
  <!--                Page Heading -->
+ 				
+ 				
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             	로그인 <small>Log in</small>
                         </h1>
-
-						    <form class="form-signin" method="post" action="/user/loginPost">       
-						      <h2 class="form-signin-heading">Please login</h2>
-						      <input type="text" class="form-control" name="u_id" placeholder="Email Address" required="" autofocus="" />
-						      <input type="password" class="form-control" name="u_pw" placeholder="Password" required=""/>      
-						      <label class="checkbox">
-						        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-						      </label>
-						      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-						    </form>
-
+                        
+                        <div class="row" id="pwd-container">
+						    <div class="col-md-4"></div>
+						    
+						    <div class="col-md-4">
+						      <section class="login-form">
+						        <form method="post" action="#" role="login">
+						          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+						          <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+						          
+						          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+						          
+						          <div class="pwstrength_viewport_progress"></div>
+						          
+						          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">로그인</button>
+						          <div>
+						            <a href="#">계정 등록</a> or <a href="#">비밀번호 찾기</a>
+						          </div>
+						          
+						        </form>
+						        
+						      </section>  
+						      </div>
+						  </div>
                     </div>
 		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
