@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="login" resultType="com.kedu.nodazi.dto.UserDto">
 	select u_id,u_pw,u_nm from user
-	where u_id = #{u_id} and u_pw=#{u_pw} and u_withraw = 0
+	where u_id = #{u_id} and u_pw=#{u_pw}
 	</select>
 	
 	<insert id = "payment">
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id = "info" resultType="com.kedu.nodazi.dto.UserDto">
-		select u_id,u_nm,u_email,u_mobile,u_regdt from user
+		select u_id,u_nm,u_pw,u_email,u_mobile,u_regdt from user
 		where u_id= #{u_id}
 	</select>
 	
@@ -29,13 +29,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u_id= #{u_id}
 	</select> 
 	
-	<update id ="userupdate">
-		update user set u_pw = #{u_pw},u_email = #{u_email},u_mobile = #{u_mobile}
+	<update id ="userUpdate">
+		update user set  u_pw = #{u_pw}
+						,u_email = #{u_email}
+						,u_mobile = #{u_mobile}
+						,u_updatedt = now()
 		where u_id = #{u_id}
 	</update>
 	
-	<update id="userwithdraw">
-		update user set u_withdraw = 1;
+	<update id="withdraw">
+		update user set u_withraw = 1
 		where u_id = #{u_id}
 	</update>
 </mapper>

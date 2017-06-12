@@ -95,12 +95,15 @@ public class UserController {
 		}
 		
 		@RequestMapping(value="/payment",method=RequestMethod.GET)
-		public void PaymentGET(Model model)throws Exception{
+		public void PaymentGET(Model model,HttpSession session)throws Exception{
+
 			logger.info("payment");
+		
 		}
 		
 		@RequestMapping(value="/payment",method = RequestMethod.POST)
 		public String PaymentPOST(PaymentDto pdto,RedirectAttributes rttr)throws Exception{
+			
 			logger.info("Payment post");
 			uservice.payment(pdto);
 			
@@ -110,6 +113,7 @@ public class UserController {
 		
 		@RequestMapping(value="/payment_detail",method = RequestMethod.GET)
 		public void PaymentDetailGET(Model model,HttpSession session)throws Exception{
+
 			Object obj = session.getAttribute("login");
 			UserDto udto = (UserDto)obj;
 			String u_id = udto.getU_id();
@@ -117,18 +121,28 @@ public class UserController {
 			logger.info("infoGET");
 		}
 		
-		@RequestMapping(value="/info_tab",method= RequestMethod.GET)
-		public void InfotabGET(Model model)throws Exception{
-			logger.info("info_tab");
-		}
 		@RequestMapping(value="/info",method = RequestMethod.GET)
 		public void InfoGET(Model model, HttpSession session)throws Exception{
+			
 			Object obj = session.getAttribute("login");
 			UserDto udto = (UserDto)obj;
 			String u_id = udto.getU_id();
 			model.addAttribute("udto",uservice.info(u_id));
 			logger.info("infoGET");
 
+		}
+		
+		
+		@RequestMapping(value="/withdraw",method = RequestMethod.POST)
+		public String Withdraw(UserDto udto, RedirectAttributes rttr,HttpSession session)throws Exception{
+			logger.info("Payment post");
+			uservice.withdraw(udto);
+			
+			rttr.addFlashAttribute("msg","success");
+			session.removeAttribute("login");
+			session.invalidate();
+			return "redirect:/user/main";
+			
 		}
 		
 		

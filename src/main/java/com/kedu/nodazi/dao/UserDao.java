@@ -18,4 +18,6 @@ public interface UserDao {
 	public List<PaymentDto> payment(String u_id)throws Exception;
 	
 	public void userUpdate(UserDto udto)throws Exception;
+	
+	public void withdraw(UserDto udto)throws Exception;
 }

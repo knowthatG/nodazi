@@ -26,6 +26,7 @@ public class UserDaoImpl implements UserDao{
 	public UserDto login(LoginDto ldto) throws Exception{
 		return session.selectOne(namespace + ".login",ldto);
 	}
+	
 	public void payment(PaymentDto pdto)throws Exception{
 		 session.insert(namespace+".payment",pdto);
 	}
@@ -40,6 +41,10 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	public void userUpdate(UserDto udto)throws Exception{
-		 session.update(namespace+".UserUpdate",udto);
+		 session.update(namespace+".userUpdate",udto);
+	}
+	
+	public void withdraw(UserDto udto)throws Exception{
+		session.update(namespace+".withdraw",udto);
 	}
 }

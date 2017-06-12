@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService{
 	public void userUpdate(UserDto udto)throws Exception{
 		udao.userUpdate(udto);
 	}
+	
+	@Override
+	public void withdraw(UserDto udto)throws Exception{
+		udao.withdraw(udto);
+	}
 }

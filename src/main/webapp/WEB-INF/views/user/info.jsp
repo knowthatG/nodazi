@@ -30,28 +30,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	  $.get('/joshadelic/pen/WvmePv.html', function(data){
-	    $('#section-1').html(data);
-	  });
-	});
+    
 
-	$('[data-toggle="tab"]').on('click', function(){
-	    var $this = $(this),
-	        source = $this.attr('href'),
-	        pane = $this.attr('data-target');
-	  
-	    if($(pane).is(':empty')) {  // check if pane is empty, if so get data
-	      $.get(source, function(data) {
-	          $(pane).html(data);
-	      });
-
-	      $(this).tab('show');
-	      return false;
-	    }
-	}); 
-</script>
 </head>
 
 
@@ -81,24 +61,94 @@ $(document).ready(function(){
 			
 			      <!-- Nav tabs -->
 			      <ul class="nav nav-tabs" role="tablist">
-			        <li role="presentation" class="active"><a href="" id="link-1" aria-controls="section-1" role="tab" data-target="#section-1" data-toggle="tab">Section 1</a></li>
-			        <li role="presentation"><a href="/joshadelic/pen/LVabRL.html" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">Section 2</a></li>
-			        <li role="presentation"><a href="/joshadelic/pen/VLRmKr.html" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">Section 3</a></li>
+			        <li role="presentation" class="active"><a href="" id="link-1" aria-controls="section-1" role="tab" data-target="#section-1" data-toggle="tab">사용자 정보</a></li>
+			        <li role="presentation"><a href="" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">정보 수정</a></li>
+			        <li role="presentation"><a href="" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">회원 탈퇴</a></li>
 			      </ul>
 			
 			      <!-- Tab panes -->
 			      <div class="tab-content">
 			        <div role="tabpanel" class="tab-pane active" id="section-1">
-			        	
-			        </div>
+			        	  <div class="center-block clearfx">
+				 			 <div class="form-group">
+				    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
+				    			<div class="col-sm-10">
+				     				 <input type="text" class="form-control" value="${udto.u_nm }" readonly="readonly">
+				    			</div>
+				  			
+				  			
+				  		
+				   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
+				    			</div>
+				  		
+				  			
+				
+				   			   <label for="u_pw" class="col-sm-2 control-label">email :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control" id="f_u_email" value="${udto.u_email }" readonly="readonly">
+				    			</div>
+				  			
+			
+				   			   <label for="passcheck" class="col-sm-2 control-label">Mobile :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control"  id="f_u_mobile" value="${udto.u_mobile }" readonly="readonly">
+				    			</div>
+				  			</div>
+						</div>
+					</div>
+			      
+			      <!-- section 2 -->
 			       <div role="tabpanel" class="tab-pane" id="section-2">
 			        	<form action="/user/update">
-			        	
+			        					        	  <div class="center-block clearfx">
+				 			 <div class="form-group">
+				    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
+				    			<div class="col-sm-10">
+				     				 <input type="text" class="form-control" id="u_nm" name="u_nm" value="${udto.u_nm }" readonly="readonly">
+				    			</div>
+				  			
+				  			
+				  		
+				   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
+				    			</div>
+				  				
+				 				<label for="u_id" class="col-sm-2 control-label">PW :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control" id="u_pw" name="u_pw" value="${udto.u_pw }" >
+				    			</div>
+				  		
+				  			
+				
+				   			   <label for="u_pw" class="col-sm-2 control-label">email :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control" id="u_email" name="u_email" value="${udto.u_email }" >
+				    			</div>
+				  			
+				  			
+
+				   			   <label for="passcheck" class="col-sm-2 control-label">Mobile :</label>
+				    			<div class="col-sm-10">
+				    			  <input type="text" class="form-control" id="u_mobile" value="${udto.u_mobile }">
+				    			</div>
+				    			
+				    			<input type="button" id="update_btn" class="btn btn-default" value="update">
+				  			</div>
+						</div>
 			        	</form>
 			        </div>
+			        
+			        <!-- section 3 -->
 			        <div role="tabpanel" class="tab-pane" id="section-3">
-			        	
+			        	<form action="/user/withdraw" method="post">
+			        	<input type="hidden" id="u_id" name="u_id" value="${udto.u_id }">
+			        	<input type="submit" id="withdraw_btn" class="btn btn-default" value="withdraw">
+			        	</form>
 			        </div>
+			        <!-- section end -->
 			      </div>
 			    </div>
 			  </div>
@@ -111,6 +161,38 @@ $(document).ready(function(){
             </div>
             </div>
 <script>
+$("#update_btn").on("click",function(){
+	var u_id = $("#u_id").val();
+	var u_pw = $("#u_pw").val();
+	var u_email = $("#u_email").val();
+	var u_mobile = $("#u_mobile").val();
+	
+	$.ajax({
+		type:'put',
+		url: '/user/'+u_id,
+		headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"PUT"},
+		data:JSON.stringify({u_pw:u_pw,u_email:u_email,u_mobile:u_mobile}),
+		dataType:'text',
+		success:function(result){
+			console.log("result:" +result);
+			if(result == 'success'){
+				alert("성공");
+				getInfo();		
+			}
+		}
+		
+	});
+})
+function getInfo(){
+	{
+		alert("info");
+		$("#f_u_email").val($("#u_email").val());
+		$("#f_u_mobile").val($("#u_mobile").val());
+		
+	}
+}
 
 </script>
 </body>

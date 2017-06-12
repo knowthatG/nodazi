@@ -22,7 +22,14 @@
     <!-- Custom Fonts -->
     <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+	    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
     
+    <!-- javascript -->
+    <script src="../../js/User.js"></script>
 </head>
 
 <body>
@@ -44,83 +51,83 @@
                         </h1>
                 </div>
                 <!-- /.row -->
-      <div class="center-block clearfx" style="width:800px">
-		<form class="form-horizontal" method="post">
- 			 <div class="form-group">
-    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
-    			<div class="col-sm-10">
-     				 <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name">
-    			</div>
-  			</div>
+	      <div class="center-block clearfx" style="width:800px">
+			<form class="form-horizontal" method="post">
+	 			 <div class="form-group">
+	    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
+	    			<div class="col-sm-10">
+	     				 <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name">
+	    			</div>
+	  			</div>
+	  			
+	  			<div class="form-group">
+	   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
+	    			<div class="col-sm-10">
+	    			  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID">
+	    			</div>
+	  			</div>
+	  			
+	  			  <div class="form-group">
+	   			   <label for="u_pw" class="col-sm-2 control-label">Password :</label>
+	    			<div class="col-sm-10">
+	    			  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw">
+	    			</div>
+	  			</div>
+	  			
+	  			<div class="form-group">
+	   			   <label for="passcheck" class="col-sm-2 control-label">PwCheck :</label>
+	    			<div class="col-sm-10">
+	    			  <input type="password" class="form-control" id="passcheck" placeholder="Password Check">
+	    			</div>
+	  			</div>
+	  			
+	  			
   			
-  			<div class="form-group">
-   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
-    			<div class="col-sm-10">
-    			  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID">
-    			</div>
-  			</div>
+	  			<div class="form-group">
+	  				 <label for="email1" class="col-sm-2 control-label">E-mail :</label>
+	  					<div class="col-sm-4">
+	  						<input name="email1" type="text" class="form-control" id="email1" size="15"placeholder="E-mail"> 
+	  					</div>
+	  					<div class="col-sm-4">
+	  						<input name="email2" type="text" class="form-control" id="email2" size="20" readonly="readonly" placeholder="@">
+	  					</div>
+						<div class="col-sm-2">
+							<select name="email_select" class="form-control" id="email_select">
+	  						  <option value="" selected>-----</option>
+	    					  <option value="naver.com">Naver</option>
+	    					  <option value="hotmail.com">Outlook</option>
+	    					  <option value="hanmail.com">Hanmail</option>
+	    					  <option value="yahoo.co.kr">Yahoo</option>
+	   						  <option value="1">직접입력</option>
+							</select>
+						</div>
+	  			</div>
   			
-  			  <div class="form-group">
-   			   <label for="u_pw" class="col-sm-2 control-label">Password :</label>
-    			<div class="col-sm-10">
-    			  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw">
-    			</div>
-  			</div>
-  			
-  			<div class="form-group">
-   			   <label for="passcheck" class="col-sm-2 control-label">PwCheck :</label>
-    			<div class="col-sm-10">
-    			  <input type="password" class="form-control" id="passcheck" placeholder="Password Check">
-    			</div>
-  			</div>
-  			
-  			
-  			
-  			<div class="form-group">
-  				 <label for="email1" class="col-sm-2 control-label">E-mail :</label>
-  					<div class="col-sm-4">
-  						<input name="email1" type="text" class="form-control" id="email1" size="15"placeholder="E-mail"> 
-  					</div>
-  					<div class="col-sm-4">
-  						<input name="email2" type="text" class="form-control" id="email2" size="20" readonly="readonly" placeholder="@">
-  					</div>
-					<div class="col-sm-2">
-						<select name="email_select" class="form-control" id="email_select">
-  						  <option value="" selected>-----</option>
-    					  <option value="naver.com">Naver</option>
-    					  <option value="hotmail.com">Outlook</option>
-    					  <option value="hanmail.com">Hanmail</option>
-    					  <option value="yahoo.co.kr">Yahoo</option>
-   						  <option value="1">직접입력</option>
-						</select>
-					</div>
-  			</div>
-  			
-  			 <div class="form-group">
-   			   <label for="mobile1" class="col-sm-2 control-label">Phone :</label>
-    			<div class="col-sm-2">
-    			  <input name="mobile1" type="text" class="form-control" id="mobile1" readonly="readonly" value="010">
-    			  </div>
-    			 <div class="col-sm-4">
-    			   <input name="mobile2" type="text" class="form-control" id="mobile2" placeholder="-" >
-    			 </div>
-    			 <div class="col-sm-4">
-    			    <input name="mobile3" type="text" class="form-control" id="mobile3"  placeholder="-">
-    			  </div>
-    			</div>
-  			</div>
+	  			 <div class="form-group">
+	   			   <label for="mobile1" class="col-sm-2 control-label">Phone :</label>
+	    			<div class="col-sm-2">
+	    			  <input name="mobile1" type="text" class="form-control" id="mobile1" readonly="readonly" value="010">
+	    			  </div>
+	    			 <div class="col-sm-4">
+	    			   <input name="mobile2" type="text" class="form-control" id="mobile2" placeholder="-" >
+	    			 </div>
+	    			 <div class="col-sm-4">
+	    			    <input name="mobile3" type="text" class="form-control" id="mobile3"  placeholder="-">
+	    			  </div>
+	    			</div>
+	  			</div>
   
- 		 <input type="hidden" name="u_email" id="u_email" value="">
-  		<input type="hidden" name="u_mobile" id="u_mobile" value="">
-  		<div class="form-group" style="width:500">
-    		<div class="col-sm-offset-2 col-sm-12">
-    			<div class="center-block">
-      			<button type="submit" class="btn btn-default" id="submit">Sign in</button>
-    			</div>
-    		</div>
- 		 </div>
-      </div>
-		</form>
+		 		<input type="hidden" name="u_email" id="u_email" value="">
+		  		<input type="hidden" name="u_mobile" id="u_mobile" value="">
+		  		<div class="form-group" style="width:500">
+		    		<div class="col-sm-offset-2 col-sm-12">
+		    			<div class="center-block">
+		      			<button type="submit" class="btn btn-default" id="submit" action="loginCheck()">Sign in</button>
+						</form>
+		    			</div>
+		    		</div>
+		 		 </div>
+		      </div>
 
 		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
@@ -131,11 +138,7 @@
             <!-- /.container-fluid -->
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../js/bootstrap.min.js"></script>
     
             <!-- javaScript -->
 <script>
@@ -170,34 +173,8 @@ $(function(){
 			
 			$("#u_email").val(u_email);	
 		 
-			if($("#u_pw").val().length < 8 || $("#u_pw").val().length > 20){
-				alert("비밀번호는 8~20자리여야 합니다.");
-				return false;
-			}else if($("#u_id").val() == null){
-				alert("아이디를 입력해주세요");
-				$("#u_id").focus();
-				return false;
-			}
-			else if($("#email1").val()== null ||("#email2").val() == null){
-				alert("이메일을 입력해주세요");
-				$("#email1").focus();
-				return false;
-			}
-			else{
-				if($("#u_pw").val() != $("#passcheck").val()){
-					alert("비밀번호가 다릅니다.");
-					return false;
-				}
-				else{
-					 
-					submit();
-				}
-			}
-
-	});
- 	
-		
-
+			return idCheck();
+			});
 });
 
 </script>
