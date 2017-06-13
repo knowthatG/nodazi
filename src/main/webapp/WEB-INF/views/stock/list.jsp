@@ -85,7 +85,6 @@
 
 				<div class="row">
 					<div class="col-lg-6">
-						<h2>Basic Table</h2>
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>

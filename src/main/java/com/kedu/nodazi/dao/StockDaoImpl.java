@@ -2,6 +2,7 @@ package com.kedu.nodazi.dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,28 +15,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.kedu.nodazi.dto.CodesDto;
+import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.PricesDto;
+import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
 
 @Repository
-public class RecStockDaoImpl implements RecStockDao{
+public class StockDaoImpl implements StockDao{
 
 	@Inject
 	private SqlSession session;
 	
-	private static Logger logger = LoggerFactory.getLogger(RecStockDaoImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(StockDaoImpl.class);
 	
-	private static String namespace = "com.kedu.nodazi.mapper.RecStockMapper";
+	private static String namespace = "com.kedu.nodazi.mapper.StockMapper";
 	
 
 	@Override
-	public List<String> readRecStock() throws Exception {
+	public List<CodesDto> readRecStock() throws Exception {
 		
 		Calendar day   = Calendar.getInstance();
 		String	 today = "";
 		
 		Map<String, Integer> listMap  = new HashMap<String, Integer>();
-		List<String>		 recList  = new ArrayList<String>();
+		List<CodesDto>		 recList  = new ArrayList<CodesDto>();
 		
 //		오늘 날짜 생성
 		int year = day.get(Calendar.YEAR);
@@ -61,7 +64,7 @@ public class RecStockDaoImpl implements RecStockDao{
 //		seq는 1부터 시작하기에 i=1
 		for(int i=1; i<=5; i++){
 			listMap.replace("seq", i);
-			recList.add(session.selectOne(namespace+".readRecList", listMap).toString());
+			recList.add(session.selectOne(namespace+".readRecList", listMap));
 		}
 		
 //		logger.info("recList : " + recList);
@@ -78,37 +81,6 @@ public class RecStockDaoImpl implements RecStockDao{
 		map.put("term", term);
 		
 		return session.selectList(namespace + ".readRecStock", map);
-		
-//		List<Object>	stock  = new ArrayList<Object>();
-//		String[] stockDate = new String[term];
-//		int[] stockPrices = new int[term];
-//		 
-//		List<PricesDto> prices  = session.selectList(namespace + ".readRecStock", map);
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//		
-//		for(int num = 0; num < prices.size(); num++){
-//			PricesDto dto = prices.get(num);
-//
-//			Object[] price = new Object[5];
-//			List<Object> price = new ArrayList<Object>();
-//			price[0] = sdf.format(dto.getPrice_date());
-//			price[1] = dto.getPrice_low();
-//			price[2] = dto.getPrice_open();
-//			price[3] = dto.getPrice_close();
-//			price[4] = dto.getPrice_high();
-//			
-//			price.add(sdf.format(dto.getPrice_date()));
-//			price.add(dto.getPrice_low());
-//			price.add(dto.getPrice_open());
-//			price.add(dto.getPrice_close());
-//			price.add(dto.getPrice_high());
-//			
-//			Object[] priceArray = price.toArray(new Object[price.size()]);
-//
-//			stock[num] = price;
-//			stock[num] = price;
-//		}
 		
 	}
 
@@ -128,8 +100,25 @@ public class RecStockDaoImpl implements RecStockDao{
 	}
 
 	@Override
-	public List<PricesDto> readPrice(String code) throws Exception {
-		return session.selectList(namespace + ".readPricesDto", code);
+	public List<PricesDto> readPricePage(String code, Criteria cri) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("code", code);
+		paramMap.put("cri", cri);
+		
+		return session.selectList(namespace + ".readPricePage", paramMap);
 	}
+
+	@Override
+	public List<Date> readHistory(String code) throws Exception {
+		return session.selectList(namespace + ".readRecHistory", code);
+	}
+
+	@Override
+	public Integer readPriceCount(String code) throws Exception {
+		return session.selectOne(namespace + ".readPriceCount", code);
+	}
+
 
 }

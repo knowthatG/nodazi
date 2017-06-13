@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybais.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kedu.nodazi.mapper.StockMapper">
+
+	<select id="readRecList"
+			resultType="CodesDto">
+		select R.code
+			 , C.company
+		  from rec_stock R left outer join codes C
+		    on R.code = C.code
+		 where r_recdt = #{today}
+		   and r_seq = #{seq}
+		 limit 1
+	</select>
+	
+	<select id="readRecStock"
+			resultType="com.kedu.nodazi.dto.PricesDto">
+		select price_date
+			 , price_open
+			 , price_close
+			 , price_high
+			 , price_low
+		  from prices
+		 where code = lpad(cast(#{code} as char), 6, '0')
+		 order by price_date desc
+		 limit #{term}
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'code'.toString()">
+				and code like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'com'.toString()">
+				and company like CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="searchList"
+			resultType="CodesDto">
+		<![CDATA[
+		select *
+		  from codes
+		 where id > 0
+		   
+		]]>
+		
+		<include refid="search"></include>
+		
+		 order by id
+		 limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="searchListCount"
+			resultType="int">
+		<![CDATA[
+		select count(id)
+		  from codes
+		 where id > 0
+		   
+		]]>
+		
+		<include refid="search"></include>
+	</select>
+	
+	<select id="readPricePage"
+			resultType="PricesDto">
+		select *
+		  from prices
+		 where code = #{code}
+		 order by price_date desc
+		 limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="readPriceCount"
+			resultType="int">
+		select count(id)
+		  from prices
+		 where code = #{code}
+	</select>
+	
+	<select id="readCodesDto"
+			resultType="CodesDto">
+		select *
+		  from codes
+		 where code = #{code}
+		   and market_type = 1
+	</select>
+	
+	<select id="readRecHistory"
+			resultType="date">
+		select rec_dt
+		  from rec_stock
+		 where code = #{code}
+		 order by r_recdt desc
+	</select>
+	
+</mapper>

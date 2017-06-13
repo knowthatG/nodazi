@@ -1,5 +1,7 @@
 package com.kedu.nodazi.dto;
 
+import java.util.Date;
+
 /*****************************************************
  * <pre>
  * com.kedu.nodazi.dto
@@ -11,23 +13,23 @@ package com.kedu.nodazi.dto;
  *****************************************************/
 public class RecStockDto {
 	
-	private Integer	r_regdt;
-	private Integer	r_recdt;
+	private Date	r_regdt;
+	private Date	r_recdt;
 	private Integer	r_seq;
 	private String	code;
 	private	float	r_change;
 	
 	
-	public Integer getR_regdt() {
+	public Date getR_regdt() {
 		return r_regdt;
 	}
-	public void setR_regdt(Integer r_regdt) {
+	public void setR_regdt(Date r_regdt) {
 		this.r_regdt = r_regdt;
 	}
-	public Integer getR_recdt() {
+	public Date getR_recdt() {
 		return r_recdt;
 	}
-	public void setR_recdt(Integer r_recdt) {
+	public void setR_recdt(Date r_recdt) {
 		this.r_recdt = r_recdt;
 	}
 	public Integer getR_seq() {

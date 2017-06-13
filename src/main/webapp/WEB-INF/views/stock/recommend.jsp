@@ -33,7 +33,9 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
 
+<!-- Google Chart JavaScript -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	
@@ -55,7 +57,7 @@ $(function(){
 				, dataType : 'json'
 				, data : {	
 					code : code
-				  /* , term : 5 */
+				  , term : 5
 				}
 				, async : false
 			}).responseText;
@@ -90,8 +92,8 @@ $(function(){
 </head>
 <body>
 
-	<c:forEach items="${recStockList }" var="code" varStatus="status">
-		<input type="hidden" id="code${status.index }" value="${code }">
+	<c:forEach items="${recStockList }" var="recStock" varStatus="status">
+		<input type="hidden" id="code${status.index }" value="${recStock.code }">
 	</c:forEach>
 	
 	<div id="wrapper">
@@ -116,19 +118,19 @@ $(function(){
 				</div>
 				<!-- /.row -->
 				
-				<c:forEach items="${recStockList }" var="code" varStatus="status">
+				<c:forEach items="${recStockList }" var="recStock" varStatus="status">
 						<div class="col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">
-										<i class="fa fa-bar-chart-o fa-fw" ></i> &nbsp;${code }
+										<i class="fa fa-bar-chart-o fa-fw" ></i> &nbsp;${recStock.company }
 									</h3>
 								</div>
 								
 								<div class="panel-body">
 									<div id="chartDiv${status.index }"></div>
 									<div class="text-right">
-										<a href="#">View Detail <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="/stock/read?code=${recStock.code }">View Detail <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>

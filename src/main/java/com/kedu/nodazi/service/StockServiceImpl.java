@@ -1,24 +1,27 @@
 package com.kedu.nodazi.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kedu.nodazi.dao.RecStockDao;
+import com.kedu.nodazi.dao.StockDao;
 import com.kedu.nodazi.dto.CodesDto;
+import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.PricesDto;
+import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
 
 @Service
-public class RecStockServiceImpl implements RecStockService{
+public class StockServiceImpl implements StockService{
 
 	@Inject
-	private RecStockDao dao;
+	private StockDao dao;
 
 	@Override
-	public List<String> readRecStock() throws Exception {
+	public List<CodesDto> readRecStock() throws Exception {
 		
 		return dao.readRecStock();
 	}
@@ -45,9 +48,19 @@ public class RecStockServiceImpl implements RecStockService{
 	}
 
 	@Override
-	public List<PricesDto> readPrice(String code) throws Exception {
-		return dao.readPrice(code);
+	public List<PricesDto> readPricePage(String code, Criteria cri) throws Exception {
+		return dao.readPricePage(code, cri);
 	}
 
-	
+	@Override
+	public List<Date> readHistory(String code) throws Exception {
+		return dao.readHistory(code);
+	}
+
+	@Override
+	public Integer readPriceCount(String code) throws Exception {
+		return dao.readPriceCount(code);
+	}
+
+
 }
