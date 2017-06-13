@@ -30,6 +30,21 @@
     
     <!-- javascript -->
     <script src="../../js/User.js"></script>
+    
+    	<style type="text/css">
+
+@font-face{
+	font-family: blackChancery;
+	src: url(../fonts/BLKCHCRY.ttf);
+	font-weight: bold;
+}
+
+#companyName{
+	font-family: blackChancery;
+	font-size: 30px;
+	text-align: center;
+}
+	</style>
 </head>
 
 <body>
@@ -42,76 +57,103 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
-
- 			<!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            	회원가입 <small>Register</small>
+                            	회원가입 <small>Join</small>
                         </h1>
-                </div>
-                <!-- /.row -->
-	      <div class="center-block clearfx" style="width:800px">
-			<form class="form-horizontal" method="post">
-	 			 <div class="form-group">
-	    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
-	    			<div class="col-sm-10">
-	     				 <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name" required="">
-	    			</div>
-	  			</div>
-	  			
-	  			<div class="form-group">
-	   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
-	    			<div class="col-sm-10">
-	    			  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
-	    			</div>
-	  			</div>
-	  			
-	  			  <div class="form-group">
-	   			   <label for="u_pw" class="col-sm-2 control-label">Password :</label>
-	    			<div class="col-sm-10">
-	    			  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw" required="">
-	    			</div>
-	  			</div>
-	  			
-	  			<div class="form-group">
-	   			   <label for="passcheck" class="col-sm-2 control-label">PwCheck :</label>
-	    			<div class="col-sm-10">
-	    			  <input type="password" class="form-control" id="passcheck" placeholder="Password Check" required="">
-	    			</div>
-	  			</div>
-	  			
-	  			<div class="form-group">
-	  				<label for="u_email" class="col-sm-2 control-label">E-mail :</label>
-	  				<div class="col-sm-10">
-	  				<input type="text" id="u_email" name="u_email" class="form-control" required=""/>
-	  				</div>
-	  				
-	  			</div>
-  			
-	  			<div class="form-group">
-	  				<label for="u_mobile" class="col-sm-2 control-label">Tel :</label>
-	  				<div class="col-sm-10">
-	  				<input type="text" id="u_mobile" name="u_mobile" class="form-control" required=""/ size="12">
-	  				</div>
-	  			</div>
-  
-		  		<div class="form-group" style="width:500">
-		    		<div class="col-sm-offset-2 col-sm-12">
-		    			<div class="center-block">
-		      			<button type="submit" class="btn btn-default" id="submit">Sign in</button>
-		    			</div>
-		    		</div>
-		 		 </div>
-		      </div>
-
-		<%@include file="../include/footer.jsp"%>
-                <!-- /.row -->
-
+     
+						 <form class="well form-horizontal"  id="contact_form" method="post" action="/user/join">
+						<fieldset>
+						
+						<!-- Form Name -->
+						<legend><center><h2><b id="companyName">Know Da G</b></h2></center></legend><br>
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Name</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						   <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name" required="">
+						    </div>
+						  </div>
+						</div>
+						  
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label">ID</label>  
+						  <div class="col-md-4 inputGroupContainer">
+						  <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						    <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Password</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw" required="">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Confirm Password</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						   <input type="password" class="form-control" id="passcheck" placeholder="Password Check" required="">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						       <div class="form-group">
+						  <label class="col-md-4 control-label">E-Mail</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						   <input type="text" id="u_email" name="u_email" class="form-control" required=""/>
+						    </div>
+						  </div>
+						</div>
+						
+						
+						<!-- Text input-->
+						       
+						<div class="form-group">
+						  <label class="col-md-4 control-label">Contact No.</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						  <input type="text" id="u_mobile" name="u_mobile" class="form-control" required="" size="12">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Button -->
+						<div class="form-group">
+						  <label class="col-md-4 control-label"></label>
+						  <div class="col-md-4" style="text-align: center"><br>
+						     <button type="submit"id="submit"class="btn btn-warning" ><span class="glyphicon glyphicon-send">&nbsp</span>Join</button>
+						  </div>
+						</div>
+						
+						</fieldset>
 						</form>
+						</div>
             </div>
             </div>
-            </div>
+                               </div>
+                        </div>
             <!-- /.container-fluid -->
     <!-- /#wrapper -->
 
@@ -125,27 +167,6 @@ $(function(){
 			return idCheck();
 			});
 });
-
-$("#update_btn").on("click",function(){
-	var u_id = $("#u_id").val();
-	$.ajax({
-		type:'put',
-		url: '/user/'+u_id,
-		headers:{
-				"Content-Type":"application/json",
-				"X-HTTP-Method-Override":"PUT"},
-		data:JSON.stringify({u_id:u_id}),
-		dataType:'text',
-		success:function(result){
-			console.log("result:" +result);
-			if(result == 'success'){
-				alert("성공");
-				getInfo();		
-			}
-		}
-		
-	});
-})
 
 </script>
 
