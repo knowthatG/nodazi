@@ -31,6 +31,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
     
+    <!-- javascript -->
+    <script src="../../js/User.js"></script>
 
 </head>
 
@@ -50,14 +52,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            	회원가입 <small>Register</small>
+                            	사용자 정보 <small>User Information</small>
                         </h1>
                 </div>
                 <!-- /.row -->
-      	<div class="center-block clearfx" style="width:800px">
+      	<div class="center-block clearfx">
 			<div class="container">
 			  <div class="row">
-			    <div class="col-sm-6 col-sm-offset-2">
+			   <!--  <div class="col-sm-6 col-sm-offset-2"> -->
 			
 			      <!-- Nav tabs -->
 			      <ul class="nav nav-tabs" role="tablist">
@@ -65,80 +67,159 @@
 			        <li role="presentation"><a href="" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">정보 수정</a></li>
 			        <li role="presentation"><a href="" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">회원 탈퇴</a></li>
 			      </ul>
-			
+				
 			      <!-- Tab panes -->
 			      <div class="tab-content">
 			        <div role="tabpanel" class="tab-pane active" id="section-1">
-			        	  <div class="center-block clearfx">
-				 			 <div class="form-group">
-				    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
-				    			<div class="col-sm-10">
-				     				 <input type="text" class="form-control" value="${udto.u_nm }" readonly="readonly">
-				    			</div>
-				  			
-				  			
-				  		
-				   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
-				    			</div>
-				  		
-				  			
-				
-				   			   <label for="u_pw" class="col-sm-2 control-label">email :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control" id="f_u_email" value="${udto.u_email }" readonly="readonly">
-				    			</div>
-				  			
-			
-				   			   <label for="passcheck" class="col-sm-2 control-label">Mobile :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control"  id="f_u_mobile" value="${udto.u_mobile }" readonly="readonly">
-				    			</div>
-				  			</div>
+						<div class="container">
+						 <form class="well form-horizontal"  id="contact_form">
+						<fieldset>
+						
+						<!-- Form Name -->
+						<legend><center><h2><b>사용자 정보</b></h2></center></legend><br>
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Name</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						   <input type="text" class="form-control" value="${udto.u_nm }" readonly="readonly">
+						    </div>
+						  </div>
+						</div>
+						  
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label">ID</label>  
+						  <div class="col-md-4 inputGroupContainer">
+						  <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						  <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
+						    </div>
+						  </div>
+						</div>
+
+						<!-- Text input-->
+						       <div class="form-group">
+						  <label class="col-md-4 control-label">E-Mail</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						  <input type="text" class="form-control" id="f_u_email" value="${udto.u_email }" readonly="readonly">
+						    </div>
+						  </div>
+						</div>
+						
+						
+						<!-- Text input-->
+						       
+						<div class="form-group">
+						  <label class="col-md-4 control-label">Contact No.</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						  <input type="text" class="form-control"  id="f_u_mobile" value="${udto.u_mobile }" readonly="readonly">
+						    </div>
+						  </div>
+						</div>
+						
+						
+						</fieldset>
+						</form>
 						</div>
 					</div>
 			      
 			      <!-- section 2 -->
 			       <div role="tabpanel" class="tab-pane" id="section-2">
-			        	<form action="/user/update">
-			        					        	  <div class="center-block clearfx">
-				 			 <div class="form-group">
-				    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
-				    			<div class="col-sm-10">
-				     				 <input type="text" class="form-control" id="u_nm" name="u_nm" value="${udto.u_nm }" readonly="readonly">
-				    			</div>
-				  			
-				  			
-				  		
-				   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
-				    			</div>
-				  				
-				 				<label for="u_id" class="col-sm-2 control-label">PW :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control" id="u_pw" name="u_pw" value="${udto.u_pw }" >
-				    			</div>
-				  		
-				  			
-				
-				   			   <label for="u_pw" class="col-sm-2 control-label">email :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control" id="u_email" name="u_email" value="${udto.u_email }" >
-				    			</div>
-				  			
-				  			
-
-				   			   <label for="passcheck" class="col-sm-2 control-label">Mobile :</label>
-				    			<div class="col-sm-10">
-				    			  <input type="text" class="form-control" id="u_mobile" value="${udto.u_mobile }">
-				    			</div>
-				    			
-				    			<input type="button" id="update_btn" class="btn btn-default" value="update">
-				  			</div>
+						<div class="container">
+						 <form class="well form-horizontal"  id="contact_form">
+						<fieldset>
+						
+						<!-- Form Name -->
+						<legend><center><h2><b>정보 수정</b></h2></center></legend><br>
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Name</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						   <input type="text" class="form-control" id="u_nm" name="u_nm" value="${udto.u_nm }" readonly="readonly">
+						    </div>
+						  </div>
 						</div>
-			        	</form>
+						  
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label">ID</label>  
+						  <div class="col-md-4 inputGroupContainer">
+						  <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						   <input type="text" class="form-control"  value="${udto.u_id }" readonly="readonly">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Password</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input type="text" class="form-control" id="u_pw" name="u_pw" value="${udto.u_pw }" >
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >Confirm Password</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Text input-->
+						       <div class="form-group">
+						  <label class="col-md-4 control-label">E-Mail</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						   <input type="text" class="form-control" id="u_email" name="u_email" value="${udto.u_email }" >
+						    </div>
+						  </div>
+						</div>
+						
+						
+						<!-- Text input-->
+						       
+						<div class="form-group">
+						  <label class="col-md-4 control-label">Contact No.</label>  
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						  <input type="text" id="u_mobile" name="u_mobile" placeholder="Mobile" class="form-control"  value="${udto.u_mobile }" >
+						    </div>
+						  </div>
+						</div>
+						
+						<!-- Button -->
+						<div class="form-group">
+						  <label class="col-md-4 control-label"></label>
+						  <div class="col-md-4"><br>
+						     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" id="update_btn" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUpdate <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+						  </div>
+						</div>
+						
+						</fieldset>
+						</form>
+						</div>
 			        </div>
 			        
 			        <!-- section 3 -->
@@ -166,7 +247,6 @@ $("#update_btn").on("click",function(){
 	var u_pw = $("#u_pw").val();
 	var u_email = $("#u_email").val();
 	var u_mobile = $("#u_mobile").val();
-	
 	$.ajax({
 		type:'put',
 		url: '/user/'+u_id,

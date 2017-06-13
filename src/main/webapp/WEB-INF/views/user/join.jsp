@@ -56,74 +56,50 @@
 	 			 <div class="form-group">
 	    			<label for="u_nm" class="col-sm-2 control-label">Name :</label>
 	    			<div class="col-sm-10">
-	     				 <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name">
+	     				 <input type="text" class="form-control" id="u_nm" name="u_nm" placeholder="Name" required="">
 	    			</div>
 	  			</div>
 	  			
 	  			<div class="form-group">
 	   			   <label for="u_id" class="col-sm-2 control-label">ID :</label>
 	    			<div class="col-sm-10">
-	    			  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID">
+	    			  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
 	    			</div>
 	  			</div>
 	  			
 	  			  <div class="form-group">
 	   			   <label for="u_pw" class="col-sm-2 control-label">Password :</label>
 	    			<div class="col-sm-10">
-	    			  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw">
+	    			  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw" required="">
 	    			</div>
 	  			</div>
 	  			
 	  			<div class="form-group">
 	   			   <label for="passcheck" class="col-sm-2 control-label">PwCheck :</label>
 	    			<div class="col-sm-10">
-	    			  <input type="password" class="form-control" id="passcheck" placeholder="Password Check">
+	    			  <input type="password" class="form-control" id="passcheck" placeholder="Password Check" required="">
 	    			</div>
 	  			</div>
 	  			
-	  			
+	  			<div class="form-group">
+	  				<label for="u_email" class="col-sm-2 control-label">E-mail :</label>
+	  				<div class="col-sm-10">
+	  				<input type="text" id="u_email" name="u_email" class="form-control" required=""/>
+	  				</div>
+	  				
+	  			</div>
   			
 	  			<div class="form-group">
-	  				 <label for="email1" class="col-sm-2 control-label">E-mail :</label>
-	  					<div class="col-sm-4">
-	  						<input name="email1" type="text" class="form-control" id="email1" size="15"placeholder="E-mail"> 
-	  					</div>
-	  					<div class="col-sm-4">
-	  						<input name="email2" type="text" class="form-control" id="email2" size="20" readonly="readonly" placeholder="@">
-	  					</div>
-						<div class="col-sm-2">
-							<select name="email_select" class="form-control" id="email_select">
-	  						  <option value="" selected>-----</option>
-	    					  <option value="naver.com">Naver</option>
-	    					  <option value="hotmail.com">Outlook</option>
-	    					  <option value="hanmail.com">Hanmail</option>
-	    					  <option value="yahoo.co.kr">Yahoo</option>
-	   						  <option value="1">직접입력</option>
-							</select>
-						</div>
-	  			</div>
-  			
-	  			 <div class="form-group">
-	   			   <label for="mobile1" class="col-sm-2 control-label">Phone :</label>
-	    			<div class="col-sm-2">
-	    			  <input name="mobile1" type="text" class="form-control" id="mobile1" readonly="readonly" value="010">
-	    			  </div>
-	    			 <div class="col-sm-4">
-	    			   <input name="mobile2" type="text" class="form-control" id="mobile2" placeholder="-" >
-	    			 </div>
-	    			 <div class="col-sm-4">
-	    			    <input name="mobile3" type="text" class="form-control" id="mobile3"  placeholder="-">
-	    			  </div>
-	    			</div>
+	  				<label for="u_mobile" class="col-sm-2 control-label">Tel :</label>
+	  				<div class="col-sm-10">
+	  				<input type="text" id="u_mobile" name="u_mobile" class="form-control" required=""/ size="12">
+	  				</div>
 	  			</div>
   
-		 		<input type="hidden" name="u_email" id="u_email" value="">
-		  		<input type="hidden" name="u_mobile" id="u_mobile" value="">
 		  		<div class="form-group" style="width:500">
 		    		<div class="col-sm-offset-2 col-sm-12">
 		    			<div class="center-block">
-		      			<button type="submit" class="btn btn-default" id="submit" action="loginCheck()">Sign in</button>
-						</form>
+		      			<button type="submit" class="btn btn-default" id="submit">Sign in</button>
 		    			</div>
 		    		</div>
 		 		 </div>
@@ -132,6 +108,7 @@
 		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
 
+						</form>
             </div>
             </div>
             </div>
@@ -143,39 +120,32 @@
             <!-- javaScript -->
 <script>
 $(function(){
-	//e-mail 셀렉트박스 처리.
-	$("#email_select").change(function(){
-		if($("#email_select").val() == "1"){
-			$("#email2").attr("readonly",false); 
-			$("#email2").val("");
-			$("#email2").focus();
-		}else{
-			$("#email2").attr("readonly",true); 
-			$("#email2").val($("#email_select").val());
-		}
-	})
-	//비밀번호 유효성 처리.
 	 $("#submit").click(function(){
-			
-		 	mobile1 = $("#mobile1").val();
-			mobile2 = $("#mobile2").val();
-			mobile3 = $("#mobile3").val();
-			
-			
-			email1 = $("#email1").val();
-			email2 = $("#email2").val();
-			
-			u_email = email1 + "@" + email2;
-			
-			u_mobile = mobile1 + "-" + mobile2 + "-" + mobile3;
-			
-			$("#u_mobile").val(u_mobile);
-			
-			$("#u_email").val(u_email);	
-		 
+
 			return idCheck();
 			});
 });
+
+$("#update_btn").on("click",function(){
+	var u_id = $("#u_id").val();
+	$.ajax({
+		type:'put',
+		url: '/user/'+u_id,
+		headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"PUT"},
+		data:JSON.stringify({u_id:u_id}),
+		dataType:'text',
+		success:function(result){
+			console.log("result:" +result);
+			if(result == 'success'){
+				alert("성공");
+				getInfo();		
+			}
+		}
+		
+	});
+})
 
 </script>
 
