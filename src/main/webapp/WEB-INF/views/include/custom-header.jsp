@@ -89,7 +89,7 @@
           </c:if>
 
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" id="target">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="blank.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> 추천종목</a>
@@ -146,9 +146,18 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
     
-        
         <script>
-        $('.dropdown-toggle').dropdown()
+       $("a[data-toggle='collapse']").click(function(){
+        	var that = this;
+        	$(that).next().toggleClass("in");
+        	return false;
+        });
+       
+       $("button[data-toggle='collapse']").click(function(){
+    	  	$("#target").toggleClass("in");
+    	  	return false;
+       });
+        
 		$(function(){
 			$("#main_tag").click(function(){
 				$("#main_tag").attr("method","get");
