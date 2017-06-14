@@ -8,7 +8,7 @@ public class BoardDto {
 	private String	 b_title;
 	private String	 b_content;
 	private String	 u_id;
-	private Date	 b_regda;
+	private Date	 b_regdt;
 	private int		 b_notice;
 	private int		 b_top;
 	private Date	 b_updatedt;
@@ -40,11 +40,11 @@ public class BoardDto {
 	public void setU_id(String u_id) {
 		this.u_id = u_id;
 	}
-	public Date getB_regda() {
-		return b_regda;
+	public Date getB_regdt() {
+		return b_regdt;
 	}
-	public void setB_regda(Date b_regda) {
-		this.b_regda = b_regda;
+	public void setB_regdt(Date b_regdt) {
+		this.b_regdt = b_regdt;
 	}
 	public int getB_notice() {
 		return b_notice;
@@ -86,7 +86,7 @@ public class BoardDto {
 	@Override
 	public String toString() {
 		return "BoardDto [b_no=" + b_no + ", b_title=" + b_title + ", b_content=" + b_content + ", u_id=" + u_id
-				+ ", b_regda=" + b_regda + ", b_notice=" + b_notice + ", b_top=" + b_top + ", b_updatedt=" + b_updatedt
+				+ ", b_regdt=" + b_regdt + ", b_notice=" + b_notice + ", b_top=" + b_top + ", b_updatedt=" + b_updatedt
 				+ ", b_viewcnt=" + b_viewcnt + ", r_cnt=" + r_cnt + ", files=" + Arrays.toString(files) + "]";
 	}
 		

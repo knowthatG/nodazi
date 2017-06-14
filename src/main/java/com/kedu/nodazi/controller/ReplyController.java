@@ -39,12 +39,12 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/all/{bno}", method = RequestMethod.GET)
-	public ResponseEntity<List<ReplyDto>> list(@PathVariable("bno") Integer bno){
+	@RequestMapping(value = "/all/{b_no}", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDto>> list(@PathVariable("b_no") Integer b_no){
 		
 		ResponseEntity<List<ReplyDto>> entity = null;
 		try{
-			entity = new ResponseEntity<>(service.listReply(bno), HttpStatus.OK);
+			entity = new ResponseEntity<>(service.listReply(b_no), HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

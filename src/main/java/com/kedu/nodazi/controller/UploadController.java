@@ -69,7 +69,7 @@ public class UploadController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax"
-				, method = RequestMethod.GET
+				, method = RequestMethod.POST
 				, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
 		logger.info("originalName : " + file.getOriginalFilename());

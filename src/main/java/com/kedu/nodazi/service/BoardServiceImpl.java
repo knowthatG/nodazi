@@ -62,14 +62,16 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void remove(int b_no) throws Exception {
+		dao.deleteAttach(b_no);
 		dao.delete(b_no);
 	}
 
 	@Override
-	public List<BoardDto> listAll() throws Exception {
-		return dao.listAll();
+	public List<BoardDto> list() throws Exception {
+		return dao.list();
 	}
 
 	@Override

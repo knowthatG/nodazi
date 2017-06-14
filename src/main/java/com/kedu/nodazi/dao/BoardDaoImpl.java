@@ -42,8 +42,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardDto> listAll() throws Exception {
-		return session.selectList(namespace + ".listAll");
+	public List<BoardDto> list() throws Exception {
+		return session.selectList(namespace + ".list");
 	}
 
 	@Override

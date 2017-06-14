@@ -22,7 +22,7 @@
 			 , b_regdt
 			 , b_viewcnt
 			 , u_id
-			 , b_replycnt
+			 , r_cnt
   		  from board
  		 where b_no = #{b_no}
 	</select>
@@ -41,7 +41,7 @@
 		 where b_no = #{b_no}
 	</delete>
 	
-	<select id="listAll"
+	<select id="list"
 			resultType="com.kedu.nodazi.dto.BoardDto">
 		<![CDATA[
 		select b_no
@@ -50,6 +50,7 @@
 			 , u_id
 			 , b_regdt
 			 , b_viewcnt
+			 , r_cnt
 		  from board
 		 where b_no > 0
 		 order by b_no desc, b_regdt desc
@@ -133,7 +134,7 @@
 		select fullName
 		  from attach
 		 where b_no = #{b_no}
-		 order by a_regdt
+		 order by b_regdt
 	</select>
 	
 	<delete id="deleteAttach">
@@ -154,23 +155,23 @@
 			and b_title like CONCAT('%', #{keyword}, '%')
 		</if>
 		<if test="searchType == 'c'.toString()">
-			and content like CONCAT('%', #{keyword}, '%')
+			and b_content like CONCAT('%', #{keyword}, '%')
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and writer like CONCAT('%', #{keyword}, '%')
+			and u_id like CONCAT('%', #{keyword}, '%')
 		</if>
 		<if test="searchType == 'tc'.toString()">
-			and (title like CONCAT('%', #{keyword}, '%')
-			OR content like CONCAT('%', #{keyword}, '%'))
+			and (b_title like CONCAT('%', #{keyword}, '%')
+			OR b_content like CONCAT('%', #{keyword}, '%'))
 		</if>
 		<if test="searchType == 'cw'.toString()">
-			and (content like CONCAT('%', #{keyword}, '%')
-			OR writer like CONCAT('%', #{keyword}, '%'))
+			and (b_content like CONCAT('%', #{keyword}, '%')
+			OR u_id like CONCAT('%', #{keyword}, '%'))
 		</if>
 		<if test="searchType == 'tcw'.toString()">
-			and (title like CONCAT('%', #{keyword}, '%')
-			OR content like CONCAT('%', #{keyword}, '%')
-			OR writer like CONCAT('%', #{keyword}, '%'))
+			and (b_title like CONCAT('%', #{keyword}, '%')
+			OR b_content like CONCAT('%', #{keyword}, '%')
+			OR u_id like CONCAT('%', #{keyword}, '%'))
 		</if>
 	</if>
 	</sql>

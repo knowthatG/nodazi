@@ -67,11 +67,11 @@ public interface BoardDao {
 	 * 1. 개요	: 
 	 * 2. 처리내용	: 
 	 * </pre>
-	 * @Method Name : listAll
+	 * @Method Name : list
 	 * @return
 	 * @throws Exception
 	 *****************************************************/
-	public List<BoardDto> listAll() throws Exception;
+	public List<BoardDto> list() throws Exception;
 	
 	/*****************************************************
 	 * <pre>
