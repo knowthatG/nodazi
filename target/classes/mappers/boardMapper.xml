@@ -8,10 +8,12 @@
 	<insert id="create">
 		insert into board(b_title
 						, b_content
-                    	, u_id)
+                    	, u_id
+                    	, b_regdt)
 			   		values(#{b_title}
 						 , #{b_content}
-                    	 , #{u_id})
+                    	 , #{u_id}
+                    	 , now())
 	</insert>
 	
 	<select id="read"

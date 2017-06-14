@@ -57,10 +57,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							게시판<small>Statistics Overview</small>
+							게시판
 						</h1>
 						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-dashboard"></i>Dashboard</li>
+							<li class="active"><i class="fa fa-dashboard"></i>Board</li>
 						</ol>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 				</form>
 				
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="form-group">
 							<input type="text" name='b_title' class="form-control" value="${boardDto.b_title}" readonly="readonly">
 						</div>
@@ -88,37 +88,34 @@
 						</div>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div>
 							<hr>
 						</div>
 						<ul class="mailbox-attachments clearfix uploadedList"></ul>
 
 						<c:if test="${login.u_id == boardDto.u_id}">
-						<button type="submit" id="modifyBtn">수정</button>
-						<button type="submit" id="removeBtn">삭제</button>
+						<button type="submit" id="modifyBtn" class="btn btn-info">수정</button>
+						<button type="submit" id="removeBtn" class="btn btn-warning">삭제</button>
 						</c:if>
-						<button type="submit" id="goListBtn">목록</button>
+						<button type="submit" id="goListBtn" class="btn btn-success">목록</button>
 					</div>
 				</div>
 				<!-- /.row -->
 
-
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="box box-success">
 							<div class="box-header">
-								<h3 class="box-title">댓글</h3>
+								<div class="box-title">댓글</div>
 							</div>
 							<c:if test="${not empty login}">
 							<div class="box-body">
-								<label for="exampleInputEmail1">작성자</label>
-								<input class="form-control" type="text" id="newReplyWriter" value="${login.u_id }" readonly="readonly">
-								<label for="exampleInputEmail1">댓글</label>
 								<input class="form-control" type="text" id="newReplyText">
 							</div>
+							<input type="hidden" id="replywriter" value="${login.u_id}">
 							<div class="box-footer">
-								<button type="submit" class="btn btn-default" id="replyAddBtn">ADD REPLY</button>
+								<button type="submit" class="btn btn-default" id="replyAddBtn">댓글 작성</button>
 							</div>
 							</c:if>
 						</div>
@@ -202,20 +199,23 @@
 		<div class="timeline-item" >
 			<span class="timeline-header">{{r_no}}</span>
 			<span><strong>{{u_id}}</strong></span>
-			<span class="time">
+			<span class="time" id="tmp">
 				<i class="fa fa-clock-o"></i>{{prettifyDate r_regdt}}
 			</span>
-			<span>|</span>
-			<a href="#" id="replyModBtn"><span>수정</span></a>
-			<span>|</span>
-			<a href="#" id="replyDelBtn"><span>삭제</span></a>
-			
+			{{chkIDToDeleteReply u_id}}
 			<div class="timeline-body">{{r_content}}</div>
 		</div>
 	</li>
 {{/each}}    
 </script>  
 
+<script id="templateChk" type="text/x-handlebars-template">
+	<span>|</span>
+	<a href='#' id='replyModBtn'><span>수정</span></a>
+	<span>|</span>
+	<a href='#' id='replyDelBtn'><span>삭제</span></a>
+</script>
+ 
 <script>
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
@@ -232,7 +232,19 @@
 		var date 	= dateObj.getDate();
 		return year + "/" + month + "/" + date;
 	});
+	
+	Handlebars.registerHelper("chkIDToDeleteReply",function(u_id){
+		var replyer 	 = $("#replywriter").val();
+		if(replyer == u_id){
+			return new Handlebars.SafeString(
+					"<span>|</span>"+
+					"<a href='#' id='replyModBtn'><span>수정</span></a>"+
+					"<span>|</span>"+
+					"<a href='#' id='replyDelBtn'><span>삭제</span></a>");
 
+		}
+	})
+	
 	var printData = function(replyArr, target, templateObject) {
 
 		var template = Handlebars.compile(templateObject.html());
@@ -303,12 +315,9 @@
 	});
 
 	$("#replyAddBtn").on("click", function() {
-
-		var replyerObj 	 = $("#newReplyWriter");
 		var replytextObj = $("#newReplyText");
-		var replyer 	 = replyerObj.val();
+		var replyer 	 = $("#replywriter").val();
 		var replytext 	 = replytextObj.val();
-		
 		$.ajax({
 			type : 'post',
 			url : '/replies/',
@@ -319,8 +328,8 @@
 			dataType : 'text',
 			data : JSON.stringify({
 				b_no : b_no,
-				u_id : u_id,
-				r_content : r_content
+				u_id : replyer ,
+				r_content : replytext
 			}),
 			success : function(result) {
 				console.log("result: " + result);
@@ -500,5 +509,11 @@ function goLogin(){
        max-height: 800px; 
        overflow: auto;       
      } 
+     
+     .box-title{
+     	font-size: 20px;
+     	font-weight: bold;
+     	margin: 5px;
+     }
   	
 </style>

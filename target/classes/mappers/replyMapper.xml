@@ -15,11 +15,17 @@
 	
 	<insert id="create">
 		insert into reply(b_no
-						, r_content
-						, u_id)
-				   values(#{b_no}
-				   		, #{r_content}
-				   		, #{u_id})
+				, r_no
+				, r_content
+				, u_id)
+		   values(#{b_no}
+				, (
+				   select ifnull(max(r_no),0)+1 
+                	 from reply as a
+                	where b_no=#{b_no}
+                  )
+				, #{r_content}
+				, #{u_id})
 	</insert>
 	
 	<update id="update">

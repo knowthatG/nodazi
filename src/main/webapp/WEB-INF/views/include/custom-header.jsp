@@ -107,7 +107,7 @@
                         <a href="blank5.jsp"><i class="fa fa-fw fa-desktop"></i> 히스토리</a>
                     </li>
                     <li>
-                        <a href="blank6.jsp"><i class="fa fa-fw fa-edit"></i> 게시판</a>
+                        <a href="/board/list"><i class="fa fa-fw fa-edit"></i> 게시판</a>
                     </li>
                     <li>
                     
