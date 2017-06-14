@@ -162,7 +162,7 @@
                         </div>
             <!-- /.container-fluid -->
     <!-- /#wrapper -->
-
+		<%@include file="../include/footer.jsp"%> 
 
     
             <!-- javaScript -->

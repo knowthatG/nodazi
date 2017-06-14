@@ -6,39 +6,63 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Sticky Footer With Flexbox</title>
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <link rel="stylesheet" href="../../css/footer-styles.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <!-- Custom CSS -->
-    <link href="../../css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-
-		#foot{margin-top:-1.9em;}
-		.container{
-		padding-top: 60px;
-		}
-	</style>
 <body>
- 
-<div class="footer navbar-fixed-bottom" style="text-align: center">
-		<div class="container">
-		<footer class="footer">
 
-				<strong id="foot">
-					&copy;Copyright 2017 by (이름) All Pictures cannot be copied without permission
-				</strong>
+	<footer style="background-color:#222222;">
+		
+		<div class="footer-limiter">
 
-		</footer>
-	</div>
-</div>
+			<div class="footer-right">
+
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a>
+
+			</div>
+
+			<div class="footer-left">
+
+				<p class="footer-links">&copy;Copyright 2017 by (이름) All Pictures cannot be copied without permission</p>
+
+				<p>Company Name © 2016</p>
+			</div>
+
+		</div>
+
+	</footer>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+		var dummyContent = $('.dummy-content').children(),
+			i;
+
+
+		$('#add-content').click(function(e){
+			e.preventDefault();
+
+			if($(dummyContent[0]).is(":visible")){
+				for(i=0;i<dummyContent.length;i++){
+					$(dummyContent[i]).fadeOut(600);
+				}
+			}
+			else{
+				for(i=0;i<dummyContent.length;i++){
+					$(dummyContent[i]).delay(600*i).fadeIn(600);
+				}
+			}
+
+		});
+	</script>
+	<!-- Demo ads. Please ignore and remove. -->
+    <script src="http://cdn.tutorialzine.com/misc/enhance/v2.js" async></script>
 </body>
 
 </html>

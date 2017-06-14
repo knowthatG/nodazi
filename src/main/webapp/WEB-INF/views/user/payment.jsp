@@ -21,19 +21,100 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     
+       <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 
 </head>
 
+
 <body>
+
+   <div id="wrapper">
+
+       <%@include file="../include/custom-header.jsp"%>
+
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            	결제 <small>Payment</small>
+                        </h1>
+     				</div>
+     			</div>
+     	<div class="row row-centered">
+			<div class="col-lg-3"></div>
+				<div class="col-lg-6">
+     				<form class="well form-horizontal"  method="post" action="/user/payment">
+						<fieldset>
+						<!-- Form Name -->
+						 <div class="col-lg-12" style="margin-bottom: 20px;">
+				        <textarea class="form-control" rows="10" readonly="readonly" style="resize:none; ">약관이 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고 어쩌고저쩌고</textarea>
+				    </div><br>
+						
+						<!-- Text input-->
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label">입금자명</label>  
+						  <div class="col-md-4 inputGroupContainer">
+							  <div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input type="text" class="form-control" id="p_dep_nm" name="p_dep_nm" required="" value= ${login.u_nm }>
+							  </div>
+						  </div>
+						</div>
+						
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >계좌번호</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input name="p_account" type="text" class="form-control" id="email2">
+						    </div>
+						  </div>
+						</div>
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label" >입금은행</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<select name="p_dep_bank" class="form-control" id="bank_select">
+		  						  <option value="" selected>-----</option>
+		    					  <option value="하나">하나</option>
+		    					  <option value="우리">우리</option>
+		    					  <option value="농협">농협</option>
+		    					  <option value="신한">신한</option>
+								</select>
+							</div>
+						  </div>
+						</div>
+						<!-- Button -->
+						<div class="form-group">
+						  <label class="col-md-4 control-label"></label>
+						  <div class="col-md-4" style="text-align: center"><br>
+						    <button type="submit" class="btn btn-warning" id="submit"><span class="glyphicon glyphicon-send">&nbsp</span>전송</button>
+						  </div>
+						</div>
+						<input type="hidden" name="u_id" value=${login.u_id }>
+						</fieldset>
+					</form>
+				</div>
+            </div>
+		</div>
+	</div>
+	<%@include file="../include/footer.jsp"%>
+</div>
+</body>
+</html>
+<%-- <body>
 
     <div id="wrapper">
 
@@ -97,12 +178,12 @@
                 
                 
 
-		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
 
             </div>
             </div>
             </div>
+		<%@include file="../include/footer.jsp"%>
             <!-- /.container-fluid -->
     <!-- /#wrapper -->
 
@@ -114,6 +195,4 @@
     
             <!-- javaScript -->
 
-</body>
-
-</html>
+</body> --%>

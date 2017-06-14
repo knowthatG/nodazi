@@ -466,12 +466,12 @@
 				                	<button type="button" class="btn btn-danger btn-lg">취소</button>
 								</p>
                             </div>
-		<%@include file="../include/footer.jsp"%> 
                         </div>
 
                 <!-- /.row -->
 		</form>
             </div>
+		<%@include file="../include/footer.jsp"%> 
             
             <!-- /.container-fluid -->
     <!-- /#wrapper -->

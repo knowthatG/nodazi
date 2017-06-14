@@ -21,6 +21,12 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+        <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -300,8 +306,8 @@
 				                	<button type="button" class="btn btn-danger btn-lg">취소</button>
 								</p>
                             </div>
-		<%@include file="../include/footer.jsp"%>
                         </div>
+		<%@include file="../include/footer.jsp"%>
 
 
                 <!-- /.row -->
@@ -311,11 +317,6 @@
             <!-- /.container-fluid -->
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			

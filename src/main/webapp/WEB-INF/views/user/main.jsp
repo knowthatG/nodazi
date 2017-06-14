@@ -51,7 +51,7 @@
 	</ol>
 	<!--페이지-->
 
-	<div class="carousel-inner"style="width: 100%;height:30%">
+	<div class="carousel-inner"style="width: 100%;height:30%;margin-bottom: 100px;">
 		<!--슬라이드1-->
 		<div class="item active" > 
 			<img src="https://cdn.shanghai.nyu.edu/sites/default/files/styles/content_page_slideshow_display/public/field/image/1d653237-940_0.jpg?itok=mAdrO65r" style="width:100%" alt="First slide">
@@ -79,7 +79,6 @@
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
 	</div>
-	
 
                 <!-- /.row -->
                 
@@ -298,7 +297,6 @@
                     </div>
                 </div>
                </div>
-		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
 
             </div>
@@ -307,6 +305,7 @@
         <!-- /#page-wrapper -->
 
     </div>
+		<%@include file="../include/footer.jsp"%>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
