@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kedu.nodazi.dto.BoardDto;
-import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.SearchCriteria;
 import com.kedu.nodazi.service.BoardService;
@@ -43,13 +42,12 @@ public class BoardController {
 		
 		service.regist(board);
 		
-//		rttr.addAttribute("result", "success");
-		
-		return "redirect:/board/listAll";
+		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void list(@ModelAttribute("cri") SearchCriteria cri
+			, Model model) throws Exception{
 		logger.info(cri.toString());
 		
 		model.addAttribute("list", service.listSearchCriteria(cri));
@@ -72,6 +70,7 @@ public class BoardController {
 	public String remove(@RequestParam("b_no") int b_no
 			, SearchCriteria cri
 			, RedirectAttributes rttr) throws Exception{
+		
 		service.remove(b_no);
 		
 		rttr.addAttribute("page", cri.getPage());
@@ -79,7 +78,7 @@ public class BoardController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
-		return "redirect:/board/listAll";
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -104,7 +103,7 @@ public class BoardController {
 		
 		logger.info(rttr.toString());
 		
-		return "redirect:/board/listAll";
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping("/getAttach/{b_no}")
