@@ -147,6 +147,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
         <script>
+        $(".dropdown-toggle").dropdown();
        $("a[data-toggle='collapse']").click(function(){
         	var that = this;
         	$(that).next().toggleClass("in");
