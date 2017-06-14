@@ -21,5 +21,7 @@ public interface UserDao {
 	
 	public void withdraw(UserDto udto)throws Exception;
 	
-	public UserDto overlap(UserDto udto)throws Exception;
+	public String overlap(String u_id)throws Exception;
+	
+	public String loginCheck(String u_id) throws Exception;
 }

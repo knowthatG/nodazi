@@ -62,7 +62,12 @@
                         <h1 class="page-header">
                             	회원가입 <small>Join</small>
                         </h1>
-     
+     				</div>
+     			</div>
+     							    <div class="row row-centered">
+				                	<div class="col-lg-3"></div>
+				                	<div class="col-lg-6">
+     				
 						 <form class="well form-horizontal"  id="contact_form" method="post" action="/user/join">
 						<fieldset>
 						
@@ -84,11 +89,12 @@
 						<div class="form-group">
 						  <label class="col-md-4 control-label">ID</label>  
 						  <div class="col-md-4 inputGroupContainer">
-						  <div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						    <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
-						    </div>
+							  <div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
+							  </div>
 						  </div>
+							  <input type="button" class="btn btn-warning" id="overlap_chk" value="중복체크">
 						</div>
 						
 						<!-- Text input-->
@@ -98,7 +104,7 @@
 						    <div class="col-md-4 inputGroupContainer">
 						    <div class="input-group">
 						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="u_pw" required="">
+						  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="Password" required="">
 						    </div>
 						  </div>
 						</div>
@@ -121,7 +127,7 @@
 						    <div class="col-md-4 inputGroupContainer">
 						    <div class="input-group">
 						        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						   <input type="text" id="u_email" name="u_email" class="form-control" required=""/>
+						   <input type="text" id="u_email" name="u_email"  placeholder="E-Mail" class="form-control" required=""/>
 						    </div>
 						  </div>
 						</div>
@@ -134,7 +140,7 @@
 						    <div class="col-md-4 inputGroupContainer">
 						    <div class="input-group">
 						        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-						  <input type="text" id="u_mobile" name="u_mobile" class="form-control" required="" size="12">
+						  <input type="text" id="u_mobile" name="u_mobile"  placeholder="Phone Number" class="form-control" required="" size="12">
 						    </div>
 						  </div>
 						</div>
@@ -143,7 +149,7 @@
 						<div class="form-group">
 						  <label class="col-md-4 control-label"></label>
 						  <div class="col-md-4" style="text-align: center"><br>
-						     <button type="submit"id="submit"class="btn btn-warning" ><span class="glyphicon glyphicon-send">&nbsp</span>Join</button>
+						     <button type="submit"id="submit"class="btn btn-warning" ><span class="glyphicon glyphicon-send">&nbsp</span>가입</button>
 						  </div>
 						</div>
 						
@@ -161,13 +167,56 @@
     
             <!-- javaScript -->
 <script>
+	var overlap_chk = false;
 $(function(){
 	 $("#submit").click(function(){
-
+		if(overlap_chk == false){
+			alert("중복체크를 해주세요.");
+			return false;
+		}else{
 			return idCheck();
-			});
+		}
+		});
 });
 
+$("#overlap_chk").on("click",function(){
+	var u_id = $("#u_id").val();
+	if(u_id==""){
+		alert("아이디를 입력해주세요.");
+		return false;
+	}
+	
+	$.ajax({
+		type:'put',
+		url: '/user/overlap',
+		headers:{
+				"Content-Type":"application/text",
+				"X-HTTP-Method-Override":"PUT"},
+		data:u_id,
+		dataType:'text',
+		success:function(result){
+			console.log("result:" +result);
+				if(result != ""){
+					alert(result);
+					alert("중복된 아이디 입니다.");
+					overlap_chk = false;
+				}else{
+					alert("사용가능한 아이디 입니다.");
+					overlap_chk = true;
+						
+			}
+		}
+		
+	});
+})
+function getInfo(){
+	{
+		alert("info");
+		$("#f_u_email").val($("#u_email").val());
+		$("#f_u_mobile").val($("#u_mobile").val());
+		
+	}
+}
 </script>
 
 </body>

@@ -47,7 +47,10 @@ public class UserDaoImpl implements UserDao{
 	public void withdraw(UserDto udto)throws Exception{
 		session.update(namespace+".withdraw",udto);
 	}
-	public UserDto overlap(UserDto udto)throws Exception{
-		return session.selectOne(namespace+".overlap",udto);
+	public String overlap(String u_id)throws Exception{
+		return session.selectOne(namespace+".overlap",u_id);
+	}
+	public String loginCheck(String u_id) throws Exception{
+		return session.selectOne(namespace+".loginCheck",u_id);
 	}
 }

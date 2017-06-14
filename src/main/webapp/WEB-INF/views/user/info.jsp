@@ -180,7 +180,7 @@
 						    <div class="col-md-4 inputGroupContainer">
 						    <div class="input-group">
 						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+						  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password" name="passcheck" id="passcheck">
 						    </div>
 						  </div>
 						</div>
@@ -213,7 +213,7 @@
 						<div class="form-group">
 						  <label class="col-md-4 control-label"></label>
 						  <div class="col-md-4"><br>
-						     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" id="update_btn" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUpdate <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+						     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" id="update_btn" name="update_btn" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUpdate <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
 						  </div>
 						</div>
 						
@@ -247,6 +247,9 @@ $("#update_btn").on("click",function(){
 	var u_pw = $("#u_pw").val();
 	var u_email = $("#u_email").val();
 	var u_mobile = $("#u_mobile").val();
+	var passcheck = $("#passcheck").val();
+
+	if(idCheck()){
 	$.ajax({
 		type:'put',
 		url: '/user/'+u_id,
@@ -264,6 +267,7 @@ $("#update_btn").on("click",function(){
 		}
 		
 	});
+	}
 })
 function getInfo(){
 	{

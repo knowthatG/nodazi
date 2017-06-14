@@ -41,33 +41,50 @@
 
             <div class="container-fluid">
 
- <!--                Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            	메인화면<small>Statistics Overview</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <!-- /.row -->
+				<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+	
+	<!--페이지-->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<!--페이지-->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-                        </div>
-                    </div>
-                </div>
+	<div class="carousel-inner"style="width: 100%;height:30%">
+		<!--슬라이드1-->
+		<div class="item active" > 
+			<img src="https://cdn.shanghai.nyu.edu/sites/default/files/styles/content_page_slideshow_display/public/field/image/1d653237-940_0.jpg?itok=mAdrO65r" style="width:100%" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 1</h1>
+					<p>텍스트 1</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드1-->
+
+		<!--슬라이드2-->
+		<div class="item"> 
+			<img src="http://www.stock-free.org/images/make-money-dollar-usd-29022016-image-050.jpg" style="width:100%" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 2</h1>
+					<p>텍스트 2</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드2-->
+
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+	</div>
+	
+
                 <!-- /.row -->
                 
                 
-
+			  <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
@@ -280,6 +297,7 @@
                         </div>
                     </div>
                 </div>
+               </div>
 		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
 

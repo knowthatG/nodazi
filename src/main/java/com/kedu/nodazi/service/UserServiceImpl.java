@@ -54,7 +54,12 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public UserDto overlap(UserDto udto)throws Exception{
-		return udao.overlap(udto);
+	public String overlap(String u_id)throws Exception{
+		 return udao.overlap(u_id);
+	}
+	
+	@Override
+	public String loginCheck(String u_id) throws Exception{
+		return udao.loginCheck(u_id);
 	}
 }

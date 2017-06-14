@@ -14,6 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where u_id = #{u_id} and u_pw=#{u_pw}
 	</select>
 	
+	<select id="loginCheck" resultType="String">
+	select u_pw
+	  from user
+	 where u_id = #{u_id}
+	   and u_withraw = 0
+	</select>
+	
 	<insert id = "payment">
 		insert into payment(u_id,p_account,p_dep_nm,p_dep_bank)
 		values(#{u_id},#{p_account},#{p_dep_nm},#{p_dep_bank})
@@ -42,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u_id = #{u_id}
 	</update>
 	
-	<select id="overlap" resultType="com.kedu.nodazi.dto.UserDto">
+	<select id="overlap" resultType="String">
 		select u_id
 		from user
 		where u_id = #{u_id}
