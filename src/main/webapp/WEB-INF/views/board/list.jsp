@@ -61,7 +61,7 @@
 
 				<div class="row">
 					<div class="col-lg-6">
-						<select name="searchType">
+						<select name="searchType" class="form-control" style="width: 100px; float: left;">
 							<option value="n" <c:out value="${cri.searchType == null?'selected':''}"/>>---</option>
 							<option value="t" <c:out value="${cri.searchType eq 't'?'selected':''}"/>>Title</option>
 							<option value="c" <c:out value="${cri.searchType eq 'c'?'selected':''}"/>>Content</option>
@@ -70,17 +70,22 @@
 							<option value="cw" <c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>Content or Writer</option>
 							<option value="tcw" <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>Title or Content or Writer</option>
 						</select>
-						
-						<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'>
-						<button id='searchBtn'>Search</button>
-						<button id="newBtn">New Board</button>
+						<div class="form-group input-group" style="width: 300px; float: left;">
+							<input type="text" name='keyword' id="keywordInput" class="form-control" value='${cri.keyword }'>
+							<span class="input-group-btn">
+								<button id='searchBtn' class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+						<button id='newBtn' class="btn btn-default">New Board</button>
 					</div>
 					<!-- col end -->
 				</div>
 				<!-- /.row -->
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>
@@ -96,9 +101,12 @@
 									<c:forEach items="${list }" var="boardDto">
 										<tr>
 											<td>${boardDto.b_no }</td>
-											<td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&b_no=${boardDto.b_no }'> ${boardDto.b_title }<strong>[
-														${boardDto.r_cnt} ]</strong>
-											</a></td>
+											<td>
+												<a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&b_no=${boardDto.b_no }'>
+													${boardDto.b_title }
+													<strong>[${boardDto.r_cnt}]</strong>
+												</a>
+											</td>
 											<td>${boardDto.u_id}</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDto.b_regdt}" /></td>
 											<td><span>${boardDto.b_viewcnt }</span></td>
@@ -143,22 +151,16 @@
 	
 	<%@include file="../include/footer.jsp"%>
 
-	<!-- jQuery -->
-	<script src="../../js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="../js/bootstrap.min.js"></script>
-
-	<!-- Morris Charts JavaScript -->
-	<script src="../js/plugins/morris/raphael.min.js"></script>
-	<script src="../js/plugins/morris/morris.min.js"></script>
-	<script src="../js/plugins/morris/morris-data.js"></script>
-
 </body>
+
+<!-- jQuery -->
+<script src="../../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
 
 <script>
 	$(document).ready(function() {
-		alert("dfeda");
 		$("#searchBtn").on("click",
 			function(event) {
 				self.location = "list"
@@ -169,9 +171,8 @@
 							  + $('#keywordInput').val();
 			});
 		
-		$("#newBtn").on("click", function() {
-			alert("dfeda");
-			self.location = "register";
+		$('#newBtn').on("click", function() {
+			self.location = "/board/register";
 		});
 	});
 </script>

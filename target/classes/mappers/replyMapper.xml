@@ -17,7 +17,8 @@
 		insert into reply(b_no
 				, r_no
 				, r_content
-				, u_id)
+				, u_id
+				, r_regdt)
 		   values(#{b_no}
 				, (
 				   select ifnull(max(r_no),0)+1 
@@ -25,7 +26,8 @@
                 	where b_no=#{b_no}
                   )
 				, #{r_content}
-				, #{u_id})
+				, #{u_id}
+				, now())
 	</insert>
 	
 	<update id="update">
