@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="readRecStock"
-			resultType="com.kedu.nodazi.dto.PricesDto">
+			resultType="PricesDto">
 		select price_date
 			 , price_open
 			 , price_close
@@ -46,7 +46,6 @@
 		select *
 		  from codes
 		 where id > 0
-		   
 		]]>
 		
 		<include refid="search"></include>
@@ -91,12 +90,49 @@
 		   and market_type = 1
 	</select>
 	
-	<select id="readRecHistory"
-			resultType="date">
-		select rec_dt
-		  from rec_stock
-		 where code = #{code}
-		 order by r_recdt desc
+	<select id="readHistoryDto"
+			resultType="HistoryDto">
+		select h.price_date		as rec_dt
+			 , l.price_close	as rec_price
+			 , h.price_close	as latest_price
+		     , (l.price_close - h.price_close) / h.price_close as variation
+		from
+		(select price_close
+		   from prices
+		  where code = #{code}
+		  order by price_date desc
+		  limit 1
+		) as l ,
+		(	select price_close
+				 , price_date
+			  from prices a left join
+				(select r_recdt, code
+				  from rec_stock
+				 where code = #{code}) b
+				on a.code = b.code 
+			 where a.price_date = b.r_recdt
+		) as h
 	</select>
+	
+	<insert id="insertFavor">
+		insert into interest_stock( i_seq
+								  , u_id
+								  , code
+		                          , i_regdt
+		                          )
+						   values ( (select coalesce(max(a.i_seq), 1)
+									   from interest_stock a
+									)
+								  , #{u_id}
+								  , #{code}
+		                          , curdate()
+		                          )
+	</insert>
+	
+	<delete id="deleteFavor">
+		delete from interest_stock
+		 where u_id = #{u_id}
+		   and code = #{code}
+	</delete>
 	
 </mapper>

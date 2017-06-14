@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
+import com.kedu.nodazi.dto.HistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -87,6 +88,7 @@ public interface StockService {
 	 * </pre>
 	 * @Method Name : readPricePage
 	 * @param		  code
+	 * @param		  cri
 	 * @return		  List<PricesDto>
 	 * @throws		  Exception
 	 *****************************************************/
@@ -106,14 +108,38 @@ public interface StockService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 과거 추천내역 조회
-	 * 2. 처리내용	: code로 종목의 과거 추천내역을 조회
+	 * 1. 개요	: 종목의 추천일, 추천당시의 종가, 추천일 대비 최근 종가의 변동률을 가지고 있는 HistoryDto를 조회
+	 * 2. 처리내용	: 종목코드와 추천날짜를 넣어서 HistoryDto를 조회
 	 * </pre>
-	 * @Method Name : readHistory
+	 * @Method Name : readHistoryDto
 	 * @param		  code
-	 * @return		  List<Date>
+	 * @return		  List<HistoryDto>
 	 * @throws		  Exception
 	 *****************************************************/
-	public List<Date> readHistory(String code) throws Exception;
+	public List<HistoryDto> readHistoryDto(String code) throws Exception;
+	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 선호 종목 등록
+	 * 2. 처리내용	: 선호하는 종목코드를 interest_stock에 insert
+	 * </pre>
+	 * @Method Name : regFavor
+	 * @param		  code
+	 * @param		  u_id
+	 * @throws		  Exception
+	 *****************************************************/
+	public void regFavor(String code, String u_id) throws Exception;
+	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 선호 종목 해제
+	 * 2. 처리내용	: 선호하는 종목코드를 interest_stock에서 delete
+	 * </pre>
+	 * @Method Name : unRegFavor
+	 * @param		  code
+	 * @param		  u_id
+	 * @throws		  Exception
+	 *****************************************************/
+	public void unRegFavor(String code, String u_id) throws Exception;
 	
 }

@@ -1,5 +1,6 @@
 package com.kedu.nodazi.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
+import com.kedu.nodazi.dto.HistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -111,13 +113,34 @@ public class StockDaoImpl implements StockDao{
 	}
 
 	@Override
-	public List<Date> readHistory(String code) throws Exception {
-		return session.selectList(namespace + ".readRecHistory", code);
+	public Integer readPriceCount(String code) throws Exception {
+		return session.selectOne(namespace + ".readPriceCount", code);
 	}
 
 	@Override
-	public Integer readPriceCount(String code) throws Exception {
-		return session.selectOne(namespace + ".readPriceCount", code);
+	public List<HistoryDto> readHistoryDto(String code) throws Exception {
+		
+		return session.selectList(namespace + ".readHistoryDto", code);
+	}
+
+	@Override
+	public void insertFavor(String code, String u_id) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("u_id", u_id);
+		paramMap.put("code", code);
+		
+		session.insert(namespace + ".insertFavor", paramMap);
+	}
+
+	@Override
+	public void deleteFavor(String code, String u_id) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("u_id", u_id);
+		paramMap.put("code", code);
+		
+		session.delete(namespace + ".deleteFavor", paramMap);
 	}
 
 

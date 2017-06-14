@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kedu.nodazi.dto.CodesDto;
+import com.kedu.nodazi.dto.HistoryDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -68,10 +69,7 @@ public class StockController {
 		logger.info("/stock/read.GET..............................................");
 		
 		CodesDto codeDto = service.readCode(code);
-		List<Date> his = service.readHistory(code);
-		
-		Map<String, Object> history = new HashMap<>();
-		
+		List<HistoryDto> history = service.readHistoryDto(code);
 		
 		model.addAttribute("code", codeDto);
 		model.addAttribute("history", history);

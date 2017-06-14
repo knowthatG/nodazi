@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kedu.nodazi.dao.StockDao;
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
+import com.kedu.nodazi.dto.HistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -53,13 +54,23 @@ public class StockServiceImpl implements StockService{
 	}
 
 	@Override
-	public List<Date> readHistory(String code) throws Exception {
-		return dao.readHistory(code);
+	public Integer readPriceCount(String code) throws Exception {
+		return dao.readPriceCount(code);
 	}
 
 	@Override
-	public Integer readPriceCount(String code) throws Exception {
-		return dao.readPriceCount(code);
+	public List<HistoryDto> readHistoryDto(String code) throws Exception {
+		return dao.readHistoryDto(code);
+	}
+
+	@Override
+	public void regFavor(String code, String u_id) throws Exception {
+		dao.insertFavor(code, u_id);
+	}
+
+	@Override
+	public void unRegFavor(String code, String u_id) throws Exception {
+		dao.deleteFavor(code, u_id);
 	}
 
 

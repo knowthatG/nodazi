@@ -65,13 +65,21 @@
 $(function(){
 
 	var code = document.getElementById("code").value;
-	var term = document.getElementById("");
+	var term = 5;
 	
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
 	});
 	
 	google.charts.setOnLoadCallback(drawChart);
+	
+	$(".chartChange").on("click", function(){
+
+		term = this.value;
+		
+		google.charts.setOnLoadCallback(drawChart);
+	
+	});
 	
 	function drawChart() {
 
@@ -80,7 +88,7 @@ $(function(){
 			, dataType : 'json'
 			, data : {	
 				code : code
-			  , term : 5
+			  , term : term
 			}
 			, async : false
 		}).responseText;
@@ -90,23 +98,23 @@ $(function(){
 		var data = new google.visualization.DataTable(chartData, true);
 		
 		var options = {
-			  width : 800
-			, height : 500
+			  width : 700
+			, height : 300
 			, legend : 'none'
 			, candlestick: {
 				  fallingColor: { strokeWidth: 1}
 			   }
-			, margin : 0
-			, padding : 0
+			, tooltip: {
+				  isHtml: true
+			  }
 		};
 
-		var chart = new google.visualization.CandlestickChart(document
-				.getElementById("chartDiv"));
+		var chart = new google.visualization.CandlestickChart(document.getElementById("chartDiv"));
 
 		chart.draw(data, options);
 			
 	}
-
+	
 	/* Handlebars 날짜 포맷 start */
 	Handlebars.registerHelper("prettifyDate", function(timeValue){
 		var dateObj = new Date(timeValue);
@@ -117,30 +125,20 @@ $(function(){
 	});
 	/* Handlebars 날짜 포맷 end */
 	
-	/* Handlebars 숫자 포맷 start */
-	Handlebars.registerHelper("prettifyNum", function(numberValue){
-		var dateObj = new Date(timeValue);
-		var year = dateObj.getFullYear();
-		var month = dateObj.getMonth() + 1;
-		var date = dateObj.getDate();
-		return year + "/" + month + "/" + date;
-	});
-	/* Handlebars 숫자 포맷 end */
-
 	/* Handlbars를 이용한 댓글 출력 함수 선언 start */
 	var printData = function(priceArr, target, templateObject){
 		
 		var template = Handlebars.compile(templateObject.html());
 		
-		var html = "<table class='table table-bordered table-hover'>"
+		var html = "<table class='table table-bordered table-hover text-center'>"
 				 + "<thead>"
 				 + "<tr>"
-				 + 		"<th>날짜</th>"
-				 + 		"<th>시가</th>"
-				 + 		"<th>종가</th>"
-				 + 		"<th>고가</th>"
-				 + 		"<th>저가</th>"
-				 + 		"<th>거래량</th>"
+				 + 		"<th class='text-center'>날짜</th>"
+				 + 		"<th class='text-center'>시가</th>"
+				 + 		"<th class='text-center'>종가</th>"
+				 + 		"<th class='text-center'>고가</th>"
+				 + 		"<th class='text-center'>저가</th>"
+				 + 		"<th class='text-center'>거래량</th>"
 				 + "</tr>"
 				 + "</thead>"
 				 + "<tbody id='priceTbody'>"
@@ -198,16 +196,6 @@ $(function(){
 	}
 	/* 페이지 처리 end*/
 
-	/* 댓글 가져오기  start*/
-	/* $("#repliesDiv").on("click", function(){
-		
-		if($(".timeline li").size() > 1){
-			return;
-		}
-		getPage("/replies/" + bno + "/1");
-	}); */
-	/* 댓글 가져오기  end*/
-	
 	/* 페이지 링크 처리 start*/
 	$(".pagination").on("click", "li a", function(event){
 		
@@ -222,6 +210,42 @@ $(function(){
 	console.info("/stock/" + code + "/1");
 	getPage("/stock/" + code + "/1");
 	
+	$("#favor").on("click", function(){
+		
+		var status;
+		
+		if($(this).hasClass("btn-warning")){
+			status = 1;
+		}else{
+			status = 0;
+		}
+		
+		console.info(status);
+		
+		/* ajaxController까지는 검증 완료  success function에서 문제!!!*/
+		
+		$.ajax({
+			  url : '/stock/favorStock'
+			, dataType : 'int'
+			, data : {
+				  status : status
+				, code   : code
+			}
+			, success : function(status){
+				alert(status);
+				if(result == 1){
+					$(this).removeClass("btn-default");
+					$(this).addClass("btn-warning");
+				}else if(result == 0){
+					$(this).removeClass("btn-warning");
+					$(this).addClass("btn-default");
+				}else{
+					alert("등록에 실패하였습니다. 나중에 다시 시도해주세요");
+				}
+			}
+		});
+		
+	});
 	
 });
 	
@@ -229,6 +253,8 @@ $(function(){
 
 </head>
 <body>
+
+	
 
 	<input type="hidden" id="code" value="${code.code }"/>
 
@@ -245,7 +271,10 @@ $(function(){
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							상세보기<small>${code.company}<span>별</span></small>
+							상세보기
+							<small>${code.company}</small>
+							<button type="button" class="btn btn-default btn-circle" id="favor"><i class="fa fa-star"></i></button>
+							<!-- <i class="fa fa-star-o star"></i> -->
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
@@ -265,8 +294,16 @@ $(function(){
 									<i class="fa fa-bar-chart-o fa-fw" ></i> &nbsp;${code.company }
 								</h3>
 							</div>
-							<div class="panel-body">
+							<div class="panel-body text-center">
 								<div id="chartDiv"></div>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default chartChange" value="5">1 week</button>
+								  <button type="button" class="btn btn-default chartChange" value="10">2 week</button>
+								  <button type="button" class="btn btn-default chartChange" value="15">3 week</button>
+								  <button type="button" class="btn btn-default chartChange" value="20">1 month</button>
+								  <button type="button" class="btn btn-default chartChange" value="40">2 month</button>
+								  <button type="button" class="btn btn-default chartChange" value="60">3 month</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -277,23 +314,47 @@ $(function(){
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<i class="fa fa-fw fa-calendar" ></i> &nbsp;History
+									<i class="fa fa-history"></i> &nbsp;History
 								</h3>
 							</div>
 							<div class="panel-body">
 								<div class="list-group">
+									<span class="list-group-item">
+										latest
+										<%-- <fmt:formatNumber value="${history.rec_price }" type="currency"/>
+										<span class="badge">
+											<c:if test="${history.variation > 0}">
+												▲ <fmt:formatNumber value="${history.variation}" type="percent"/>
+											</c:if>
+											<c:if test="${history.variation < 0}">
+												▼ <fmt:formatNumber value="${history.variation}" type="percent"/>
+											</c:if>
+											<c:if test="${history.variation == 0}">
+												- <fmt:formatNumber value="${history.variation}" type="percent"/>
+											</c:if>
+										</span> --%>
+									</span>
 									<c:forEach items="${history }" var="history">
 										<span class="list-group-item">
-											<fmt:formatDate value="${history.r_recdt }"/>
+											<i class="fa fa-fw fa-calendar"></i>
+											<fmt:formatDate value="${history.rec_dt }" pattern="yyyy. MM. dd"/>
+											&nbsp;&nbsp;
+											<fmt:formatNumber value="${history.rec_price }" type="currency"/>
 											<span class="badge">
-												<c:if test="${history.r_change > 0}">
-													▲ ${history.r_change}
+												<c:if test="${history.variation > 0}">
+													<i class="fa fa-chevron-circle-up"></i>
+													&nbsp;
+													<fmt:formatNumber value="${history.variation}" type="percent"/>
 												</c:if>
-												<c:if test="${history.r_change < 0}">
-													▼ ${history.r_change}
+												<c:if test="${history.variation < 0}">
+													<i class="fa fa-chevron-circle-down"></i>
+													&nbsp;
+													<fmt:formatNumber value="${history.variation}" type="percent"/>
 												</c:if>
-												<c:if test="${history.r_change == 0}">
-													- ${history.r_change}
+												<c:if test="${history.variation == 0}">
+													<i class="mega-octicon octicon-dash"></i>
+													&nbsp;
+													<fmt:formatNumber value="${history.variation}" type="percent"/>
 												</c:if>
 											</span>
 										</span>
