@@ -35,6 +35,15 @@ public class ChartDto {
 		this.cols.add(col);
 	}
 	
+	public void addTooltip(){
+
+		HashMap<String, Object> col = new HashMap<String, Object>();
+		col.put("type", "string");
+		col.put("role", "tooltip");
+		
+		this.cols.add(col);
+	}
+	
 //	왜있는거지?
 	public void addRow(String name, Object value){
 		addRow(name, value, null);

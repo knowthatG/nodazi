@@ -41,6 +41,22 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+$(function(){
+	
+	$("#searchBtn").on("click", function(event){
+		self.location = "list"
+						+ "${pageMaker.makeQuery(1)}"
+						+ "&searchType="
+						+ $("select option:selected").val()
+						+ "&keyword="
+						+ encodeURIComponent($('#keywordInput').val());
+						
+	});
+	
+});
+</script>
+
 </head>
 <body>
 

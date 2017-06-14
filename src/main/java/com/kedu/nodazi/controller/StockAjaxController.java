@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kedu.nodazi.dto.ChartDto;
 import com.kedu.nodazi.dto.Criteria;
+import com.kedu.nodazi.dto.LoginDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.service.StockService;
@@ -45,21 +47,23 @@ public class StockAjaxController {
 		chart.addColumn("price_open", "number");
 		chart.addColumn("price_close", "number");
 		chart.addColumn("price_high", "number");
+		chart.addTooltip();
 		
 		chart.createRows(term);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
-		String format = null;
+		SimpleDateFormat sdfRow = new SimpleDateFormat("MM/dd");
+		SimpleDateFormat sdfTool = new SimpleDateFormat("yyyy. MM. dd");
 		
 		for(int row=0; row<recStock.size(); row++){
 			PricesDto dto = recStock.get(row);
-			format = sdf.format(dto.getPrice_date());
 			
-			chart.addCell(row, dto.getPrice_date(), format);
+			chart.addCell(row, dto.getPrice_date(), sdfRow.format(dto.getPrice_date()));
 			chart.addCell(row, dto.getPrice_low());
 			chart.addCell(row, dto.getPrice_open());
 			chart.addCell(row, dto.getPrice_close());
 			chart.addCell(row, dto.getPrice_high());
+			chart.addCell(row, sdfTool.format(dto.getPrice_date()) + "\r\n시가 : " + dto.getPrice_open() + "\r\n종가 : " + dto.getPrice_close()
+							 + "\r\n저가 : " + dto.getPrice_low() + "\r\n고가 : " + dto.getPrice_high());
 		}
 		
 		logger.info("recStock : " + recStock);
@@ -93,6 +97,34 @@ public class StockAjaxController {
 		logger.info("priceListMap : " + map);
 		
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="favorStock", method = RequestMethod.GET)
+	public int favorStock(@RequestParam int status
+						, @RequestParam String code
+						, HttpSession session) throws Exception{
+		
+//		1이면 insert성공, 0이면 delete 성공
+		
+//		LoginDto login = session.getAttribute("login");
+//		String u_id = login.getU_id();
+		
+		String u_id = "aaaa";
+		
+		logger.info("status = 0 : " + status);
+		
+		if(status == 1){
+			service.unRegFavor(code, u_id);
+			status = 0;
+		}else if(status == 0){
+			service.regFavor(code, u_id);
+			status = 1;
+			logger.info("status == 0 -> 1 : " + status);
+		}
+		
+		logger.info("return status : " + status);
+		return status;
 	}
 	
 }
