@@ -62,7 +62,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							결제 관리
+							결제 내역
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Payment Management

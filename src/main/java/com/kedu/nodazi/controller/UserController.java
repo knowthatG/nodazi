@@ -51,6 +51,7 @@ public class UserController {
 			rttr.addFlashAttribute("msg","success");
 			return "redirect:/user/login";
 		}
+
 		
 		@RequestMapping(value="/join_policy",method = RequestMethod.GET)
 		public void JoinPolicyGET(Model model) throws Exception{

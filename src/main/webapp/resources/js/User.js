@@ -1,25 +1,28 @@
 function idCheck(){
-	alert("자스 불러왔음!");
-	if(document.frm.u_id.value.length == 0){
-		alert("아이디를 입력해주세요.");
+
+	var regmobile = /^\d{3}-\d{3,4}-\d{4}$/;
+	 
+	var regemail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
+	var regpw = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,12}$/
+	
+	if(!regpw.test(document.getElementById("u_pw").value)){
+		alert("8~12자리의 영문 대소문자와 최소 1개의 숫자 혹은 특수 문자를 포함해야 합니다");
 		return false;
 	}
-	if(document.frm.u_pw.value.length == 0){
-		alert("비밀번호를 입력해주세요.");
-		return false;
-	}
-	if(document.frm.u_pw.value.length > 12){
-		alert("비밀번호가 너무 깁니다.(비밀번호는 8자리 이상, 12자리 이하입니다.)");
-		return false;
-	}
-	if(document.frm.u_pw.value.length < 8){
-		alert("비밀번호가 너무 짧습니다.(비밀번호는 8자리 이상, 12자리 이하입니다.)");
-		return false;
-	}
-	if(document.frm.u_pw.value != document.frm.passcheck.value){
+	else if(document.getElementById("u_pw").value != document.getElementById("passcheck").value){
 		alert("비밀번호가 동일하지 않습니다.");
 		return false;
 	}
-	
+	else if (!regemail.test(document.getElementById("u_email").value)) {
+		alert("올바른 이메일 주소를 입력하세요");
+		return false;
+	}
+	else if(!regmobile.test(document.getElementById("u_mobile").value)){
+		alert("올바른 핸드폰번호를 입력해주세요.");
+		return false;
+	}
+	 
+
 	return true;
 }

@@ -20,4 +20,6 @@ public interface UserService {
 	public void userUpdate(UserDto udto)throws Exception;
 	
 	public void withdraw(UserDto udto)throws Exception;
+	
+	public UserDto overlap(UserDto udto)throws Exception;
 }

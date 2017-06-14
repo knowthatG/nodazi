@@ -21,18 +21,23 @@
     <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 
-		#foot{margin-top:-1.9em;height:1.9em}
-
-		#foot{background:#ccc}
+		#foot{margin-top:-1.9em;}
+		.container{
+		padding-top: 60px;
+		}
 	</style>
 <body>
  
-<div class="navbar-footer">
-	<p class="text-center" style="margin-top: 10px;">
-			<strong>
-				&copy;Copyright 2017 by (이름) All Pictures cannot be copied without permission
-			</strong>
-	</p>
+<div class="footer navbar-fixed-bottom" style="text-align: center">
+		<div class="container">
+		<footer class="footer">
+
+				<strong id="foot">
+					&copy;Copyright 2017 by (이름) All Pictures cannot be copied without permission
+				</strong>
+
+		</footer>
+	</div>
 </div>
 </body>
 

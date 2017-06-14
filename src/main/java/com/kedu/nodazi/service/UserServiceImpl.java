@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService{
 	public void withdraw(UserDto udto)throws Exception{
 		udao.withdraw(udto);
 	}
+	
+	@Override
+	public UserDto overlap(UserDto udto)throws Exception{
+		return udao.overlap(udto);
+	}
 }

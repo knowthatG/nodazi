@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="login" resultType="com.kedu.nodazi.dto.UserDto">
-	select u_id,u_pw,u_nm from user
+	select u_id,u_pw,u_nm,u_mgr from user
 	where u_id = #{u_id} and u_pw=#{u_pw}
 	</select>
 	
@@ -41,4 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user set u_withraw = 1
 		where u_id = #{u_id}
 	</update>
+	
+	<select id="overlap" resultType="com.kedu.nodazi.dto.UserDto">
+		select u_id
+		from user
+		where u_id = #{u_id}
+	</select>
 </mapper>

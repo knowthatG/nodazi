@@ -139,17 +139,17 @@ form[role=login] {
 						    
 						    <div class="col-md-4">
 						      <section class="login-form">
-						        <form method="post" action="#" role="login">
+						        <form method="post" action="/user/loginPost" role="login">
 						          <span id="companyName">Know Da Zi</span>
-						          <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+						          <input type="text" name="u_id" id = "u_id" placeholder="ID"  class="form-control input-lg" required=""/>
 						          
-						          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+						          <input type="password" name="u_pw" id="u_pw"  placeholder="Password" class="form-control input-lg" required="" />
 						          
 						          <div class="pwstrength_viewport_progress"></div>
 						          
 						          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">로그인</button>
 						          <div>
-						            <a href="#">계정 등록</a> or <a href="#">비밀번호 찾기</a>
+						            <a href="/user/join_policy">회원가입</a>
 						          </div>
 						          
 						        </form>
