@@ -151,7 +151,6 @@
 									<button id="approval" class="btn btn-primary">승인</button>
 								</div>
 								
-								
 							</div>
 							<!-- /.box-body -->
 			
@@ -186,7 +185,6 @@
 						</div>
 					
 				</div>
-
 
 				<!-- /.row -->
 
@@ -266,8 +264,6 @@ Handlebars.registerHelper("checkStatus", function(enddt) {
 	}
 	
 });
-
-
 
 $(document).ready(function(){
 			
@@ -356,11 +352,6 @@ $(document).ready(function(){
 	);
 	
 });	
-
-
-
 </script>
-
-
 
 </html>
