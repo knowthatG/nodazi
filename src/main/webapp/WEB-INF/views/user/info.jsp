@@ -34,9 +34,23 @@
     <!-- javascript -->
     <script src="../../js/User.js"></script>
     
+    <script type="text/javascript"></script>
+    
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 </head>
+
+<script type="text/javascript">
+$(function(){
+	
+	$("#tab a").click(function(e) {
+		e.preventDefault();
+		$(this).tab("show");
+	});
+
+});
+</script>
 
 <body>
 
@@ -244,11 +258,6 @@
 		<%@include file="../include/footer.jsp"%>
 <script>
 $(function(){
-	
-	$("#tab a").click(function(e) {
-		e.preventDefault();
-		$(this).tab("show");
-		});
 	
 	$("#update_btn").on("click",function(){
 		var u_id = $("#u_id").val();
