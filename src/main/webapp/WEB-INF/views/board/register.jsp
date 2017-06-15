@@ -59,14 +59,14 @@
 					<!-- Main content -->
 					<section class="content">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-12">
 								<div class="form-group">
 									<label>제목</label>
-									<input class="form-control" name='b_title'>
+									<input class="form-control" name='b_title' id="b_title">
 								</div>
 								<div class="form-group">
 									<label>내용</label>
-									<textarea class="form-control" rows="5" name="b_content"></textarea>
+									<textarea class="form-control" id="b_content" rows="5" name="b_content"></textarea>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Writer</label> 
@@ -79,7 +79,7 @@
 							</div>
 							<ul class="mailbox-attachments clearfix uploadedList"></ul>
 							<button type="submit" class="btn btn-primary">저장</button>
-							<button type="submit" class="btn btn-warning">취소</button>
+							<button type="button" class="btn btn-warning">취소</button>
 						</div>
 					</section>
 				</form>
@@ -115,14 +115,8 @@
 </script>    
 
 <script>
-
-function goLogin(){
-	self.location ="/user/login";
-}
-
 $(".btn-warning").on("click", function(){
-	  self.location = "/board/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
-					+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+	  self.location = "/board/list";
 });
 
 var template = Handlebars.compile($("#template").html());
@@ -130,7 +124,6 @@ var template = Handlebars.compile($("#template").html());
 $(".fileDrop").on("dragenter dragover", function(event){
 	event.preventDefault();
 });
-
 
 $(".fileDrop").on("drop", function(event){
 	event.preventDefault();
@@ -158,9 +151,8 @@ $(".fileDrop").on("drop", function(event){
 			  
 			  $(".uploadedList").append(html);
 		  }
-		});	
+	});	
 });
-
 
 $("#registerForm").submit(function(event){
 	event.preventDefault();
@@ -175,6 +167,21 @@ $("#registerForm").submit(function(event){
 	that.append(str);
 
 	that.get(0).submit();
+});
+
+$(".btn-primary").on("click", function(){
+	var b_title = $("#b_title").val();
+	var b_content = $("#b_content").val();
+	
+	if(b_title == ""){
+		alert("제목을 입력해주세요");
+		return false;
+	}
+	
+	if(b_content == ""){
+		alert("내용을 입력해주세요");
+		return false;
+	}
 });
 
 </script>
