@@ -95,7 +95,7 @@
 
 							<div class="form-group">
 								<label for="exampleInputEmail1">작성자</label>
-								<input type="text" name="u_id" class="form-control" value="${boardDto.u_id}">
+								<input type="text" name="u_id" class="form-control" value="${boardDto.u_id}" readonly="readonly">
 							</div>
 
 							<div class="form-group">
@@ -114,7 +114,7 @@
 							<ul class="mailbox-attachments clearfix uploadedList"></ul>
 
 							<button type="submit" class="btn btn-primary">저장</button>
-							<button type="submit" class="btn btn-warning">취소</button>
+							<button type="button" class="btn btn-warning">취소</button>
 
 						</div>
 					</form>

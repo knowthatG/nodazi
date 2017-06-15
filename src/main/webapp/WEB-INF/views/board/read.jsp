@@ -77,23 +77,27 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-group">
-							<input type="text" name='b_title' class="form-control" value="${boardDto.b_title}" readonly="readonly">
+							<span><strong class="btitle">${boardDto.b_title}</strong></span>
 						</div>
+						<div class="form-group">
+							<span><strong>${boardDto.u_id }</strong></span>
+							<span>|</span>
+							<span>조회 ${boardDto.b_viewcnt }</span>
+							<span>|</span>
+							<span>
+								<fmt:formatDate pattern="yyyy/MM/dd" value="${boardDto.b_regdt }"/>
+							</span>
+						</div>
+						
+						<div><hr></div>
+						
 						<div class="form-group">
 							<textarea class="form-control" name="b_content" rows="5" readonly="readonly">${boardDto.b_content}</textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">작성자</label>
-							<input type="text" name="u_id" class="form-control" value="${boardDto.u_id}" readonly="readonly">
 						</div>
 					</div>
 
 					<div class="col-lg-12">
-						<div>
-							<hr>
-						</div>
 						<ul class="mailbox-attachments clearfix uploadedList"></ul>
-
 						<c:if test="${login.u_id == boardDto.u_id}">
 						<button type="submit" id="modifyBtn" class="btn btn-info">수정</button>
 						<button type="submit" id="removeBtn" class="btn btn-warning">삭제</button>
@@ -102,42 +106,37 @@
 					</div>
 				</div>
 				<!-- /.row -->
-
+				<div>
+					<hr>
+				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="box box-success">
-							<div class="box-header">
-								<div class="box-title">댓글</div>
-							</div>
-							<c:if test="${not empty login}">
-							<div class="col-lg-3">
-								<input class="form-control" type="text" id="newReplyText">
-							</div>
-							<input type="hidden" id="replywriter" value="${login.u_id}">
-							</c:if>
-							<c:if test="${empty login}">
-							<div class="col-lg-3">
-								<input class="form-control" type="text" id="newReplyText" readonly="readonly" value="댓글 적성을 위해 로그인을 해주세요.">
-							</div>
-							</c:if>
-							<div class="box-footer">
-								<button type="submit" class="btn btn-default" id="replyAddBtn">댓글 작성</button>
-							</div>
-							
+						<c:if test="${not empty login}">
+						<div class="col-lg-3">
+							<input class="form-control" type="text" id="newReplyText">
 						</div>
-
+						<input type="hidden" id="replywriter" value="${login.u_id}">
+						</c:if>
+						<c:if test="${empty login}">
+						<div class="col-lg-3">
+							<input class="form-control" type="text" id="newReplyText" readonly="readonly" value="댓글 적성을 위해 로그인을 해주세요.">
+						</div>
+						</c:if>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-default" id="replyAddBtn">댓글 등록</button>
+						</div>
+						<br>
 						<!-- The time line -->
-						<ul class="timeline">
-							<!-- timeline time label -->
-							<li class="time-label" id="repliesDiv">
-								<span>
-									댓글 목록 <small id='replycntSmall'>[${boardDto.r_cnt}]</small>
-								</span>
-							</li>
-						</ul>
-
-						<div class='text-center'>
-							<ul id="pagination" class="pagination pagination-sm no-margin "></ul>
+						<div class="col-lg-6">
+							<ul class="timeline">
+								<!-- timeline time label -->
+								<li class="time-label" id="repliesDiv">
+									<span>댓글<small	id='replycntSmall'>[${boardDto.r_cnt}]</small></span>
+								</li>
+							</ul>
+							<div class='text-center'>
+								<ul id="pagination" class="pagination pagination-sm no-margin "></ul>
+							</div>
 						</div>
 					</div>
 					<!-- /.col -->
@@ -176,7 +175,6 @@
 	<li class="replyLi">
     	<i class="fa fa-comments bg-blue"></i>
 		<div class="timeline-item" >
-			<span class="timeline-header">{{r_no}}</span>
 			<span><strong>{{u_id}}</strong></span>
 			<span class="time">
 				<i class="fa fa-clock-o"></i>{{prettifyDate r_regdt}}
@@ -210,7 +208,6 @@
 		var replyer 	 = $("#replywriter").val();
 		if(replyer == u_id){
 			return new Handlebars.SafeString(
-					"<span>|</span>"+
 					"<a href='#' id='replyModBtn'><span>수정</span></a>"+
 					"<span>|</span>"+
 					"<a href='#' id='replyDelBtn'><span>삭제</span></a>");
@@ -325,7 +322,7 @@
 
 	});
 	
-		$(document).on("click","#replyModBtn", function() {
+		$(document).on("click", "#replyModBtn", function() {
 			
 			if($(this).nextAll().size() > 4){
 				return;
@@ -533,6 +530,14 @@ function goLogin(){
   	
   	.modal-title{
   		font-weight: bold;
+  		font-size: 20px;
+  	}
+  	
+  	li {
+  		list-style: none;
+  	}
+  	
+  	.btitle{
   		font-size: 20px;
   	}
   	

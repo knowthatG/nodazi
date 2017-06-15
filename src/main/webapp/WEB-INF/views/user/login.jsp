@@ -117,14 +117,16 @@ $("#login_btn").on("click",function(){
 			if(result == 0){
 				alert("등록되지 않은 아이디 입니다.");
 				$("#u_id").focus();
+				return false;
 			}else if(result == 1){
 				alert("올바른 비밀번호를 입력해주세요.");
 				$("#u_pw").focus();
+				return false;
 			}else{
 				alert("환영합니다.");
 				return true;
 			}
-			}
+		}
 				
 
 

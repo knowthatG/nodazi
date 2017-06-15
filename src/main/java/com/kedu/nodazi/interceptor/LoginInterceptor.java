@@ -31,14 +31,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object userDto = modelMap.get("UserDto");
 		
-		UserDto uDto = (UserDto)userDto;
-		String u_id = uDto.getU_id();
-//		String u_id = "aaaa";
-		
-		Date endDt = service.checkUseService(u_id);
-		
 		if(userDto != null){
 			logger.info("new login success");
+			
+			UserDto uDto = (UserDto)userDto;
+			String u_id = uDto.getU_id();
+			Date endDt = service.checkUseService(u_id);
 			
 			session.setAttribute(LOGIN, userDto);
 			session.setAttribute("endDt", endDt);

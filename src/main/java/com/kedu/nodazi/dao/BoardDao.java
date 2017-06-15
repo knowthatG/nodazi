@@ -30,19 +30,19 @@ public interface BoardDao {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 조회
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : read
 	 * @param b_no
-	 * @return
+	 * @return BoardDto
 	 * @throws Exception
 	 *****************************************************/
 	public BoardDto read(int b_no) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 수정
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : update
@@ -53,7 +53,7 @@ public interface BoardDao {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 삭제
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : delete
@@ -64,64 +64,141 @@ public interface BoardDao {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 목록
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : list
-	 * @return
+	 * @return List<BoardDto>
 	 * @throws Exception
 	 *****************************************************/
 	public List<BoardDto> list() throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 목록 페이징
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : listPage
 	 * @param page
-	 * @return
+	 * @return List<BoardDto>
 	 * @throws Exception
 	 *****************************************************/
 	public List<BoardDto> listPage(int page) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 목록 페이징
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : listCriteria
 	 * @param cri
-	 * @return
+	 * @return List<BoardDto>
 	 * @throws Exception
 	 *****************************************************/
 	public List<BoardDto> listCriteria(Criteria cri) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 페이지 개수
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : countPaging
 	 * @param cri
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 *****************************************************/
 	public int countPaging(Criteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 게시글 검색
+	 * 2. 처리내용	: 검색 목록 출력, 페이징
+	 * </pre>
+	 * @Method Name : listSearch
+	 * @param cri
+	 * @return List<BoardDto>
+	 * @throws Exception
+	 *****************************************************/
 	public List<BoardDto> listSearch(SearchCriteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 게시글 검색 출력
+	 * 2. 처리내용	: 검색, 페이징
+	 * </pre>
+	 * @Method Name : listSearchCount
+	 * @param cri
+	 * @return
+	 * @throws Exception
+	 *****************************************************/
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 댓글 개수 수정
+	 * 2. 처리내용	: 
+	 * </pre>
+	 * @Method Name : updateReplyCnt
+	 * @param b_no
+	 * @param amount
+	 * @throws Exception
+	 *****************************************************/
 	public void updateReplyCnt(int b_no, int amount) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 조회수 수정
+	 * 2. 처리내용	: 
+	 * </pre>
+	 * @Method Name : updateViewCnt
+	 * @param b_no
+	 * @throws Exception
+	 *****************************************************/
 	public void updateViewCnt(int b_no) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 첨부파일 추가
+	 * 2. 처리내용	: 첨부파일 정보 저장
+	 * </pre>
+	 * @Method Name : addAttach
+	 * @param fullName
+	 * @throws Exception
+	 *****************************************************/
 	public void addAttach(String fullName) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 첨부파일 목록
+	 * 2. 처리내용	: 특정 게시물의 첨부파일을 시간 순서대로 가져옴
+	 * </pre>
+	 * @Method Name : getAttach
+	 * @param b_no
+	 * @return List<String>
+	 * @throws Exception
+	 *****************************************************/
 	public List<String> getAttach(int b_no) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 첨부파일 삭제
+	 * 2. 처리내용	: 
+	 * </pre>
+	 * @Method Name : deleteAttach
+	 * @param b_no
+	 * @throws Exception
+	 *****************************************************/
 	public void deleteAttach(int b_no) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 첨부파일 추가
+	 * 2. 처리내용	: 수정시 추가
+	 * </pre>
+	 * @Method Name : replaceAttach
+	 * @param fullName
+	 * @param b_no
+	 * @throws Exception
+	 *****************************************************/
 	public void replaceAttach(String fullName, int b_no) throws Exception;
 }

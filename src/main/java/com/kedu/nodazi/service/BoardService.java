@@ -13,12 +13,12 @@ import com.kedu.nodazi.dto.SearchCriteria;
  * </pre>
  * @author	: 김윤화
  * @Date	: 2017. 5. 30.
- * @Version	: 
+ * @Version	: 1.0
  *****************************************************/
 public interface BoardService {
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 작성
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : regist
@@ -29,19 +29,19 @@ public interface BoardService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 조회
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : read
 	 * @param b_no
-	 * @return
+	 * @return BoardDto
 	 * @throws Exception
 	 *****************************************************/
 	public BoardDto read(int b_no) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 수정
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : modify
@@ -52,7 +52,7 @@ public interface BoardService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 삭제
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : remove
@@ -63,42 +63,72 @@ public interface BoardService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 게시글 목록
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : list
-	 * @return
+	 * @return List<BoardDto>
 	 * @throws Exception
 	 *****************************************************/
 	public List<BoardDto> list() throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
-	 * 2. 처리내용	: 
+	 * 1. 개요	: 페이징
+	 * 2. 처리내용	: 목록 페이징
 	 * </pre>
 	 * @Method Name : listCriteria
 	 * @param cri
-	 * @return
+	 * @return List<BoardDto>
 	 * @throws Exception
 	 *****************************************************/
 	public List<BoardDto> listCriteria(Criteria cri) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 
+	 * 1. 개요	: 페이지 수
 	 * 2. 처리내용	: 
 	 * </pre>
 	 * @Method Name : listCountCriteria
 	 * @param cri
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 *****************************************************/
 	public int listCountCriteria(Criteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 게시글 검색
+	 * 2. 처리내용	: 검색 목록 출력, 페이징
+	 * </pre>
+	 * @Method Name : listSearchCriteria
+	 * @param cri
+	 * @return List<BoardDto>
+	 * @throws Exception
+	 *****************************************************/
 	public List<BoardDto> listSearchCriteria(SearchCriteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 게시글 검색 출력, 페이징
+	 * 2. 처리내용	: 
+	 * </pre>
+	 * @Method Name : listSearchCount
+	 * @param cri
+	 * @return int
+	 * @throws Exception
+	 *****************************************************/
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 첨부파일 목록
+	 * 2. 처리내용	: 
+	 * </pre>
+	 * @Method Name : getAttach
+	 * @param b_no
+	 * @return List<String>
+	 * @throws Exception
+	 *****************************************************/
 	public List<String> getAttach(int b_no) throws Exception;
 }

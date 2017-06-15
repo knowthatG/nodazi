@@ -81,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="withdraw">
 		update user set u_withraw = 1
+						,u_withdrawdt = now()
 		where u_id = #{u_id}
 	</update>
 	

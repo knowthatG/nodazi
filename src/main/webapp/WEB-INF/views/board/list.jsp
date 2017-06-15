@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,10 +49,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							게시판<small>Statistics Overview</small>
+							게시판<small>Board</small>
 						</h1>
 						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+							<li class="active"><i class="fa fa-dashboard"></i>Dashboard</li>
 						</ol>
 					</div>
 				</div>
@@ -108,7 +107,7 @@
 												</a>
 											</td>
 											<td>${boardDto.u_id}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDto.b_regdt}" /></td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${boardDto.b_regdt}" /></td>
 											<td><span>${boardDto.b_viewcnt }</span></td>
 										</tr>
 									</c:forEach>
