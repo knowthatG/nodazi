@@ -18,7 +18,7 @@
 <title>SB Admin - Bootstrap Admin Template</title>
 
 <!-- Bootstrap Core CSS -->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <!-- Custom CSS -->
 <link href="../css/sb-admin.css" rel="stylesheet">
@@ -27,8 +27,7 @@
 <link href="../css/plugins/morris.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,6 +35,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
 
 </head>
 
@@ -75,7 +75,7 @@
 				</form>
 				
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<div class="form-group">
 							<span><strong class="btitle">${boardDto.b_title}</strong></span>
 						</div>
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<ul class="mailbox-attachments clearfix uploadedList"></ul>
 						<c:if test="${login.u_id == boardDto.u_id}">
 						<button type="submit" id="modifyBtn" class="btn btn-info">수정</button>
@@ -110,28 +110,35 @@
 					<hr>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<c:if test="${not empty login}">
-						<div class="col-lg-3">
-							<input class="form-control" type="text" id="newReplyText">
-						</div>
-						<input type="hidden" id="replywriter" value="${login.u_id}">
+							<div class="col-lg-10">
+								<input class="form-control" type="text" id="newReplyText">
+							</div>
+							<input type="hidden" id="replywriter" value="${login.u_id}">
 						</c:if>
 						<c:if test="${empty login}">
-						<div class="col-lg-3">
-							<input class="form-control" type="text" id="newReplyText" readonly="readonly" value="댓글 적성을 위해 로그인을 해주세요.">
-						</div>
+							<div class="col-lg-10">
+								<input class="form-control" type="text" id="newReplyText" readonly="readonly" value="댓글 적성을 위해 로그인을 해주세요.">
+							</div>
 						</c:if>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-default" id="replyAddBtn">댓글 등록</button>
 						</div>
 						<br>
 						<!-- The time line -->
-						<div class="col-lg-6">
-							<ul class="timeline">
+						<div class="col-lg-12">
+							<ul class="chat">
 								<!-- timeline time label -->
-								<li class="time-label" id="repliesDiv">
-									<span>댓글<small	id='replycntSmall'>[${boardDto.r_cnt}]</small></span>
+								<li class="left clearfix" id="repliesDiv">
+									<div class="chat-body clearfix">
+										<div class="header">
+											<strong class="primary-font">댓글</strong>
+											<small class="text-muted">
+												[${boardDto.r_cnt}]
+											</small>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<div class='text-center'>
@@ -169,25 +176,121 @@
   </div>
 </li>
 </script>  
-          
+
+
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
-	<li class="replyLi">
-    	<i class="fa fa-comments bg-blue"></i>
-		<div class="timeline-item" >
-			<span><strong>{{u_id}}</strong></span>
-			<span class="time">
-				<i class="fa fa-clock-o"></i>{{prettifyDate r_regdt}}
-			</span>
-			{{chkIDToDeleteReply u_id}}
-			<input type="hidden" id="selectedRno" value={{r_no}} />
-			<div class="timeline-body">{{r_content}}</div>
+	<li class="left clearfix replyLi">
+		<div class="chat-body clearfix" >
+			<div class="header">
+				<strong class="primary-font">{{u_id}}</strong>
+				<small class="pull-right text-muted">
+					<i class="glyphicon glyphicon-time"/>
+						{{prettifyDate r_regdt}}
+				</small>
+			</div>
+			<p>
+				<span>{{r_content}}</span>
+				<input type="hidden" id="selectedRno" value={{r_no}} />
+				<small class="pull-right text-muted">
+					{{chkIDToDeleteReply u_id}}
+				</small>
+			</p>
 		</div>
 	</li>
 {{/each}}    
-</script>  
+</script> 
 
 <script>
+	
+	$(document).on("click", "#replyModBtn", function() {
+		
+		if($(this).nextAll().size() > 4){
+			return;
+		}
+		
+		var r_no = $(this).parent().prev().val();
+		var r_content = $(this).parent().prev().prev().text();
+		var c_span = $(this).parent().prev().prev();
+		var small = $(this).parent();
+		
+		console.info("rno : " + r_no + ", r_content : " + r_content);
+		
+		var div = $("<div>");
+		
+		var div11 = $("<div>");
+		div11.addClass("col-lg-11");
+		
+		var input = $("<input>");
+		input.attr("type","text");
+		input.attr("id","replyContent");
+		input.addClass("form-control");
+		input.val(r_content);
+		
+		var button = $("<button>");
+		button.attr("type","button");
+		button.addClass("btn btn-info");
+		button.attr("id","replyMod2nd");
+		button.text("수정");
+		
+		div11.append(input);
+		div.append(div11).append(button);
+		c_span.after(div);
+		c_span.remove();
+		small.remove();
+		
+		
+		$("#replyMod2nd").on("click",function(){
+			
+			r_content = $("#replyContent").val();
+		
+			$.ajax({
+				type : 'put',
+				url : '/replies/' + r_no,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "PUT"
+				},
+				data : JSON.stringify({
+					r_content : r_content
+				}),
+				dataType : 'text',
+				success : function(result) {
+					console.log("result: " + result);
+					if (result == 'SUCCESS') {
+						alert("수정 되었습니다.");
+						getPage("/replies/" + b_no + "/" + replyPage);
+					}
+				}
+			});
+			
+		});
+		
+	
+	});
+	
+	
+	$(document).on("click","#replyDelBtn", function() {
+		var r_no = $(this).next().val();
+		alert(r_no);
+		$.ajax({
+			type : 'delete',
+			url : '/replies/' + r_no,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "DELETE"
+			},
+			dataType : 'text',
+			success : function(result) {
+				console.log("result: " + result);
+				if (result == 'SUCCESS') {
+					alert("삭제 되었습니다.");
+					getPage("/replies/" + b_no + "/" + replyPage);
+				}
+			}
+		});
+	});
+
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
 		if (replyer == '${login.u_id}') {
@@ -209,9 +312,8 @@
 		if(replyer == u_id){
 			return new Handlebars.SafeString(
 					"<a href='#' id='replyModBtn'><span>수정</span></a>"+
-					"<span>|</span>"+
+					"<span>&nbsp;|&nbsp;</span>"+
 					"<a href='#' id='replyDelBtn'><span>삭제</span></a>");
-
 		}
 	})
 	
@@ -237,7 +339,7 @@
 
 			$("#modifyModal").modal('hide');
 			$("#replycntSmall").html("[ " + data.pageMaker.totalCount + " ]");
-
+			
 		});
 	}
 
@@ -267,9 +369,10 @@
 
 	$("#repliesDiv").on("click", function() {
 
-		if ($(".timeline li").size() > 1) {
+		if ($(".chat li").size() > 1) {
 			return;
 		}
+		$(".replyLi").remove();
 		getPage("/replies/" + b_no + "/1");
 
 	});
@@ -288,6 +391,14 @@
 		var replytextObj = $("#newReplyText");
 		var replyer 	 = $("#replywriter").val();
 		var replytext 	 = replytextObj.val();
+		
+		console.info("replytext : " + replytext);
+		
+		if(replytext == null || replytext ==""){
+			alert("내용을 입력해 주세요");
+			return;
+		}
+		
 		$.ajax({
 			type : 'post',
 			url : '/replies/',
@@ -322,77 +433,7 @@
 
 	});
 	
-		$(document).on("click", "#replyModBtn", function() {
-			
-			if($(this).nextAll().size() > 4){
-				return;
-			}
-			
-			var r_no = $(this).next().next().next().val();
-			var r_content = $(this).next().next().next().next().text();
-			
-			var input = $("<input>");
-			input.attr("type","text");
-			input.attr("id","replyContent");
-			input.addClass("form-control");
-			input.val(r_content);
-			
-			var button = $("<button>");
-			button.attr("type","button");
-			button.addClass("btn btn-info");
-			button.attr("id","replyMod2nd");
-			button.text("수정");
-			
-			$(this).parent().append(input).append(button);
-			
-			r_content=$("#replyContent").val();
-			
-			$("#replyMod2nd").on("click",function(){
-				$.ajax({
-					type : 'put',
-					url : '/replies/' + r_no,
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "PUT"
-					},
-					data : JSON.stringify({
-						r_content : r_content
-					}),
-					dataType : 'text',
-					success : function(result) {
-						console.log("result: " + result);
-						if (result == 'SUCCESS') {
-							alert("수정 되었습니다.");
-							getPage("/replies/" + b_no + "/" + replyPage);
-						}
-					}
-				});
-				
-			});
 	
-		});
-	
-		
-		$(document).on("click","#replyDelBtn", function() {
-			var r_no = $(this).next().val();
-			alert(r_no);
-			$.ajax({
-				type : 'delete',
-				url : '/replies/' + r_no,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "DELETE"
-				},
-				dataType : 'text',
-				success : function(result) {
-					console.log("result: " + result);
-					if (result == 'SUCCESS') {
-						alert("삭제 되었습니다.");
-						getPage("/replies/" + b_no + "/" + replyPage);
-					}
-				}
-			});
-		});
 </script>
 
 

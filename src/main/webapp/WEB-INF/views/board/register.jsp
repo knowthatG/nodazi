@@ -68,7 +68,7 @@
 									<textarea class="form-control" id="b_content" rows="5" name="b_content"></textarea>
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Writer</label> 
+									<label for="exampleInputEmail1">작성자</label> 
 									<input type="text" name="u_id" class="form-control" value="${login.u_id }" readonly>
 								</div>
 								<div class="form-group">

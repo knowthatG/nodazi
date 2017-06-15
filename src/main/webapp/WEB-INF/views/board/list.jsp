@@ -59,7 +59,7 @@
 				<!-- /.row -->
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-10 text-right">
 						<select name="searchType" class="form-control" style="width: 100px; float: left;">
 							<option value="n" <c:out value="${cri.searchType == null?'selected':''}"/>>---</option>
 							<option value="t" <c:out value="${cri.searchType eq 't'?'selected':''}"/>>Title</option>
@@ -70,13 +70,14 @@
 							<option value="tcw" <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>Title or Content or Writer</option>
 						</select>
 						<div class="form-group input-group" style="width: 300px; float: left;">
-							<input type="text" name='keyword' id="keywordInput" class="form-control" value='${cri.keyword }'>
+							<input type="text" name='keyword' id="keywordInput" class="form-control" value='${cri.keyword }' size='100'>
 							<span class="input-group-btn">
 								<button id='searchBtn' class="btn btn-default" type="button">
 									<i class="fa fa-search"></i>
 								</button>
 							</span>
 						</div>
+						&nbsp;
 						<button id='newBtn' class="btn btn-default">New Board</button>
 					</div>
 					<!-- col end -->
@@ -84,7 +85,7 @@
 				<!-- /.row -->
 
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-10">
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>
