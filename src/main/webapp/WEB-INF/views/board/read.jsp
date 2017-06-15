@@ -85,7 +85,7 @@
 							<span>조회 ${boardDto.b_viewcnt }</span>
 							<span>|</span>
 							<span>
-								<fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${boardDto.b_regdt }"/>
+								<fmt:formatDate pattern="yyyy/MM/dd" value="${boardDto.b_regdt }"/>
 							</span>
 						</div>
 						

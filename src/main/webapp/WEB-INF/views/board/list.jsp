@@ -108,7 +108,7 @@
 												</a>
 											</td>
 											<td>${boardDto.u_id}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDto.b_regdt}" /></td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${boardDto.b_regdt}" /></td>
 											<td><span>${boardDto.b_viewcnt }</span></td>
 										</tr>
 									</c:forEach>
