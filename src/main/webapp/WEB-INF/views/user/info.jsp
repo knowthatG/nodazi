@@ -239,10 +239,34 @@ $(function(){
 			        
 			        <!-- section 3 -->
 			        <div role="tabpanel" class="tab-pane fade" id="section-3">
-			        	<form action="/user/withdraw" method="post">
+			        	<div class="container">
+						 <form class="well form-horizontal"  id="contact_form" action="/user/withdraw" method="post">
+						<fieldset>
+						
+						<!-- Form Name -->
+						<legend><center><h2><b>회원 탈퇴</b></h2></center></legend><br>
+						
+						<div class="form-group" style="text-align: center;">
+											        <div class="col-lg-3"></div>
+											        <div class="col-lg-6" style="margin-bottom: 10px;">
+											        <textarea class="form-control" rows="10" readonly="readonly" style="resize:none; ">당 사이트의 이용은 무통장거래로 이루어집니다.
+결제신청 후 예금주:관리자 계좌번호:xxx-xxx-xxxxxxx(xx은행)로 입금하여 주시면 이용 승인 후 그 즉시서비스 이용이 가능해 집니다. 
+만약,결제 신청후 1주일이 지나도록 입금이 되지않으면 신청기록은 사라지니 유의하여 주십시오.
+
+
+*주:관리자의 사정에 따라 확인이 늦어질 수 있습니다.
+				        </textarea>
+				        </div>
+				        <div class="col-lg-3"></div>
+				        <div class="col-lg-12">
 			        	<input type="hidden" id="u_id" name="u_id" value="${udto.u_id }">
-			        	<input type="submit" id="withdraw_btn" class="btn btn-default" value="withdraw">
+			        	<input type="submit" id="withdraw_btn" class="btn btn-warning" value="탈퇴">
+						
+				        </div>
+						</div>
+						</fieldset>
 			        	</form>
+						</div>
 			        </div>
 			        <!-- section end -->
 			      </div>
