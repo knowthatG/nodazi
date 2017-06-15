@@ -33,9 +33,10 @@
     
     <!-- javascript -->
     <script src="../../js/User.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
-
 
 <body>
 
@@ -59,18 +60,18 @@
       	<div class="center-block clearfx">
 			<div class="container">
 			  <div class="row">
-			   <!--  <div class="col-sm-6 col-sm-offset-2"> -->
+			   <!--  <div class="col-sm-6 col-sm-offset-2"> -->	
 			
 			      <!-- Nav tabs -->
-			      <ul class="nav nav-tabs" role="tablist">
+			      <ul class="nav nav-tabs" role="tablist" id="tab">
 			        <li role="presentation" class="active"><a href="" id="link-1" aria-controls="section-1" role="tab" data-target="#section-1" data-toggle="tab">사용자 정보</a></li>
-			        <li role="presentation"><a href="" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">정보 수정</a></li>
-			        <li role="presentation"><a href="" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">회원 탈퇴</a></li>
+			        <li role="presentation" class=""><a href="" id="link-2" aria-controls="section-2" role="tab" data-target="#section-2" data-toggle="tab">정보 수정</a></li>
+			        <li role="presentation" class=""><a href="" id="link-3" aria-controls="section-3" role="tab" data-target="#section-3" data-toggle="tab">회원 탈퇴</a></li>
 			      </ul>
 				
 			      <!-- Tab panes -->
 			      <div class="tab-content">
-			        <div role="tabpanel" class="tab-pane active" id="section-1">
+			        <div role="tabpanel" class="tab-pane fade active in" id="section-1">
 						<div class="container">
 						 <form class="well form-horizontal"  id="contact_form">
 						<fieldset>
@@ -131,7 +132,7 @@
 					</div>
 			      
 			      <!-- section 2 -->
-			       <div role="tabpanel" class="tab-pane" id="section-2">
+			       <div role="tabpanel" class="tab-pane fade" id="section-2">
 						<div class="container">
 						 <form class="well form-horizontal"  id="contact_form">
 						<fieldset>
@@ -223,7 +224,7 @@
 			        </div>
 			        
 			        <!-- section 3 -->
-			        <div role="tabpanel" class="tab-pane" id="section-3">
+			        <div role="tabpanel" class="tab-pane fade" id="section-3">
 			        	<form action="/user/withdraw" method="post">
 			        	<input type="hidden" id="u_id" name="u_id" value="${udto.u_id }">
 			        	<input type="submit" id="withdraw_btn" class="btn btn-default" value="withdraw">
@@ -242,41 +243,48 @@
             </div>
 		<%@include file="../include/footer.jsp"%>
 <script>
-$("#update_btn").on("click",function(){
-	var u_id = $("#u_id").val();
-	var u_pw = $("#u_pw").val();
-	var u_email = $("#u_email").val();
-	var u_mobile = $("#u_mobile").val();
-	var passcheck = $("#passcheck").val();
-
-	if(idCheck()){
-	$.ajax({
-		type:'put',
-		url: '/user/'+u_id,
-		headers:{
-				"Content-Type":"application/json",
-				"X-HTTP-Method-Override":"PUT"},
-		data:JSON.stringify({u_pw:u_pw,u_email:u_email,u_mobile:u_mobile}),
-		dataType:'text',
-		success:function(result){
-			console.log("result:" +result);
-			if(result == 'success'){
-				alert("성공");
-				getInfo();		
-			}
+$(function(){
+	
+	$("#tab a").click(function(e) {
+		e.preventDefault();
+		$(this).tab("show");
+		});
+	
+	$("#update_btn").on("click",function(){
+		var u_id = $("#u_id").val();
+		var u_pw = $("#u_pw").val();
+		var u_email = $("#u_email").val();
+		var u_mobile = $("#u_mobile").val();
+		var passcheck = $("#passcheck").val();
+	
+		if(idCheck()){
+			$.ajax({
+				type:'put',
+				url: '/user/'+u_id,
+				headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"PUT"},
+				data:JSON.stringify({u_pw:u_pw,u_email:u_email,u_mobile:u_mobile}),
+				dataType:'text',
+				success:function(result){
+					console.log("result:" +result);
+					if(result == 'success'){
+						alert("성공");
+						getInfo();
+					}
+				}
+				
+			});
 		}
-		
 	});
-	}
-})
-function getInfo(){
-	{
+	
+	function getInfo(){
 		alert("info");
 		$("#f_u_email").val($("#u_email").val());
 		$("#f_u_mobile").val($("#u_mobile").val());
-		
+			
 	}
-}
+});
 
 </script>
 </body>
