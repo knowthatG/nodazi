@@ -25,8 +25,7 @@
 <link href="../../css/plugins/morris.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
+<link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -251,6 +250,10 @@ $(function(){
 		
 	});
 	
+	$("#goPay").on("click", function(){
+		self.location = "/user/payment_policy";
+	});
+	
 });
 	
 </script>
@@ -330,48 +333,41 @@ $(function(){
 								</h3>
 							</div>
 							<div class="panel-body">
-								<div class="list-group">
-									<span class="list-group-item">
-										latest
-										<%-- <fmt:formatNumber value="${history.rec_price }" type="currency"/>
-										<span class="badge">
-											<c:if test="${history.variation > 0}">
-												▲ <fmt:formatNumber value="${history.variation}" type="percent"/>
-											</c:if>
-											<c:if test="${history.variation < 0}">
-												▼ <fmt:formatNumber value="${history.variation}" type="percent"/>
-											</c:if>
-											<c:if test="${history.variation == 0}">
-												- <fmt:formatNumber value="${history.variation}" type="percent"/>
-											</c:if>
-										</span> --%>
-									</span>
-									<c:forEach items="${history }" var="history">
-										<span class="list-group-item">
-											<i class="fa fa-fw fa-calendar"></i>
-											<fmt:formatDate value="${history.rec_dt }" pattern="yyyy. MM. dd"/>
-											&nbsp;&nbsp;
-											<fmt:formatNumber value="${history.latest_price }" type="currency"/>
-											<span class="badge">
-												<c:if test="${history.variation > 0}">
-													<i class="fa fa-chevron-circle-up"></i>
-													&nbsp;
-													<fmt:formatNumber value="${history.variation}" type="percent"/>
-												</c:if>
-												<c:if test="${history.variation < 0}">
-													<i class="fa fa-chevron-circle-down"></i>
-													&nbsp;
-													<fmt:formatNumber value="${history.variation}" type="percent"/>
-												</c:if>
-												<c:if test="${history.variation == 0}">
-													<i class="mega-octicon octicon-dash"></i>
-													&nbsp;
-													<fmt:formatNumber value="${history.variation}" type="percent"/>
-												</c:if>
+								<c:if test="${!empty endDt }">
+									<div class="list-group">
+										<c:forEach items="${history }" var="history">
+											<span class="list-group-item">
+												<i class="fa fa-fw fa-calendar"></i>
+												<fmt:formatDate value="${history.rec_dt }" pattern="yyyy. MM. dd"/>
+												&nbsp;&nbsp;
+												<fmt:formatNumber value="${history.latest_price }" type="currency"/>
+												<span class="badge">
+													<c:if test="${history.variation > 0}">
+														<i class="fa fa-chevron-circle-up"></i>
+														&nbsp;
+														<fmt:formatNumber value="${history.variation}" type="percent"/>
+													</c:if>
+													<c:if test="${history.variation < 0}">
+														<i class="fa fa-chevron-circle-down"></i>
+														&nbsp;
+														<fmt:formatNumber value="${history.variation}" type="percent"/>
+													</c:if>
+													<c:if test="${history.variation == 0}">
+														<i class="mega-octicon octicon-dash"></i>
+														&nbsp;
+														<fmt:formatNumber value="${history.variation}" type="percent"/>
+													</c:if>
+												</span>
 											</span>
-										</span>
-									</c:forEach>
-								</div>
+										</c:forEach>
+									</div>
+								</c:if>
+								<c:if test="${empty endDt }">
+									<div class="text-center">
+										결제 후 이용 가능합니다.
+										<input type="button" value="결제" class="btn btn-default" id="goPay"/>
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

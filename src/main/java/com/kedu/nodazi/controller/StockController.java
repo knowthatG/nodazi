@@ -1,5 +1,7 @@
 package com.kedu.nodazi.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -69,8 +71,9 @@ public class StockController {
 		logger.info("/stock/read.GET..............................................");
 		
 		UserDto uDto = (UserDto) session.getAttribute("login");
-//		String u_id  = uDto.getU_id();
-		String u_id = "aaaa";
+		String u_id  = uDto.getU_id();
+		
+		Date endDt = (Date) session.getAttribute("endDt");
 		
 		CodesDto codeDto = service.readCode(code);
 		List<StockHistoryDto> history = service.readSHistoryDto(code);
@@ -86,10 +89,12 @@ public class StockController {
 		model.addAttribute("code", codeDto);
 		model.addAttribute("history", history);
 		model.addAttribute("checkFavor", favorResult);
+		model.addAttribute("endDt", endDt);
 		
 		logger.info("read.codeDto : " + codeDto);
 		logger.info("read.history : " + history);
 		logger.info("read.result : " + favorResult);
+		logger.info("read.endDt : " + endDt);
 	}
 	
 	@RequestMapping(value="/history", method = RequestMethod.GET)
@@ -105,9 +110,9 @@ public class StockController {
 		logger.info("/stock/favor.GET...............................................");
 		
 		UserDto uDto = (UserDto) session.getAttribute("login");
-//		String u_id  = uDto.getU_id();
+		String u_id  = uDto.getU_id();
 		
-		String u_id = "aaaa";
+//		String u_id = "aaaa";
 		
 		List<FavorDto> favor = service.readFavorDto(u_id);
 		

@@ -1,6 +1,9 @@
 package com.kedu.nodazi.interceptor;
 
 
+import java.util.Date;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,18 +14,35 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.kedu.nodazi.dto.UserDto;
+import com.kedu.nodazi.service.UserService;
+
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	private static final String LOGIN = "login";
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 	
+	@Inject
+	private UserService service;
+	
 	@Override
 	public void postHandle(HttpServletRequest request,HttpServletResponse response,Object handler,ModelAndView modelAndView)throws Exception{
+		
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
-		Object UserDto = modelMap.get("UserDto");
-		if(UserDto != null){
+		Object userDto = modelMap.get("UserDto");
+		
+		UserDto uDto = (UserDto)userDto;
+		String u_id = uDto.getU_id();
+//		String u_id = "aaaa";
+		
+		Date endDt = service.checkUseService(u_id);
+		
+		if(userDto != null){
 			logger.info("new login success");
-			session.setAttribute(LOGIN, UserDto);
+			
+			session.setAttribute(LOGIN, userDto);
+			session.setAttribute("endDt", endDt);
+			
 			response.sendRedirect("/user/main");
 		}	
 	}
@@ -34,6 +54,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(session.getAttribute(LOGIN)!= null){
 			logger.info("clear login data before");
 			session.removeAttribute(LOGIN);
+			session.removeAttribute("endDt");
 		}
 		return true;
 		}

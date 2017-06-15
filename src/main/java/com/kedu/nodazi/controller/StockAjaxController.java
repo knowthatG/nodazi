@@ -109,9 +109,9 @@ public class StockAjaxController {
 //		1이면 insert성공, 0이면 delete 성공
 		
 		UserDto uDto = (UserDto) session.getAttribute("login");
-//		String u_id  = uDto.getU_id();
+		String u_id  = uDto.getU_id();
 		
-		String u_id = "aaaa";
+//		String u_id = "aaaa";
 		
 		logger.info("status = 0 : " + status);
 		

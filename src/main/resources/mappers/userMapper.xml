@@ -89,4 +89,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from user
 		where u_id = #{u_id}
 	</select>
+	
+	<select id="checkUseService"
+			resultType="Date">
+		<![CDATA[
+		select p_enddt
+		  from payment
+		 where p_depdt <= curdate()
+		   and p_enddt >= curdate()
+		   and u_id = #{u_id}
+		]]>
+	</select>
+	
 </mapper>

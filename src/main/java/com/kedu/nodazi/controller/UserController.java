@@ -84,6 +84,7 @@ public class UserController {
 				UserDto udto = (UserDto) obj;
 				
 				session.removeAttribute("login");
+				session.removeAttribute("endDt");
 				session.invalidate();
 			}
 			return "/user/logout";

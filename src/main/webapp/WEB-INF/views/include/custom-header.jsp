@@ -114,7 +114,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-shopping-cart"></i> 결제 <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="/user/payment_policy">결제안내</a>
+                                <a href="/user/payment_policy">결제</a>
                             </li>
                             <li>
                                 <a href="/user/payment_detail">결제내역</a>

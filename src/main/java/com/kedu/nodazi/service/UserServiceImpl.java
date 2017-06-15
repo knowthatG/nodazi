@@ -1,5 +1,6 @@
 package com.kedu.nodazi.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,5 +62,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String loginCheck(String u_id) throws Exception{
 		return udao.loginCheck(u_id);
+	}
+
+	@Override
+	public Date checkUseService(String u_id) throws Exception {
+		return udao.checkUseService(u_id);
 	}
 }

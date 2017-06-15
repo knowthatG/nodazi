@@ -1,5 +1,6 @@
 package com.kedu.nodazi.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,5 +53,10 @@ public class UserDaoImpl implements UserDao{
 	}
 	public String loginCheck(String u_id) throws Exception{
 		return session.selectOne(namespace+".loginCheck",u_id);
+	}
+
+	@Override
+	public Date checkUseService(String u_id) throws Exception {
+		return session.selectOne(namespace + ".checkUseService",u_id);
 	}
 }

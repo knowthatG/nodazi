@@ -1,5 +1,6 @@
 package com.kedu.nodazi.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.kedu.nodazi.dto.LoginDto;
@@ -119,4 +120,17 @@ public interface UserService {
 	 * @throws Exception
 	 *****************************************************/
 	public String loginCheck(String u_id) throws Exception;
+	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 유저가 현재 서비스를 이용중인지 확인
+	 * 2. 처리내용	: 유저 id를 조건으로 오늘 날짜가 만기일과 시작일 사이에 있는지 확인
+	 * </pre>
+	 * @Method Name : checkUseService
+	 * @param		  u_id
+	 * @return		  Date
+	 * @throws		  Exception
+	 *****************************************************/
+	public Date checkUseService(String u_id) throws Exception;
+	
 }
