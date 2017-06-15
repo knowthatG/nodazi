@@ -38,11 +38,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into payment(u_id
 							,p_account
 							,p_dep_nm
-							,p_dep_bank)
+							,p_dep_bank
+							,p_price)
 		values		(#{u_id}
 					,#{p_account}
 					,#{p_dep_nm}
-					,#{p_dep_bank})
+					,#{p_dep_bank}
+					,#{p_price})
 	</insert>
 	
 	<select id = "info" resultType="com.kedu.nodazi.dto.UserDto">

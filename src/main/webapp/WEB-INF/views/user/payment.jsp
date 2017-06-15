@@ -82,6 +82,22 @@
 						</div>
 						
 						<div class="form-group">
+						  <label class="col-md-4 control-label" >결제 기간</label> 
+						    <div class="col-md-4 inputGroupContainer">
+						    <div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								<select name="p_price" class="form-control" id="price_select">
+		  						  <option value="" selected>-----</option>
+		    					  <option value="10000">30일</option>
+		    					  <option value="30000">90일</option>
+		    					  <option value="60000">180일</option>
+		    					  <option value="120000">360일</option>
+								</select>
+							</div>
+						  </div>
+						</div>
+						
+						<div class="form-group">
 						  <label class="col-md-4 control-label" >입금은행</label> 
 						    <div class="col-md-4 inputGroupContainer">
 						    <div class="input-group">
