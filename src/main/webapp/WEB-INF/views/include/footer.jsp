@@ -15,9 +15,9 @@
 
 <body>
 
-	<footer style="background-color:#222222;">
+	<footer style="background-color:#222222; ">
 		
-		<div class="footer-limiter">
+		<div class="footer-limiter" style="border-style: none;">
 
 			<div class="footer-right">
 

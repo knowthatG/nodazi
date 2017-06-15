@@ -235,12 +235,12 @@
 			  </div>
 			</div>		
 		</div>
-		<%@include file="../include/footer.jsp"%>
                 <!-- /.row -->
 
             </div>
             </div>
             </div>
+		<%@include file="../include/footer.jsp"%>
 <script>
 $("#update_btn").on("click",function(){
 	var u_id = $("#u_id").val();
