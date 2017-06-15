@@ -1,15 +1,14 @@
 package com.kedu.nodazi.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.DateHistoryDto;
-import com.kedu.nodazi.dto.StockHistoryDto;
+import com.kedu.nodazi.dto.FavorDto;
 import com.kedu.nodazi.dto.PricesDto;
-import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
+import com.kedu.nodazi.dto.StockHistoryDto;
 
 /*****************************************************
  * <pre>
@@ -161,7 +160,7 @@ public interface StockService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 유저가 종목을 선호종목에 등록하였는지 확인
-	 * 2. 처리내용	: 유저ID와 code로 interest_stock을 검색
+	 * 2. 처리내용	: 유저ID와 code로 interest_stock을 조회
 	 * 				i_seq를 return받아 제대로 select가 되었는지 확인
 	 * </pre>
 	 * @Method Name : checkFavorStock
@@ -171,5 +170,17 @@ public interface StockService {
 	 * @throws		  Exception
 	 *****************************************************/
 	public String checkFavorStock(String code, String u_id) throws Exception;
+	
+	/*****************************************************
+	 * <pre>
+	 * 1. 개요	: 유저ID로 선호종목과 정보를 검색
+	 * 2. 처리내용	: u_id를 받아서 FavorDto 조회
+	 * </pre>
+	 * @Method Name : readFavorDto
+	 * @param u_id
+	 * @return
+	 * @throws Exception
+	 *****************************************************/
+	public List<FavorDto> readFavorDto(String u_id) throws Exception;
 	
 }

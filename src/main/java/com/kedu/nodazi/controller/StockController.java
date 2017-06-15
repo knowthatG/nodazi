@@ -1,11 +1,9 @@
 package com.kedu.nodazi.controller;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kedu.nodazi.dto.CodesDto;
-import com.kedu.nodazi.dto.DateHistoryDto;
-import com.kedu.nodazi.dto.StockHistoryDto;
+import com.kedu.nodazi.dto.FavorDto;
 import com.kedu.nodazi.dto.PageMaker;
-import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
+import com.kedu.nodazi.dto.StockHistoryDto;
+import com.kedu.nodazi.dto.UserDto;
 import com.kedu.nodazi.service.StockService;
 
 @Controller
@@ -65,12 +63,13 @@ public class StockController {
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@ModelAttribute("cri") SearchCriteria cri
 					, @RequestParam("code") String code
+					, HttpSession session
 					, Model model) throws Exception{
 		
 		logger.info("/stock/read.GET..............................................");
 		
-//		LoginDto login = session.getAttribute("login");
-//		String u_id = login.getU_id();
+		UserDto uDto = (UserDto) session.getAttribute("login");
+//		String u_id  = uDto.getU_id();
 		String u_id = "aaaa";
 		
 		CodesDto codeDto = service.readCode(code);
@@ -97,6 +96,23 @@ public class StockController {
 	public void history() throws Exception{
 		
 		logger.info("/stock/history.GET.............................................");
+		
+	}
+	
+	@RequestMapping(value="/favor", method = RequestMethod.GET)
+	public void favor(HttpSession session, Model model) throws Exception{
+		
+		logger.info("/stock/favor.GET...............................................");
+		
+		UserDto uDto = (UserDto) session.getAttribute("login");
+//		String u_id  = uDto.getU_id();
+		
+		String u_id = "aaaa";
+		
+		List<FavorDto> favor = service.readFavorDto(u_id);
+		
+		model.addAttribute("favor", favor);
+		logger.info("favor : " + favor);
 		
 	}
 	

@@ -1,9 +1,7 @@
 package com.kedu.nodazi.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +16,10 @@ import org.springframework.stereotype.Repository;
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.DateHistoryDto;
-import com.kedu.nodazi.dto.StockHistoryDto;
+import com.kedu.nodazi.dto.FavorDto;
 import com.kedu.nodazi.dto.PricesDto;
-import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
+import com.kedu.nodazi.dto.StockHistoryDto;
 
 @Repository
 public class StockDaoImpl implements StockDao{
@@ -58,8 +56,6 @@ public class StockDaoImpl implements StockDao{
 		}
 		today += date;
 		
-//		logger.info("today : " + today);
-		
 //		오늘의 추천종목 5개의 종목코드를 가져온다.
 		paramMap.put("today", Integer.parseInt(today));
 		paramMap.put("seq", 0);
@@ -69,8 +65,6 @@ public class StockDaoImpl implements StockDao{
 			paramMap.replace("seq", i);
 			recList.add(session.selectOne(namespace+".readRecList", paramMap));
 		}
-		
-//		logger.info("recList : " + recList);
 		
 		return recList;
 	}
@@ -164,6 +158,11 @@ public class StockDaoImpl implements StockDao{
 		paramMap.put("u_id", u_id);
 		
 		return session.selectOne(namespace + ".checkFavor", paramMap);
+	}
+
+	@Override
+	public List<FavorDto> readFavorDto(String u_id) throws Exception {
+		return session.selectList(namespace + ".readFavorDto", u_id);
 	}
 
 

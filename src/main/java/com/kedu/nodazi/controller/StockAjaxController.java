@@ -1,8 +1,6 @@
 package com.kedu.nodazi.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +23,7 @@ import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.DateHistoryDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PricesDto;
+import com.kedu.nodazi.dto.UserDto;
 import com.kedu.nodazi.service.StockService;
 
 @RestController
@@ -109,8 +108,8 @@ public class StockAjaxController {
 		
 //		1이면 insert성공, 0이면 delete 성공
 		
-//		LoginDto login = session.getAttribute("login");
-//		String u_id = login.getU_id();
+		UserDto uDto = (UserDto) session.getAttribute("login");
+//		String u_id  = uDto.getU_id();
 		
 		String u_id = "aaaa";
 		

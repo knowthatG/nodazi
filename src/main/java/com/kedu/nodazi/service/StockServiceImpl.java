@@ -10,6 +10,7 @@ import com.kedu.nodazi.dao.StockDao;
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
 import com.kedu.nodazi.dto.DateHistoryDto;
+import com.kedu.nodazi.dto.FavorDto;
 import com.kedu.nodazi.dto.StockHistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -80,6 +81,11 @@ public class StockServiceImpl implements StockService{
 	@Override
 	public String checkFavorStock(String code, String u_id) throws Exception {
 		return dao.checkFavorStock(code, u_id);
+	}
+
+	@Override
+	public List<FavorDto> readFavorDto(String u_id) throws Exception {
+		return dao.readFavorDto(u_id);
 	}
 
 }

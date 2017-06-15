@@ -182,4 +182,37 @@
 		   and u_id = #{u_id}
 	</select>
 	
+	<select id="readFavorDto"
+			resultType="FavorDto">
+		select i.i_seq			seq
+			 , i.code			code
+		     , i.company		company
+		     , i.price_close	int_price
+		     , p.price_close	latest_price
+			 , (i.price_close - p.price_close) / p.price_close	variation
+		  from (
+					select i.i_seq
+						 , i.code
+						 , c.company
+						 , p.price_close
+					  from interest_stock i, codes c, prices p
+					 where i.code = c.code
+					   and i.code = p.code
+					   and i.u_id = #{u_id}
+					   and c.market_type = 1
+					   and p.price_date = i.i_regdt
+					 order by i.i_seq
+			   ) i,
+		       (
+					select code
+						 , price_close
+					  from prices
+					 where price_date = (
+											select max(price_date)
+											  from prices
+										)
+		       ) p
+		 where i.code = p.code
+	</select>
+	
 </mapper>
