@@ -5,13 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kedu.nodazi.mapper.UserMapper">
 	<insert id = "regist">
-	insert into user(u_nm,u_id,u_pw,u_email,u_mobile)
-	values(#{u_nm},#{u_id},#{u_pw},#{u_email},#{u_mobile})
+	insert into user(u_nm
+					,u_id
+					,u_pw
+					,u_email
+					,u_mobile)
+	values			(#{u_nm}
+					,#{u_id}
+					,#{u_pw}
+					,#{u_email}
+					,#{u_mobile})
 	</insert>
 	
 	<select id="login" resultType="com.kedu.nodazi.dto.UserDto">
-	select u_id,u_pw,u_nm,u_mgr from user
-	where u_id = #{u_id} and u_pw=#{u_pw}
+	select 	u_id
+			,u_pw
+			,u_nm
+			,u_mgr 
+	from user
+	where u_id = #{u_id} 
+	  and u_pw=#{u_pw}
 	</select>
 	
 	<select id="loginCheck" resultType="String">
@@ -22,17 +35,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id = "payment">
-		insert into payment(u_id,p_account,p_dep_nm,p_dep_bank)
-		values(#{u_id},#{p_account},#{p_dep_nm},#{p_dep_bank})
+		insert into payment(u_id
+							,p_account
+							,p_dep_nm
+							,p_dep_bank)
+		values		(#{u_id}
+					,#{p_account}
+					,#{p_dep_nm}
+					,#{p_dep_bank})
 	</insert>
 	
 	<select id = "info" resultType="com.kedu.nodazi.dto.UserDto">
-		select u_id,u_nm,u_pw,u_email,u_mobile,u_regdt from user
+		select 	u_id
+				,u_nm
+				,u_pw
+				,u_email
+				,u_mobile
+				,u_regdt 
+		from user
 		where u_id= #{u_id}
 	</select>
 	
  	<select id = "paymentDetail" resultType="com.kedu.nodazi.dto.PaymentDto">
-		select u_id,p_account,p_dep_nm,p_dep_bank,p_regdt,p_depdt,p_price,p_enddt from payment
+		select 	u_id
+				,p_account
+				,p_dep_nm
+				,p_dep_bank
+				,p_regdt
+				,p_depdt
+				,p_price
+				,p_enddt 
+				from payment
 		where u_id= #{u_id}
 	</select> 
 	

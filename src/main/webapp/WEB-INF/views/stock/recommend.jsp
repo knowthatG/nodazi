@@ -71,10 +71,15 @@ $(function(){
 				, height : 400
 				, legend : 'none'
 				, candlestick: {
-					  fallingColor: { strokeWidth: 1}
+					  fallingColor: { strokeWidth: 0, fill: '#337ab7' }
+					, risingColor: { strokeWidth: 0, fill: '#d9534f' }
 				   }
-				, margin : 0
-				, padding : 0
+				, tooltip: {
+					  isHtml: true
+				  }
+				, series: {
+					  0 :{color: 'black', visibleInLegend: false}
+					}
 			};
 	
 			var chart = new google.visualization.CandlestickChart(document
@@ -108,7 +113,7 @@ $(function(){
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							관심종목 <small>Statistics Overview</small>
+							추천종목 <small>recommend</small>
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
@@ -137,14 +142,14 @@ $(function(){
 						</div>
 				</c:forEach>
 
-				<%@include file="../include/footer.jsp"%>
-				<!-- /.row -->
-
 			</div>
-			<!-- /.container-fluid -->
+			<!-- /.row -->
 		</div>
-		<!-- /#wrapper -->
+		<!-- /.container-fluid -->
 	</div>
+	<!-- /#wrapper -->
+	
+	<%@include file="../include/footer.jsp"%>
 
 </body>
 

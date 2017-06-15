@@ -73,7 +73,7 @@ $(function(){
 				<div class="row">
 					<div class="col-lg-10">
 						<h1 class="page-header">
-							종목상세 <small>Statistics Overview</small>
+							선호종목 <small>favor</small>
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
@@ -83,31 +83,6 @@ $(function(){
 				</div>
 				<!-- /.row -->
 				
-				<!-- search row -->
-				<div class="row">
-					<div class="col-lg-10">
-						<div class="panel panel-default">
-							<div class="panel-body text-center">
-								<select name="searchType">
-									<option value="n" <c:out value="${cri.searchType == null? 'selected ':' ' }"/>>
-										---
-									</option>
-									<option value="code" <c:out value="${cri.searchType eq 't' ? 'selected ':' ' }"/>>
-										code
-									</option>
-									<option value="com" <c:out value="${cri.searchType eq 'c' ? 'selected ':' ' }"/>>
-										종목명
-									</option>
-								</select>
-								&nbsp;&nbsp;
-								<input type="text" name="keyword" id="keywordInput" >
-								&nbsp;&nbsp;
-								<button id="searchBtn" class="btn btn-default">Search</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- search row end -->
 
 				<div class="row">
 					<div class="col-lg-10">
@@ -116,45 +91,41 @@ $(function(){
 								<thead>
 									<tr>
 										<th class="text-center">no</th>
-										<th class="text-center">코드</th>
 										<th class="text-center">종목명</th>
-										<!-- <th class="text-center">전날 종가</th> -->
+										<th class="text-center">최근종가</th>
+										<th class="text-center">증감율</th>
+										<th class="text-center">더보기</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list }" var="codesDto">
+									<c:forEach items="${favor }" var="favorDto">
 										<tr>
-											<td>${codesDto.id }</td>
-											<td>${codesDto.code }</td>
+											<td>${favorDto.seq }</td>
+											<td>${favorDto.company }</td>
 											<td>
-												<a href='/stock/read${pageMaker.makeSearch(pageMaker.cri.page) }&code=${codesDto.code }'>
-													${codesDto.company }
+												<fmt:formatNumber value="${favorDto.latest_price }" type="currency"/>
+											</td>
+											<td>
+												<c:if test="${favorDto.variation > 0}">
+													<i class='fa fa-chevron-circle-up' style='color: #d9534f;'></i>
+												</c:if>
+												<c:if test="${favorDto.variation < 0}">
+													<i class='fa fa-chevron-circle-up' style='color: #337ab7;'></i>
+												</c:if>
+												<c:if test="${favorDto.variation == 0}">
+													<i class='fa fa-chevron-circle-up'></i>
+												</c:if>
+												<fmt:formatNumber value="${favorDto.variation}" type="percent"/>
+											</td>
+											<td>
+												<a href='/stock/read?code=${favorDto.code }'>
+												detail
 												</a>
 											</td>
-											<!-- <td>        종가를 넣을 수 있나</td> -->
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
-							<div class = "text-center">
-								<ul class="pagination">
-									<c:if test="${pageMaker.prev }">
-										<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
-									</c:if>
-									
-									<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-										<li <c:out value="${pageMaker.cri.page == idx? 'class=active' : '' }"/>>
-											<a href="list${pageMaker.makeSearch(idx) }">${idx }</a>
-										</li>
-									</c:forEach>
-									
-									<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-										<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-									</c:if>
-								</ul>
-							</div>
-
 						</div>
 						<!-- table dev end -->
 					</div>

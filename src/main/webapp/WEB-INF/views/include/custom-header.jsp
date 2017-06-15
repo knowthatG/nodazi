@@ -91,20 +91,20 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse" id="target">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="blank.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> 추천종목</a>
+                    <li>
+                        <a href="/stock/recommend"><i class="fa fa-fw fa-bar-chart-o"></i> 추천종목</a>
                     </li>
                     <li>
-                        <a href="blank2.jsp"><i class="fa fa-fw fa-star"></i> 관심종목</a>
+                        <a href="/stock/favor"><i class="fa fa-fw fa-star"></i> 관심종목</a>
                     </li>
                     <li>
-                        <a href="blank3.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> 종목상세</a>
+                        <a href="/stock/list"><i class="fa fa-fw fa-bar-chart-o"></i> 종목상세</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="blank4.jsp"><i class="fa fa-fw fa-table"></i> 부가정보</a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a href="blank5.jsp"><i class="fa fa-fw fa-desktop"></i> 히스토리</a>
+                        <a href="/stock/history"><i class="fa fa-fw fa-desktop"></i> 히스토리</a>
                     </li>
                     <li>
                         <a href="/board/list"><i class="fa fa-fw fa-edit"></i> 게시판</a>
@@ -173,6 +173,14 @@
         $("#login_form").on("click",function(){
         	self.location = "/user/login"
         })
+        
+        	 $(function(){
+	  var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+	  sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+	   sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+	   $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+	  })
+	 })
         </script>
 </body>
 </html>

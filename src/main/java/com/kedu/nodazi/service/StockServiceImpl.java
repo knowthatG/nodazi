@@ -1,6 +1,5 @@
 package com.kedu.nodazi.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,9 +9,10 @@ import org.springframework.stereotype.Service;
 import com.kedu.nodazi.dao.StockDao;
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
-import com.kedu.nodazi.dto.HistoryDto;
+import com.kedu.nodazi.dto.DateHistoryDto;
+import com.kedu.nodazi.dto.FavorDto;
+import com.kedu.nodazi.dto.StockHistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
-import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
 
 @Service
@@ -59,8 +59,8 @@ public class StockServiceImpl implements StockService{
 	}
 
 	@Override
-	public List<HistoryDto> readHistoryDto(String code) throws Exception {
-		return dao.readHistoryDto(code);
+	public List<StockHistoryDto> readSHistoryDto(String code) throws Exception {
+		return dao.readSHistoryDto(code);
 	}
 
 	@Override
@@ -73,5 +73,19 @@ public class StockServiceImpl implements StockService{
 		dao.deleteFavor(code, u_id);
 	}
 
+	@Override
+	public List<DateHistoryDto> readDHistoryDto(int start, int end) throws Exception {
+		return dao.readDHistoryDto(start, end);
+	}
+
+	@Override
+	public String checkFavorStock(String code, String u_id) throws Exception {
+		return dao.checkFavorStock(code, u_id);
+	}
+
+	@Override
+	public List<FavorDto> readFavorDto(String u_id) throws Exception {
+		return dao.readFavorDto(u_id);
+	}
 
 }

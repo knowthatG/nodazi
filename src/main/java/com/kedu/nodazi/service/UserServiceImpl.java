@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<PaymentDto> payment(String u_id)throws Exception{
-		return udao.payment(u_id);
+	public List<PaymentDto> paymentDetail(String u_id)throws Exception{
+		return udao.paymentDetail(u_id);
 	}
 	
 	@Override

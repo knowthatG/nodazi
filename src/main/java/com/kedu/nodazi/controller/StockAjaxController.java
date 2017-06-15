@@ -20,9 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kedu.nodazi.dto.ChartDto;
 import com.kedu.nodazi.dto.Criteria;
-import com.kedu.nodazi.dto.LoginDto;
+import com.kedu.nodazi.dto.DateHistoryDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PricesDto;
+import com.kedu.nodazi.dto.UserDto;
 import com.kedu.nodazi.service.StockService;
 
 @RestController
@@ -107,8 +108,8 @@ public class StockAjaxController {
 		
 //		1이면 insert성공, 0이면 delete 성공
 		
-//		LoginDto login = session.getAttribute("login");
-//		String u_id = login.getU_id();
+		UserDto uDto = (UserDto) session.getAttribute("login");
+//		String u_id  = uDto.getU_id();
 		
 		String u_id = "aaaa";
 		
@@ -127,4 +128,26 @@ public class StockAjaxController {
 		return status;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="historyTable", method=RequestMethod.GET)
+	public List<DateHistoryDto> historyTable(@RequestParam String start
+											, @RequestParam String end) throws Exception{
+		
+		start = start.replace("-", "");
+		end = end.replace("-", "");
+		
+		int startNum = Integer.parseInt(start);
+		int endNum = Integer.parseInt(end);
+		
+		logger.info("String : start = " + start + ", end = " + end);
+		
+		
+		logger.info("int : start = " + start + ", end = " + end);
+		
+		List<DateHistoryDto> history = service.readDHistoryDto(startNum, endNum);
+		
+		logger.info("history.history : " + history);
+		
+		return history;
+	}
 }

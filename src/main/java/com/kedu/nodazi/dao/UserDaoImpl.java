@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 
-	public List<PaymentDto> payment(String u_id)throws Exception{
+	public List<PaymentDto> paymentDetail(String u_id)throws Exception{
 		return session.selectList(namespace + ".paymentDetail",u_id);
 	}
 	

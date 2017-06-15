@@ -118,7 +118,7 @@ public class UserController {
 			Object obj = session.getAttribute("login");
 			UserDto udto = (UserDto)obj;
 			String u_id = udto.getU_id();
-			model.addAttribute("list",uservice.payment(u_id));
+			model.addAttribute("list",uservice.paymentDetail(u_id));
 			logger.info("infoGET");
 		}
 		
