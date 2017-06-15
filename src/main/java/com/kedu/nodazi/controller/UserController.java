@@ -1,13 +1,10 @@
 package com.kedu.nodazi.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kedu.nodazi.dto.LoginDto;
+import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PaymentDto;
+import com.kedu.nodazi.dto.SearchCriteria;
 import com.kedu.nodazi.dto.UserDto;
+import com.kedu.nodazi.service.BoardService;
 import com.kedu.nodazi.service.UserService;
 
 @Controller
@@ -31,10 +30,13 @@ public class UserController {
 
 		@Inject
 		private UserService uservice;
-		
+		@Inject
+		private BoardService service;
 		@RequestMapping(value="/main",method = RequestMethod.GET)
-		public void mainGET(Model model)throws Exception{
+		public void mainGET(Model model,SearchCriteria cri)throws Exception{
 			logger.info("main");
+			cri.setPerPageNum(5);
+			model.addAttribute("list", service.listSearchCriteria(cri));
 		}
 		
 		@RequestMapping(value="/join",method = RequestMethod.GET)
