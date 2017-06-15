@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kedu.nodazi.dto.CodesDto;
-import com.kedu.nodazi.dto.HistoryDto;
+import com.kedu.nodazi.dto.DateHistoryDto;
+import com.kedu.nodazi.dto.StockHistoryDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -68,16 +69,35 @@ public class StockController {
 		
 		logger.info("/stock/read.GET..............................................");
 		
+//		LoginDto login = session.getAttribute("login");
+//		String u_id = login.getU_id();
+		String u_id = "aaaa";
+		
 		CodesDto codeDto = service.readCode(code);
-		List<HistoryDto> history = service.readHistoryDto(code);
+		List<StockHistoryDto> history = service.readSHistoryDto(code);
+		String checkFavor = service.checkFavorStock(code, u_id);
+		int favorResult = 0;
+		
+		if(checkFavor == null){
+			favorResult = 0;
+		}else{
+			favorResult = 1;
+		}
 		
 		model.addAttribute("code", codeDto);
 		model.addAttribute("history", history);
+		model.addAttribute("checkFavor", favorResult);
 		
 		logger.info("read.codeDto : " + codeDto);
 		logger.info("read.history : " + history);
+		logger.info("read.result : " + favorResult);
 	}
 	
-	
+	@RequestMapping(value="/history", method = RequestMethod.GET)
+	public void history() throws Exception{
+		
+		logger.info("/stock/history.GET.............................................");
+		
+	}
 	
 }

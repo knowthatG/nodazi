@@ -71,10 +71,15 @@ $(function(){
 				, height : 400
 				, legend : 'none'
 				, candlestick: {
-					  fallingColor: { strokeWidth: 1}
+					  fallingColor: { strokeWidth: 0, fill: '#337ab7' }
+					, risingColor: { strokeWidth: 0, fill: '#d9534f' }
 				   }
-				, margin : 0
-				, padding : 0
+				, tooltip: {
+					  isHtml: true
+				  }
+				, series: {
+					  0 :{color: 'black', visibleInLegend: false}
+					}
 			};
 	
 			var chart = new google.visualization.CandlestickChart(document

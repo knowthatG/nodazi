@@ -102,11 +102,15 @@ $(function(){
 			, height : 300
 			, legend : 'none'
 			, candlestick: {
-				  fallingColor: { strokeWidth: 1}
+				  fallingColor: { strokeWidth: 0, fill: '#337ab7' }
+				, risingColor: { strokeWidth: 0, fill: '#d9534f' }
 			   }
 			, tooltip: {
 				  isHtml: true
 			  }
+			, series: {
+				  0 :{color: 'black', visibleInLegend: false}
+				}
 		};
 
 		var chart = new google.visualization.CandlestickChart(document.getElementById("chartDiv"));
@@ -213,35 +217,35 @@ $(function(){
 	$("#favor").on("click", function(){
 		
 		var status;
+		var star = $(this);
 		
-		if($(this).hasClass("btn-warning")){
+		if(star.hasClass("btn-warning")){
 			status = 1;
 		}else{
 			status = 0;
 		}
 		
-		console.info(status);
-		
-		/* ajaxController까지는 검증 완료  success function에서 문제!!!*/
-		
 		$.ajax({
 			  url : '/stock/favorStock'
-			, dataType : 'int'
+			, type : 'get'
+			, dataType : 'text'
 			, data : {
 				  status : status
 				, code   : code
 			}
-			, success : function(status){
-				alert(status);
-				if(result == 1){
-					$(this).removeClass("btn-default");
-					$(this).addClass("btn-warning");
-				}else if(result == 0){
-					$(this).removeClass("btn-warning");
-					$(this).addClass("btn-default");
+			, success : function(result){
+				if(result == '1'){
+					star.removeClass("btn-default");
+					star.addClass("btn-warning");
+				}else if(result == '0'){
+					star.removeClass("btn-warning");
+					star.addClass("btn-default");
 				}else{
 					alert("등록에 실패하였습니다. 나중에 다시 시도해주세요");
 				}
+			}
+			, fail : function(){
+				alert("등록에 실패하였습니다. 나중에 다시 시도해주세요");
 			}
 		});
 		
@@ -273,8 +277,16 @@ $(function(){
 						<h1 class="page-header">
 							상세보기
 							<small>${code.company}</small>
-							<button type="button" class="btn btn-default btn-circle" id="favor"><i class="fa fa-star"></i></button>
-							<!-- <i class="fa fa-star-o star"></i> -->
+							<c:if test="${checkFavor == '1'}">
+								<button type="button" class="btn btn-warning btn-circle" id="favor">
+									<i class="fa fa-star"></i>
+								</button>
+							</c:if>
+							<c:if test="${checkFavor == '0'}">
+								<button type="button" class="btn btn-default btn-circle" id="favor">
+									<i class="fa fa-star-o star"></i>
+								</button>
+							</c:if>
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
@@ -339,7 +351,7 @@ $(function(){
 											<i class="fa fa-fw fa-calendar"></i>
 											<fmt:formatDate value="${history.rec_dt }" pattern="yyyy. MM. dd"/>
 											&nbsp;&nbsp;
-											<fmt:formatNumber value="${history.rec_price }" type="currency"/>
+											<fmt:formatNumber value="${history.latest_price }" type="currency"/>
 											<span class="badge">
 												<c:if test="${history.variation > 0}">
 													<i class="fa fa-chevron-circle-up"></i>

@@ -1,6 +1,8 @@
 package com.kedu.nodazi.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kedu.nodazi.dto.ChartDto;
 import com.kedu.nodazi.dto.Criteria;
-import com.kedu.nodazi.dto.LoginDto;
+import com.kedu.nodazi.dto.DateHistoryDto;
 import com.kedu.nodazi.dto.PageMaker;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.service.StockService;
@@ -127,4 +129,26 @@ public class StockAjaxController {
 		return status;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="historyTable", method=RequestMethod.GET)
+	public List<DateHistoryDto> historyTable(@RequestParam String start
+											, @RequestParam String end) throws Exception{
+		
+		start = start.replace("-", "");
+		end = end.replace("-", "");
+		
+		int startNum = Integer.parseInt(start);
+		int endNum = Integer.parseInt(end);
+		
+		logger.info("String : start = " + start + ", end = " + end);
+		
+		
+		logger.info("int : start = " + start + ", end = " + end);
+		
+		List<DateHistoryDto> history = service.readDHistoryDto(startNum, endNum);
+		
+		logger.info("history.history : " + history);
+		
+		return history;
+	}
 }

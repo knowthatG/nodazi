@@ -17,7 +17,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kedu.nodazi.dto.CodesDto;
 import com.kedu.nodazi.dto.Criteria;
-import com.kedu.nodazi.dto.HistoryDto;
+import com.kedu.nodazi.dto.DateHistoryDto;
+import com.kedu.nodazi.dto.StockHistoryDto;
 import com.kedu.nodazi.dto.PricesDto;
 import com.kedu.nodazi.dto.RecStockDto;
 import com.kedu.nodazi.dto.SearchCriteria;
@@ -39,8 +40,8 @@ public class StockDaoImpl implements StockDao{
 		Calendar day   = Calendar.getInstance();
 		String	 today = "";
 		
-		Map<String, Integer> listMap  = new HashMap<String, Integer>();
-		List<CodesDto>		 recList  = new ArrayList<CodesDto>();
+		Map<String, Integer> paramMap  = new HashMap<String, Integer>();
+		List<CodesDto>		 recList   = new ArrayList<CodesDto>();
 		
 //		오늘 날짜 생성
 		int year = day.get(Calendar.YEAR);
@@ -60,13 +61,13 @@ public class StockDaoImpl implements StockDao{
 //		logger.info("today : " + today);
 		
 //		오늘의 추천종목 5개의 종목코드를 가져온다.
-		listMap.put("today", Integer.parseInt(today));
-		listMap.put("seq", 0);
+		paramMap.put("today", Integer.parseInt(today));
+		paramMap.put("seq", 0);
 		
 //		seq는 1부터 시작하기에 i=1
 		for(int i=1; i<=5; i++){
-			listMap.replace("seq", i);
-			recList.add(session.selectOne(namespace+".readRecList", listMap));
+			paramMap.replace("seq", i);
+			recList.add(session.selectOne(namespace+".readRecList", paramMap));
 		}
 		
 //		logger.info("recList : " + recList);
@@ -118,9 +119,9 @@ public class StockDaoImpl implements StockDao{
 	}
 
 	@Override
-	public List<HistoryDto> readHistoryDto(String code) throws Exception {
+	public List<StockHistoryDto> readSHistoryDto(String code) throws Exception {
 		
-		return session.selectList(namespace + ".readHistoryDto", code);
+		return session.selectList(namespace + ".readSHistoryDto", code);
 	}
 
 	@Override
@@ -141,6 +142,28 @@ public class StockDaoImpl implements StockDao{
 		paramMap.put("code", code);
 		
 		session.delete(namespace + ".deleteFavor", paramMap);
+	}
+
+	@Override
+	public List<DateHistoryDto> readDHistoryDto(int start, int end) throws Exception {
+		
+		Map<String, Integer> paramMap = new HashMap<>();
+		
+		paramMap.put("start", start);
+		paramMap.put("end", end);
+		
+		return session.selectList(namespace + ".readDHistoryDto", paramMap);
+	}
+
+	@Override
+	public String checkFavorStock(String code, String u_id) throws Exception {
+		
+		Map<String, String> paramMap = new HashMap<>();
+		
+		paramMap.put("code", code);
+		paramMap.put("u_id", u_id);
+		
+		return session.selectOne(namespace + ".checkFavor", paramMap);
 	}
 
 

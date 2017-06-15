@@ -83,32 +83,42 @@ $(function(){
 				</div>
 				<!-- /.row -->
 				
+				<!-- search row -->
 				<div class="row">
-					<select name="searchType">
-						<option value="n" <c:out value="${cri.searchType == null? 'selected ':' ' }"/>>
-							---
-						</option>
-						<option value="code" <c:out value="${cri.searchType eq 't' ? 'selected ':' ' }"/>>
-							code
-						</option>
-						<option value="com" <c:out value="${cri.searchType eq 'c' ? 'selected ':' ' }"/>>
-							종목명
-						</option>
-					</select>
-					<input type="text" name="keyword" id="keywordInput" >
-					<button id="searchBtn" class="btn btn-default">Search</button>
+					<div class="col-lg-10">
+						<div class="panel panel-default">
+							<div class="panel-body text-center">
+								<select name="searchType">
+									<option value="n" <c:out value="${cri.searchType == null? 'selected ':' ' }"/>>
+										---
+									</option>
+									<option value="code" <c:out value="${cri.searchType eq 't' ? 'selected ':' ' }"/>>
+										code
+									</option>
+									<option value="com" <c:out value="${cri.searchType eq 'c' ? 'selected ':' ' }"/>>
+										종목명
+									</option>
+								</select>
+								&nbsp;&nbsp;
+								<input type="text" name="keyword" id="keywordInput" >
+								&nbsp;&nbsp;
+								<button id="searchBtn" class="btn btn-default">Search</button>
+							</div>
+						</div>
+					</div>
 				</div>
+				<!-- search row end -->
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-10">
 						<div class="table-responsive">
-							<table class="table table-hover">
+							<table class="table table-hover text-center">
 								<thead>
 									<tr>
-										<th>no</th>
-										<th>코드</th>
-										<th>종목명</th>
-										<th>전날 종가</th>
+										<th class="text-center">no</th>
+										<th class="text-center">코드</th>
+										<th class="text-center">종목명</th>
+										<!-- <th class="text-center">전날 종가</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -121,7 +131,7 @@ $(function(){
 													${codesDto.company }
 												</a>
 											</td>
-											<td>종가를 넣을 수 있나</td>
+											<!-- <td>        종가를 넣을 수 있나</td> -->
 										</tr>
 									</c:forEach>
 								</tbody>
