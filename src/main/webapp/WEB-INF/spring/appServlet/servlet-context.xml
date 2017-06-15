@@ -17,7 +17,14 @@
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 		<interceptor>
-			<mapping path="/user/main"/>
+			<mapping path="/user/payment_detail"/>
+			<mapping path="/user/payment_policy"/>
+			<mapping path="/user/info"/>
+			<mapping path="/user/payment"/>
+			<mapping path="/stock/**"/>
+			<mapping path="/board/**"/>
+			<mapping path="/reply/**"/>
+			<mapping path="/manager/**"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

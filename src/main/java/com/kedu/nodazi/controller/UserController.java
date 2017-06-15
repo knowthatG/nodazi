@@ -37,6 +37,11 @@ public class UserController {
 			logger.info("main");
 			cri.setPerPageNum(5);
 			model.addAttribute("list", service.listSearchCriteria(cri));
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			
+			pageMaker.setTotalCount(service.listSearchCount(cri));
+			model.addAttribute("pageMaker", pageMaker);
 		}
 		
 		@RequestMapping(value="/join",method = RequestMethod.GET)
