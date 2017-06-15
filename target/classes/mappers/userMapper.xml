@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select u_pw
 	  from user
 	 where u_id = #{u_id}
-	   and u_withraw = 0
+	   and u_withdraw = 0
 	</select>
 	
 	<insert id = "payment">
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="withdraw">
-		update user set u_withraw = 1
+		update user set u_withdraw = 1
 						,u_withdrawdt = now()
 		where u_id = #{u_id}
 	</update>

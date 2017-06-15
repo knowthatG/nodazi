@@ -109,6 +109,7 @@
                     <li>
                         <a href="/board/list"><i class="fa fa-fw fa-edit"></i> 게시판</a>
                     </li>
+                      <c:if test="${login.u_mgr == 0}"> 
                     <li>
                     
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-shopping-cart"></i> 결제 <i class="fa fa-fw fa-caret-down"></i></a>
@@ -121,6 +122,9 @@
                             </li>
                         </ul>
                     </li>
+                    </c:if>
+                  <c:if test="${ login.u_mgr == 1}">
+                  </c:if>
                  <c:if test="${login.u_mgr == 1}">
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="glyphicon glyphicon-king"></i> 관리 <i class="fa fa-fw fa-caret-down"></i></a>
