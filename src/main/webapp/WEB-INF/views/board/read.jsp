@@ -239,7 +239,6 @@
 		c_span.remove();
 		small.remove();
 		
-		
 		$("#replyMod2nd").on("click",function(){
 			
 			r_content = $("#replyContent").val();
@@ -271,8 +270,11 @@
 	
 	
 	$(document).on("click","#replyDelBtn", function() {
-		var r_no = $(this).next().val();
-		alert(r_no);
+		
+		var r_no = $(this).parent().prev().val();
+		
+		console.info("r_no = " + r_no);
+		
 		$.ajax({
 			type : 'delete',
 			url : '/replies/' + r_no,
