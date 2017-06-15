@@ -30,17 +30,20 @@ public class UserController {
 
 		@Inject
 		private UserService uservice;
+		
 		@Inject
 		private BoardService service;
+		
 		@RequestMapping(value="/main",method = RequestMethod.GET)
 		public void mainGET(Model model,SearchCriteria cri)throws Exception{
 			logger.info("main");
-			cri.setPerPageNum(5);
+			
 			model.addAttribute("list", service.listSearchCriteria(cri));
+			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
-			
 			pageMaker.setTotalCount(service.listSearchCount(cri));
+			
 			model.addAttribute("pageMaker", pageMaker);
 		}
 		
