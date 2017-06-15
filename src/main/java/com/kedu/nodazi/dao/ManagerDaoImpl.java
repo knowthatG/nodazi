@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kedu.nodazi.dto.PaymentDto;
 import com.kedu.nodazi.dto.SearchCriteria;
+import com.kedu.nodazi.dto.UserDto;
 
 @Repository
 public class ManagerDaoImpl implements ManagerDao {
@@ -41,7 +42,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public List<PaymentDto> userListSearch(SearchCriteria sc) throws Exception {
+	public List<UserDto> userListSearch(SearchCriteria sc) throws Exception {
 		return session.selectList(namespace + ".userListSearch",sc) ;
 	}
 	

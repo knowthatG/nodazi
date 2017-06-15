@@ -29,7 +29,6 @@ public class ManagerController {
 	@Inject
 	private ManagerService service;
 	
-	
 	@RequestMapping(value="/paymentList", method = RequestMethod.GET)
 	public String paymentListSearch(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
 		logger.info(cri.toString());
@@ -63,18 +62,8 @@ public class ManagerController {
 		cri.setKeyword((String)json.get("keyword"));
 		cri.setPage(Integer.parseInt(json.get("page").toString()));
 		
-		/*model.addAttribute("list",service.getPaymentListSearch(cri));
-		PageMaker pageMaker = new PageMaker();
-	    pageMaker.setCri(cri);
-
-	    pageMaker.setTotalCount(service.getPaymentListSearchCount(cri));
-
-	    model.addAttribute("pageMaker", pageMaker);*/
-	    
 	    return service.getPaymentListSearch(cri);
-		
 	}
-	
 	
 	@RequestMapping(value="/userList", method = RequestMethod.GET)
 	public String userListSearch(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{

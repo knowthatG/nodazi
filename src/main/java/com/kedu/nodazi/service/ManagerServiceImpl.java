@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kedu.nodazi.dao.ManagerDao;
 import com.kedu.nodazi.dto.PaymentDto;
 import com.kedu.nodazi.dto.SearchCriteria;
+import com.kedu.nodazi.dto.UserDto;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -32,7 +33,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public List<PaymentDto> getUserListSearch(SearchCriteria sc) throws Exception {
+	public List<UserDto> getUserListSearch(SearchCriteria sc) throws Exception {
 		return dao.userListSearch(sc);
 	}
 	
