@@ -92,19 +92,19 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse" id="target">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="blank.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> 추천종목</a>
+                        <a href="/stock/recommend"><i class="fa fa-fw fa-bar-chart-o"></i> 추천종목</a>
                     </li>
                     <li>
                         <a href="blank2.jsp"><i class="fa fa-fw fa-star"></i> 관심종목</a>
                     </li>
                     <li>
-                        <a href="blank3.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> 종목상세</a>
+                        <a href="/stock/list"><i class="fa fa-fw fa-bar-chart-o"></i> 종목상세</a>
                     </li>
                     <li>
                         <a href="blank4.jsp"><i class="fa fa-fw fa-table"></i> 부가정보</a>
                     </li>
                     <li>
-                        <a href="blank5.jsp"><i class="fa fa-fw fa-desktop"></i> 히스토리</a>
+                        <a href="/stock/history"><i class="fa fa-fw fa-desktop"></i> 히스토리</a>
                     </li>
                     <li>
                         <a href="/board/list"><i class="fa fa-fw fa-edit"></i> 게시판</a>

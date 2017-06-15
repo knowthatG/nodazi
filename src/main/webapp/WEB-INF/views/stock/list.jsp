@@ -162,8 +162,6 @@ $(function(){
 				</div>
 				<!-- row end -->
 
-				<%@include file="../include/footer.jsp"%>
-
 			</div>
 			<!-- /.container-fluid -->
 		</div>
@@ -171,6 +169,8 @@ $(function(){
 	</div>
 	<!-- wrapper -->
 
+	<%@include file="../include/footer.jsp"%>
+	
 </body>
 
 </html>
