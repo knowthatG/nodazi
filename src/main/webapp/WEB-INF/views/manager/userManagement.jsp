@@ -166,7 +166,6 @@
 				</div>
 
 
-				<%@include file="../include/footer.jsp"%>
 				<!-- /.row -->
 
 			</div>
@@ -174,6 +173,8 @@
 		</div>
 		<!-- /#wrapper -->
 	</div>
+<%@include file="../include/footer.jsp"%>
+
 	<!-- jQuery -->
 	<script src="../js/jquery.js"></script>
 

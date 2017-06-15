@@ -114,10 +114,16 @@
 								<input class="form-control" type="text" id="newReplyText">
 							</div>
 							<input type="hidden" id="replywriter" value="${login.u_id}">
+							</c:if>
+							<c:if test="${empty login}">
+							<div class="col-lg-3">
+								<input class="form-control" type="text" id="newReplyText" readonly="readonly" value="댓글 적성을 위해 로그인을 해주세요.">
+							</div>
+							</c:if>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-default" id="replyAddBtn">댓글 작성</button>
 							</div>
-							</c:if>
+							
 						</div>
 
 						<!-- The time line -->
@@ -137,29 +143,6 @@
 					<!-- /.col -->
 				</div>
 				<!-- /.row -->
-				
-				<!-- Modal -->
-				<div id="modifyModal" class="modal modal-primary fade" role="dialog">
-					<div class="modal-dialog">
-						Modal content
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title"></h4>
-							</div>
-							<div class="modal-body" data-rno>
-								<p>
-									<input type="text" id="replytext" class="form-control">
-								</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-								<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
 				
 			</div>
 			<!--/.container-fluid -->
@@ -190,28 +173,22 @@
           
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
-	<li class="replyLi" data-rno={{r_no}}>
+	<li class="replyLi">
     	<i class="fa fa-comments bg-blue"></i>
 		<div class="timeline-item" >
 			<span class="timeline-header">{{r_no}}</span>
 			<span><strong>{{u_id}}</strong></span>
-			<span class="time" id="tmp">
+			<span class="time">
 				<i class="fa fa-clock-o"></i>{{prettifyDate r_regdt}}
 			</span>
 			{{chkIDToDeleteReply u_id}}
+			<input type="hidden" id="selectedRno" value={{r_no}} />
 			<div class="timeline-body">{{r_content}}</div>
 		</div>
 	</li>
 {{/each}}    
 </script>  
 
-<script id="templateChk" type="text/x-handlebars-template">
-	<span>|</span>
-	<a href='#' id='replyModBtn'><span>수정</span></a>
-	<span>|</span>
-	<a href='#' id='replyDelBtn'><span>삭제</span></a>
-</script>
- 
 <script>
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
@@ -344,58 +321,81 @@
 		var reply = $(this);
 
 		$("#replytext").val(reply.find('.timeline-body').text());
-		$(".modal-title").html(reply.attr("data-rno"));
+		$("#modify-rno").val(reply.attr("data-rno"));
 
-	});
-
-	$("#replyModBtn").on("click", function() {
-
-		var r_no = $(".modal-title").html();
-		var r_content = $("#replytext").val();
-
-		$.ajax({
-			type : 'put',
-			url : '/replies/' + r_no,
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "PUT"
-			},
-			data : JSON.stringify({
-				r_content : r_content
-			}),
-			dataType : 'text',
-			success : function(result) {
-				console.log("result: " + result);
-				if (result == 'SUCCESS') {
-					alert("수정 되었습니다.");
-					getPage("/replies/" + b_no + "/" + replyPage);
-				}
-			}
-		});
 	});
 	
-	$("#replyDelBtn").on("click", function() {
-
-		var r_no 	  = $(".modal-title").html();
-		var r_content = $("#replytext").val();
-		
-		$.ajax({
-			type : 'delete',
-			url : '/replies/' + r_no,
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "DELETE"
-			},
-			dataType : 'text',
-			success : function(result) {
-				console.log("result: " + result);
-				if (result == 'SUCCESS') {
-					alert("삭제 되었습니다.");
-					getPage("/replies/" + b_no + "/" + replyPage);
-				}
+		$(document).on("click","#replyModBtn", function() {
+			
+			if($(this).nextAll().size() > 4){
+				return;
 			}
+			
+			var r_no = $(this).next().next().next().val();
+			var r_content = $(this).next().next().next().next().text();
+			
+			var input = $("<input>");
+			input.attr("type","text");
+			input.attr("id","replyContent");
+			input.addClass("form-control");
+			input.val(r_content);
+			
+			var button = $("<button>");
+			button.attr("type","button");
+			button.addClass("btn btn-info");
+			button.attr("id","replyMod2nd");
+			button.text("수정");
+			
+			$(this).parent().append(input).append(button);
+			
+			r_content=$("#replyContent").val();
+			
+			$("#replyMod2nd").on("click",function(){
+				$.ajax({
+					type : 'put',
+					url : '/replies/' + r_no,
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "PUT"
+					},
+					data : JSON.stringify({
+						r_content : r_content
+					}),
+					dataType : 'text',
+					success : function(result) {
+						console.log("result: " + result);
+						if (result == 'SUCCESS') {
+							alert("수정 되었습니다.");
+							getPage("/replies/" + b_no + "/" + replyPage);
+						}
+					}
+				});
+				
+			});
+	
 		});
-	});
+	
+		
+		$(document).on("click","#replyDelBtn", function() {
+			var r_no = $(this).next().val();
+			alert(r_no);
+			$.ajax({
+				type : 'delete',
+				url : '/replies/' + r_no,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "DELETE"
+				},
+				dataType : 'text',
+				success : function(result) {
+					console.log("result: " + result);
+					if (result == 'SUCCESS') {
+						alert("삭제 되었습니다.");
+						getPage("/replies/" + b_no + "/" + replyPage);
+					}
+				}
+			});
+		});
 </script>
 
 
@@ -434,7 +434,6 @@ $(document).ready(function(){
 				
 			});
 		}else{
-			
 			formObj.attr("action", "/board/remove");
 			formObj.submit();
 		}
@@ -494,22 +493,47 @@ function goLogin(){
 </script>
 
 <style type="text/css">
-    .popup {position: absolute;}
-    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    
+    .popup{
+    	position: absolute;
+    }
+    
+    .back{
+    	background-color: gray; 
+    	opacity:0.5; 
+    	width: 100%; 
+    	height: 300%; 
+    	overflow:hidden;  
+    	z-index:1101;
+    }
+    
     .front { 
-       z-index:1110; opacity:1; boarder:1px; margin: auto; 
-      }
-     .show{
-       position:relative;
-       max-width: 1200px; 
-       max-height: 800px; 
-       overflow: auto;       
-     } 
+		z-index:1110; 
+		opacity:1; 
+		boarder:1px; 
+		margin: auto; 
+	}
+	
+	.show{
+		position:relative;
+		max-width: 1200px; 
+		max-height: 800px; 
+		overflow: auto;       
+	} 
      
-     .box-title{
-     	font-size: 20px;
-     	font-weight: bold;
-     	margin: 5px;
-     }
+	.box-title{
+		font-size: 20px;
+		font-weight: bold;
+		margin: 5px;
+	}
+  	
+  	#replyModBtn{
+  		margin-left: 40px;
+  	}
+  	
+  	.modal-title{
+  		font-weight: bold;
+  		font-size: 20px;
+  	}
   	
 </style>

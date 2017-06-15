@@ -162,7 +162,6 @@
 		$(function(){
 			$("#main_tag").click(function(){
 				$("#main_tag").attr("method","get");
-
 			});
 			
 		});
