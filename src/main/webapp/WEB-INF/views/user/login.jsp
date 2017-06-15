@@ -59,7 +59,7 @@
 						<!-- Text input-->
 						<div class="form-group">
 						  <label class="col-md-4 control-label">ID</label>  
-						  <div class="col-md-4 inputGroupContainer">
+						  <div class="col-md-6 inputGroupContainer">
 							  <div class="input-group">
 							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 							  <input type="text" class="form-control" id="u_id" name="u_id" placeholder="ID" required="">
@@ -70,7 +70,7 @@
 						
 						<div class="form-group">
 						  <label class="col-md-4 control-label" >Password</label> 
-						    <div class="col-md-4 inputGroupContainer">
+						    <div class="col-md-6 inputGroupContainer">
 						    <div class="input-group">
 						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						  <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="Password" required="">
@@ -83,7 +83,7 @@
 						<div class="form-group">
 						  <label class="col-md-4 control-label"></label>
 						  <div class="col-md-4" style="text-align: center"><br>
-						     <button type="submit"id="login_btn" name="login_btn" class="btn btn-warning" ><span class="glyphicon glyphicon-send">&nbsp</span>로그인</button>
+						     <button type="button"id="login_btn" name="login_btn" class="btn btn-warning" ><span class="glyphicon glyphicon-send">&nbsp</span>로그인</button>
 						  </div>
 						</div>
 						
@@ -97,42 +97,46 @@
 </div>
 
 <script>
-$("#login_btn").on("click",function(){
-	var u_id = $("#u_id").val();
-	var u_pw = $("#u_pw").val();
-
+$(function(){
 	
-	$.ajax({
-		type:'put',
-		url: '/user/login',
-		headers:{
-				"Content-Type":"application/json",
-				"X-HTTP-Method-Override":"PUT"},
-		data: JSON.stringify({
-			  u_id : u_id
-			, u_pw : u_pw
-		}),
-		dataType:'text',
-		success:function(result){
-			if(result == 0){
-				alert("등록되지 않은 아이디 입니다.");
-				$("#u_id").focus();
-				return false;
-			}else if(result == 1){
-				alert("올바른 비밀번호를 입력해주세요.");
-				$("#u_pw").focus();
-				return false;
-			}else{
-				alert("환영합니다.");
-				return true;
+	
+	$("#login_btn").on("click",function(event){
+		var u_id = $("#u_id").val();
+		var u_pw = $("#u_pw").val();
+		
+		var frm = document.getElementById("contact_form");
+	
+		$.ajax({
+			type:'put',
+			url: '/user/login',
+			headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"PUT"},
+			data: JSON.stringify({
+				  u_id : u_id
+				, u_pw : u_pw
+			}),
+			dataType:'text',
+			success:function(result){
+				if(result == 0){
+					alert("등록되지 않은 아이디 입니다.");
+					$("#u_id").val("");
+					$("#u_pw").val("");
+					$("#u_id").focus();
+				}else if(result == 1){
+					alert("올바른 비밀번호를 입력해주세요.");
+					$("#u_pw").val("");
+					$("#u_pw").focus();
+				}else{
+					alert("환영합니다.");
+					frm.submit();
+				}
 			}
-		}
-				
-
-
 		});
-
-})
+		
+	});
+	
+});
 </script>
 
 
