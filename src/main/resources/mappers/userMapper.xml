@@ -36,11 +36,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id = "payment">
 		insert into payment(u_id
+							,p_seq
 							,p_account
 							,p_dep_nm
 							,p_dep_bank
 							,p_price)
 		values		(#{u_id}
+					,(select coalesce(max(a.p_seq) + 1,1)
+						from payment a
+						where a.u_id = #{u_id})
 					,#{p_account}
 					,#{p_dep_nm}
 					,#{p_dep_bank}
