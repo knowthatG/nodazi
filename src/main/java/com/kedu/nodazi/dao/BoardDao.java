@@ -20,7 +20,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 작성
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에 저장
 	 * </pre>
 	 * @Method Name : create
 	 * @param bDto
@@ -31,7 +31,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 조회
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: b_no를 받아서 게시글 조회
 	 * </pre>
 	 * @Method Name : read
 	 * @param b_no
@@ -43,7 +43,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 수정
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에 변경된 데이터 갱신
 	 * </pre>
 	 * @Method Name : update
 	 * @param bDto
@@ -54,7 +54,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 삭제
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에서 삭제
 	 * </pre>
 	 * @Method Name : delete
 	 * @param b_no
@@ -65,7 +65,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 목록
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에서 목록 조회
 	 * </pre>
 	 * @Method Name : list
 	 * @return List<BoardDto>
@@ -76,7 +76,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 목록 페이징
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 페이징 처리
 	 * </pre>
 	 * @Method Name : listPage
 	 * @param page
@@ -88,7 +88,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 목록 페이징
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 게시글 목록 페이징 처리
 	 * </pre>
 	 * @Method Name : listCriteria
 	 * @param cri
@@ -99,8 +99,8 @@ public interface BoardDao {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 페이지 개수
-	 * 2. 처리내용	: 
+	 * 1. 개요	: 게시글 수
+	 * 2. 처리내용	: b_no 수를 구한다
 	 * </pre>
 	 * @Method Name : countPaging
 	 * @param cri
@@ -124,7 +124,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 검색 출력
-	 * 2. 처리내용	: 검색, 페이징
+	 * 2. 처리내용	: 검색된 게시글을 출력, 페이징
 	 * </pre>
 	 * @Method Name : listSearchCount
 	 * @param cri
@@ -136,7 +136,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 개수 수정
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 변경된 댓글 개수 갱신
 	 * </pre>
 	 * @Method Name : updateReplyCnt
 	 * @param b_no
@@ -148,7 +148,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 조회수 수정
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 조회수를 추가한다
 	 * </pre>
 	 * @Method Name : updateViewCnt
 	 * @param b_no
@@ -182,7 +182,7 @@ public interface BoardDao {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 첨부파일 삭제
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: attach 테이블에서 첨부파일 삭제
 	 * </pre>
 	 * @Method Name : deleteAttach
 	 * @param b_no

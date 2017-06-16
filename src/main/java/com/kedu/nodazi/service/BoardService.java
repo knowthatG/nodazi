@@ -19,7 +19,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 작성
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에 저장
 	 * </pre>
 	 * @Method Name : regist
 	 * @param boeard
@@ -30,7 +30,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 조회
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: b_no를 받아서 게시글 조회
 	 * </pre>
 	 * @Method Name : read
 	 * @param b_no
@@ -42,7 +42,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 수정
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에 변경된 데이터 갱신
 	 * </pre>
 	 * @Method Name : modify
 	 * @param board
@@ -53,7 +53,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 삭제
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에서 삭제
 	 * </pre>
 	 * @Method Name : remove
 	 * @param b_no
@@ -64,7 +64,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 게시글 목록
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: board 테이블에서 목록 조회
 	 * </pre>
 	 * @Method Name : list
 	 * @return List<BoardDto>
@@ -86,8 +86,8 @@ public interface BoardService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 페이지 수
-	 * 2. 처리내용	: 
+	 * 1. 개요	: 게시글 수
+	 * 2. 처리내용	: b_no 수를 구한다
 	 * </pre>
 	 * @Method Name : listCountCriteria
 	 * @param cri
@@ -110,8 +110,8 @@ public interface BoardService {
 	
 	/*****************************************************
 	 * <pre>
-	 * 1. 개요	: 게시글 검색 출력, 페이징
-	 * 2. 처리내용	: 
+	 * 1. 개요	: 검색된 게시글 수
+	 * 2. 처리내용	: 검색된 게시글 수
 	 * </pre>
 	 * @Method Name : listSearchCount
 	 * @param cri
@@ -123,7 +123,7 @@ public interface BoardService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 첨부파일 목록
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 첨부파일 fullName 목록 출력
 	 * </pre>
 	 * @Method Name : getAttach
 	 * @param b_no

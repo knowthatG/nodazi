@@ -18,7 +18,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 추가
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: reply 테이블에 추가
 	 * </pre>
 	 * @Method Name : addReply
 	 * @param rDto
@@ -29,7 +29,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 목록 출력
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 댓글을 reply 테이블에서 가져옴
 	 * </pre>
 	 * @Method Name : listReply
 	 * @param b_no
@@ -41,7 +41,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 수정
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: reply 테이블에 변경된 내용으로 수정
 	 * </pre>
 	 * @Method Name : modifyReply
 	 * @param rDto
@@ -52,7 +52,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 삭제
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: reply 테이블에서 선택된 r_no 삭제
 	 * </pre>
 	 * @Method Name : removeReply
 	 * @param r_no
@@ -63,7 +63,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 페이징
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 댓글 페이징 처리
 	 * </pre>
 	 * @Method Name : listReplyPage
 	 * @param b_no
@@ -76,7 +76,7 @@ public interface ReplyService {
 	/*****************************************************
 	 * <pre>
 	 * 1. 개요	: 댓글 개수
-	 * 2. 처리내용	: 
+	 * 2. 처리내용	: 댓글의 개수를 구한다
 	 * </pre>
 	 * @Method Name : count
 	 * @param b_no
