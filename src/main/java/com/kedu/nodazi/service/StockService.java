@@ -27,7 +27,7 @@ public interface StockService {
 	 * 2. 처리내용	: 오늘 날짜로 추천될 종목의 코드와 회사명을 조회
 	 * </pre>
 	 * @Method Name : readRecStock
-	 * @return		: List<CodesDto>
+	 * @return		  List<CodesDto>
 	 * @throws		  Exception
 	 *****************************************************/
 	public List<CodesDto> readRecStock() throws Exception;
@@ -177,9 +177,9 @@ public interface StockService {
 	 * 2. 처리내용	: u_id를 받아서 FavorDto 조회
 	 * </pre>
 	 * @Method Name : readFavorDto
-	 * @param u_id
-	 * @return
-	 * @throws Exception
+	 * @param		  u_id
+	 * @return		  List<FavorDto>
+	 * @throws		  Exception
 	 *****************************************************/
 	public List<FavorDto> readFavorDto(String u_id) throws Exception;
 	
