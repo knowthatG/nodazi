@@ -6,6 +6,15 @@ import com.kedu.nodazi.dto.PaymentDto;
 import com.kedu.nodazi.dto.SearchCriteria;
 import com.kedu.nodazi.dto.UserDto;
 
+/*****************************************************
+ * <pre>
+ * com.kedu.nodazi.service
+ * ManagerService.java
+ * </pre>
+ * @author	: 최진혁
+ * @Date	: 2017. 5. 25.
+ * @Version	: 1.0
+ *****************************************************/
 public interface ManagerService {
 	
 	/*****************************************************
@@ -14,9 +23,9 @@ public interface ManagerService {
 	 * 2. 처리내용	: 결제 목록을 검색조건에 맞게 페이징 처리해서 출력.
 	 * </pre>
 	 * @Method Name : getPaymentListSearch
-	 * @param SearchCriteria
-	 * @return List<PaymentDto>
-	 * @throws Exception
+	 * @param		  SearchCriteria
+	 * @return		  List<PaymentDto>
+	 * @throws		  Exception
 	 *****************************************************/
 	public List<PaymentDto> getPaymentListSearch(SearchCriteria sc) throws Exception;
 	
@@ -26,9 +35,9 @@ public interface ManagerService {
 	 * 2. 처리내용	: 페이징을 위해 검색 조건에 맞는 결제 목록의 개수를 가져옴.
 	 * </pre>
 	 * @Method Name : getPaymentListSearchCount
-	 * @param SearchCriteria
-	 * @return int
-	 * @throws Exception
+	 * @param		  SearchCriteria
+	 * @return		  int
+	 * @throws		  Exception
 	 *****************************************************/
 	public int getPaymentListSearchCount(SearchCriteria sc) throws Exception;
 	
@@ -38,8 +47,8 @@ public interface ManagerService {
 	 * 2. 처리내용	: 결제 금액에 따라 결제 상태를 갱신
 	 * </pre>
 	 * @Method Name : confirmPayment
-	 * @param List<PaymentDto>
-	 * @throws Exception
+	 * @param		  List<PaymentDto>
+	 * @throws		  Exception
 	 *****************************************************/
 	public void confirmPayment(List<PaymentDto> list) throws Exception;
 	
@@ -49,8 +58,8 @@ public interface ManagerService {
 	 * 2. 처리내용	: 회원 목록을 검색조건에 맞게 페이징 처리해서 출력.
 	 * </pre>
 	 * @Method Name : getUserListSearch
-	 * @param List<UserDto>
-	 * @throws Exception
+	 * @param		  List<UserDto>
+	 * @throws		  Exception
 	 *****************************************************/
 	public List<UserDto> getUserListSearch(SearchCriteria sc) throws Exception;
 	
@@ -60,9 +69,9 @@ public interface ManagerService {
 	 * 2. 처리내용	: 페이징을 위해 검색 조건에 맞는 회원 목록의 개수를 가져옴.
 	 * </pre>
 	 * @Method Name : getUserListSearchCount
-	 * @param SearchCriteria
-	 * @return int
-	 * @throws Exception
+	 * @param		  SearchCriteria
+	 * @return		  int
+	 * @throws		  Exception
 	 *****************************************************/
 	public int getUserListSearchCount(SearchCriteria sc) throws Exception;
 }
