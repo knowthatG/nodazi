@@ -175,9 +175,9 @@ public interface StockDao {
 	 * 2. 처리내용	: u_id를 받아서 FavorDto 조회
 	 * </pre>
 	 * @Method Name : readFavorDto
-	 * @param u_id
-	 * @return
-	 * @throws Exception
+	 * @param		  u_id
+	 * @return		  List<FavorDto>
+	 * @throws		  Exception
 	 *****************************************************/
 	public List<FavorDto> readFavorDto(String u_id) throws Exception;
 	
