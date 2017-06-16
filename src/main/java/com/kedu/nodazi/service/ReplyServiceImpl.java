@@ -40,9 +40,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional
 	@Override
-	public void removeReply(int r_no) throws Exception {
-		int b_no = rDao.getB_no(r_no);
-		rDao.delete(r_no);
+	public void removeReply(int r_no, int b_no) throws Exception {
+//		b_no = rDao.getB_no(r_no);
+		rDao.delete(r_no, b_no);
 		bDao.updateReplyCnt(b_no, -1);
 	}
 

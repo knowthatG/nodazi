@@ -56,9 +56,10 @@ public interface ReplyService {
 	 * </pre>
 	 * @Method Name : removeReply
 	 * @param r_no
+	 * @param b_no
 	 * @throws Exception
 	 *****************************************************/
-	public void removeReply(int r_no) throws Exception;
+	public void removeReply(int r_no, int b_no) throws Exception;
 	
 	/*****************************************************
 	 * <pre>

@@ -52,12 +52,15 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/{r_no}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+	@RequestMapping(value = "/{r_no}/{b_no}", method = {RequestMethod.PUT, RequestMethod.PATCH})
 	public ResponseEntity<String> update(@PathVariable("r_no") int r_no
+			, @PathVariable("b_no") int b_no
 			,@RequestBody ReplyDto rDto){
+		
 		ResponseEntity<String> entity = null;
 		try{
 			rDto.setR_no(r_no);
+			rDto.setB_no(b_no);
 			service.modifyReply(rDto);
 			
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
@@ -68,11 +71,12 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/{r_no}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("r_no") int r_no){
+	@RequestMapping(value = "/{r_no}/{b_no}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("r_no") int r_no
+										, @PathVariable("b_no") int b_no){
 		ResponseEntity<String> entity = null;
 		try{
-			service.removeReply(r_no);
+			service.removeReply(r_no, b_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();

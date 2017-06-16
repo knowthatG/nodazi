@@ -141,7 +141,6 @@ $(function(){
 							</div>
 						</div>
 				</c:forEach>
-
 			</div>
 			<!-- /.row -->
 		</div>

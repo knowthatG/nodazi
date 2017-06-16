@@ -40,6 +40,8 @@ public class StockController {
 				
 		List<CodesDto> recStockList   = service.readRecStock();
 		
+		logger.info("recommend.recStockList : " + recStockList);
+		
 		model.addAttribute("recStockList", recStockList);
 		
 	}

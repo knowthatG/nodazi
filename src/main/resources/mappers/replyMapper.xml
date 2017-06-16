@@ -21,8 +21,8 @@
 				, r_regdt)
 		   values(#{b_no}
 				, (
-				   select ifnull(max(r_no),0)+1 
-                	 from reply as a
+				   select ifnull(max(a.r_no)+1,0) 
+                	 from reply a
                 	where b_no=#{b_no}
                   )
 				, #{r_content}
@@ -35,11 +35,13 @@
 		   set r_content = #{r_content}
 		     , r_updatedt = now()
 		 where r_no = #{r_no}
+		   and b_no = #{b_no}
 	</update>
 	
 	<delete id="delete">
 		delete from reply
 		 where r_no = #{r_no}
+		   and b_no = #{b_no}
 	</delete>
 	
 	<select id="listPage"

@@ -46,44 +46,42 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid" style=" margin: -25px; margin-top: -9px;">
+            <div class="container-fluid col-lg-12" style=" margin: -25px; margin-top: -9px;">
 
 				<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
 	
-	<!--페이지-->
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-	</ol>
-	<!--페이지-->
-
-	<div class="carousel-inner"style="margin-bottom: 50px;">
-		<!--슬라이드1-->
-		<div class="item active" id="fucking_image"> 
-			<img src="http://www.realwomanglobal.org/img/REAL%20CONNECTIONS%20NETWORK%20Slider.jpg" alt="First slide" width="100%">
-			<div class="container">
-
+					<!--페이지-->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+					</ol>
+					<!--페이지-->
+				
+					<div class="carousel-inner"style="margin-bottom: 50px;">
+						<!--슬라이드1 start -->
+						<div class="item active" id="fucking_image"> 
+							<img src="http://www.realwomanglobal.org/img/REAL%20CONNECTIONS%20NETWORK%20Slider.jpg" alt="First slide" width="100%">
+							<div class="container">
+				
+							</div>
+						</div>
+						<!--슬라이드1 end-->
+				
+						<!--슬라이드2 start -->
+						<div class="item"> 
+							<img src="http://www.abraaj.com/wp-content/uploads/2016/05/Op-ed-by-Tom-Speechley-Managing-Private-Equity-Currency-Risk-in-Global-Growth-Markets.jpg" style="width:100%" data-src="" alt="Second slide">
+							<div class="container">
+				
+							</div>
+						</div>
+						<!--슬라이드2 end -->
+				
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+						<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+					</div>
+				</div>
 			</div>
-		</div>
-		<!--슬라이드1-->
-
-		<!--슬라이드2-->
-		<div class="item"> 
-			<img src="http://www.abraaj.com/wp-content/uploads/2016/05/Op-ed-by-Tom-Speechley-Managing-Private-Equity-Currency-Risk-in-Global-Growth-Markets.jpg" style="width:100%" data-src="" alt="Second slide">
-			<div class="container">
-
-			</div>
-		</div>
-		<!--슬라이드2-->
-
-
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
-	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
-	</div>
-</div>
-</div>
-
-                <!-- /.row -->
+			<!-- /.row -->
                 
                 
 			  <div class="container">

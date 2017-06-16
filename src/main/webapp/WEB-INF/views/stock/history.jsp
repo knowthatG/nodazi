@@ -80,12 +80,14 @@ $(function(){
 	/* Handlebars variable 아이콘 표기 start */
 	Handlebars.registerHelper("makeIcon", function(numValue){
 		
-		if(numValue > 0){
+		var num = Math.floor(numValue * 100);
+		
+		if(num > 0){
 			return new Handlebars.SafeString("<i class='fa fa-chevron-circle-up' style='color: #d9534f;'></i>");
-		}else if(numValue < 0){
+		}else if(num < 0){
 			return new Handlebars.SafeString("<i class='fa fa-chevron-circle-down' style='color: #337ab7;'></i>");
-		}else if(numValue = 0){
-			return new Handlebars.SafeString("<i class='mega-octicon octicon-dash'></i>");
+		}else{
+			return new Handlebars.SafeString("<i class='fa fa-minus-circle' style='color: #cccccc;'></i>");
 		}
 		
 	});
@@ -179,9 +181,9 @@ $(function(){
 						<div class="panel panel-default">
 							<div class="panel-body text-center">
 								<form id="searchform">
-									<input type="date" name="start" id="start" value="2016-07-01">
+									<input type="date" name="start" id="start">
 									&nbsp;~&nbsp;
-									<input type="date" name="end"   id="end"   value="2016-07-03">
+									<input type="date" name="end"   id="end">
 									&nbsp;&nbsp;
 									<button id="searchBtn" class="btn btn-default">Search</button>
 								</form>

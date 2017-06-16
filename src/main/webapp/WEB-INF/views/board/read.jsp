@@ -67,7 +67,7 @@
 				<!-- /.row -->
 
 				<form role="form" action="modify" method="post">
-					<input type='hidden' name='b_no' value="${boardDto.b_no}">
+					<input type='hidden' name='b_no' id="b_no" value="${boardDto.b_no}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -245,7 +245,7 @@
 		
 			$.ajax({
 				type : 'put',
-				url : '/replies/' + r_no,
+				url : '/replies/' + r_no + '/' + b_no,
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "PUT"
@@ -277,7 +277,7 @@
 		
 		$.ajax({
 			type : 'delete',
-			url : '/replies/' + r_no,
+			url : '/replies/' + r_no + '/' + b_no,
 			headers : {
 				"Content-Type" : "application/json",
 				"X-HTTP-Method-Override" : "DELETE"

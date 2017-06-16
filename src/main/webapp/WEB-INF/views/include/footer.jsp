@@ -30,7 +30,7 @@
 
 			<div class="footer-left">
 
-				<p class="footer-links">&copy;Copyright 2017 by (이름) All Pictures cannot be copied without permission</p>
+				<p class="footer-links">&copy;Copyright 2017 by KnowDaG All Pictures cannot be copied without permission</p>
 
 				<p>Company Name © 2016</p>
 			</div>

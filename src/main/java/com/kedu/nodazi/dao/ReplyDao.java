@@ -44,8 +44,8 @@ public interface ReplyDao {
 	 * 2. 처리내용	: reply 테이블에 변경된 내용으로 수정
 	 * </pre>
 	 * @Method Name : update
-	 * @param rDto
-	 * @throws Exception
+	 * @param		  rDto
+	 * @throws		  Exception
 	 *****************************************************/
 	public void update(ReplyDto rDto) throws Exception;
 	
@@ -56,9 +56,10 @@ public interface ReplyDao {
 	 * </pre>
 	 * @Method Name : delete
 	 * @param r_no
+	 * @param b_no
 	 * @throws Exception
 	 *****************************************************/
-	public void delete(int r_no) throws Exception;
+	public void delete(int r_no, int b_no) throws Exception;
 	
 	/*****************************************************
 	 * <pre>
