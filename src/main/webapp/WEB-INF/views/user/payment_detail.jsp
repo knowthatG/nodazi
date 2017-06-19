@@ -97,11 +97,11 @@
 									<c:set var="now" value="<%=now%>"/>
 									
 									<!-- 결제 리스트를 출력 -->
-									<c:forEach items="${list}" var="paymentDto" varStatus="status">
+									<c:forEach items="${list}" var="paymentDto">
 										<tr>
 
 											<td>
-												${status.index+1}
+												${paymentDto.p_seq}
 											</td>
 											<td>${paymentDto.u_id}</td>
 											<td>${paymentDto.p_price}</td>

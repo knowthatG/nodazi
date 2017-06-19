@@ -64,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
  	<select id = "paymentDetail" resultType="com.kedu.nodazi.dto.PaymentDto">
 		select 	u_id
+				,p_seq
 				,p_account
 				,p_dep_nm
 				,p_dep_bank
@@ -73,6 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				,p_enddt 
 				from payment
 		where u_id= #{u_id}
+		order by p_seq desc
 	</select> 
 	
 	<update id ="userUpdate">

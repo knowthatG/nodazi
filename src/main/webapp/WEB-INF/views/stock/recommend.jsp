@@ -67,8 +67,8 @@ $(function(){
 			var data = new google.visualization.DataTable(chartData, true);
 			
 			var options = {
-				  width : 550
-				, height : 400
+				  width : 600
+				, height : 350
 				, legend : 'none'
 				, candlestick: {
 					  fallingColor: { strokeWidth: 0, fill: '#337ab7' }

@@ -138,6 +138,7 @@
 				   and c.market_type = 1
 				   and p.price_date >= #{start}
 		           and p.price_date <= #{end}
+		           and r.r_recdt = p.price_date
 			   ) h,
 		       (
 				select price_close
